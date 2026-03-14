@@ -251,7 +251,230 @@
   .nav-bc-sep { color:#d1d5db; font-size:12px; }
   .nav-bc-cur { font-size:13px; color:#1a1a1a; font-weight:600; }
   @media(max-width:540px) { .nav-breadcrumb { display:none; } }
+
+  /* 관리 버튼 */
+  .manage-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #1a1a1a; color: #fff;
+    border: none; border-radius: 8px;
+    padding: 10px 16px; font-size: 13px; font-weight: 600;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer; transition: background .15s;
+    white-space: nowrap;
+  }
+  .manage-btn:hover { background: #374151; }
+
+  /* 모달 오버레이 */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,.45); z-index: 1000;
+    align-items: center; justify-content: center; padding: 16px;
+  }
+  .modal-overlay.open { display: flex; }
+
+  /* 모달 박스 */
+  .modal {
+    background: #fff; border-radius: 14px;
+    width: 100%; max-width: 760px; max-height: 90vh;
+    display: flex; flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,.2);
+  }
+  .modal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 24px 16px; border-bottom: 1px solid #e5e7eb;
+    flex-shrink: 0;
+  }
+  .modal-header h2 { font-size: 18px; font-weight: 700; }
+  .modal-close {
+    background: none; border: none; font-size: 22px; cursor: pointer;
+    color: #6b7280; line-height: 1; padding: 2px 6px; border-radius: 4px;
+  }
+  .modal-close:hover { background: #f3f4f6; color: #1a1a1a; }
+  .modal-body { flex: 1; overflow-y: auto; padding: 20px 24px; }
+
+  /* 탭 */
+  .modal-tabs {
+    display: flex; gap: 0; border-bottom: 1.5px solid #e5e7eb;
+    margin-bottom: 20px;
+  }
+  .modal-tab {
+    padding: 10px 18px; font-size: 14px; font-weight: 600;
+    color: #6b7280; cursor: pointer; border-bottom: 2px solid transparent;
+    margin-bottom: -1.5px; transition: all .15s;
+    font-family: 'Noto Sans KR', sans-serif;
+    background: none; border-top: none; border-left: none; border-right: none;
+  }
+  .modal-tab.active { color: #1a1a1a; border-bottom-color: #1a1a1a; }
+  .modal-tab:hover:not(.active) { color: #374151; }
+
+  /* 폼 */
+  .form-row { display: flex; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+  .form-group { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 120px; }
+  .form-group label { font-size: 12px; font-weight: 600; color: #6b7280; letter-spacing: .3px; }
+  .form-group input, .form-group select {
+    border: 1.5px solid #d1d5db; border-radius: 7px;
+    padding: 9px 11px; font-size: 14px;
+    font-family: 'Noto Sans KR', sans-serif; color: #1a1a1a;
+    outline: none; transition: border-color .15s; background: #fff;
+  }
+  .form-group input:focus, .form-group select:focus { border-color: #374151; }
+  .form-group input::placeholder { color: #9ca3af; }
+  .form-hint { font-size: 11px; color: #9ca3af; margin-top: 1px; }
+
+  /* 저장 버튼 */
+  .btn-save {
+    background: #1a1a1a; color: #fff; border: none; border-radius: 8px;
+    padding: 11px 24px; font-size: 14px; font-weight: 600;
+    font-family: 'Noto Sans KR', sans-serif; cursor: pointer;
+    transition: background .15s; width: 100%; margin-top: 8px;
+  }
+  .btn-save:hover { background: #374151; }
+  .btn-cancel {
+    background: #f3f4f6; color: #374151; border: none; border-radius: 8px;
+    padding: 11px 24px; font-size: 14px; font-weight: 600;
+    font-family: 'Noto Sans KR', sans-serif; cursor: pointer;
+    transition: background .15s; width: 100%; margin-top: 8px;
+  }
+  .btn-cancel:hover { background: #e5e7eb; }
+  .btn-row { display: flex; gap: 10px; }
+
+  /* 사용자 차종 리스트 */
+  .user-models-list { display: flex; flex-direction: column; gap: 8px; }
+  .user-model-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px; background: #f9fafb;
+    border: 1px solid #e5e7eb; border-radius: 8px;
+  }
+  .user-model-info { flex: 1; min-width: 0; }
+  .user-model-name { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+  .user-model-detail { font-size: 12px; color: #6b7280; margin-top: 2px; }
+  .user-model-btns { display: flex; gap: 6px; flex-shrink: 0; }
+  .btn-edit, .btn-del {
+    border: none; border-radius: 6px; padding: 6px 10px;
+    font-size: 12px; font-weight: 600; cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif; transition: background .12s;
+  }
+  .btn-edit { background: #eff6ff; color: #2563eb; }
+  .btn-edit:hover { background: #dbeafe; }
+  .btn-del { background: #fff0f0; color: #ef4444; }
+  .btn-del:hover { background: #fee2e2; }
+
+  .empty-user { text-align: center; padding: 40px 20px; color: #9ca3af; font-size: 14px; }
+  .section-title { font-size: 13px; font-weight: 700; color: #374151; margin-bottom: 12px; letter-spacing: .3px; }
+
+  /* 사용자 추가 데이터 구분 배지 */
+  .user-badge {
+    display: inline-block; background: #eff6ff; color: #2563eb;
+    font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+    letter-spacing: .3px; margin-left: 6px; vertical-align: middle;
+  }
+
+  /* 엑셀 업로드 */
+  .excel-guide {
+    background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px;
+    padding: 16px; margin-bottom: 16px;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  .excel-cols { flex: 1; min-width: 200px; }
+  .col-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .col-badge {
+    background: #eff6ff; color: #2563eb; border-radius: 5px;
+    padding: 4px 9px; font-size: 12px; font-weight: 600;
+  }
+  .btn-sample {
+    background: #fff; border: 1.5px solid #d1d5db; border-radius: 8px;
+    padding: 10px 16px; font-size: 13px; font-weight: 600; cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif; white-space: nowrap;
+    transition: border-color .15s; color: #374151; flex-shrink: 0;
+  }
+  .btn-sample:hover { border-color: #374151; }
+  .excel-drop-zone {
+    border: 2px dashed #d1d5db; border-radius: 12px;
+    padding: 36px 20px; text-align: center; cursor: pointer;
+    transition: all .2s; margin-bottom: 16px;
+  }
+  .excel-drop-zone:hover, .excel-drop-zone.drag-over {
+    border-color: #2563eb; background: #eff6ff;
+  }
+  .drop-icon { font-size: 36px; margin-bottom: 8px; }
+  .drop-text { font-size: 14px; font-weight: 600; color: #374151; }
+  .drop-sub { font-size: 12px; color: #9ca3af; margin-top: 4px; }
+  .preview-table-wrap { overflow-x: auto; border: 1px solid #e5e7eb; border-radius: 8px; max-height: 260px; overflow-y: auto; }
+  .preview-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .preview-table th { background: #f9fafb; padding: 8px 12px; text-align: left; font-weight: 600; color: #6b7280; border-bottom: 1.5px solid #e5e7eb; white-space: nowrap; position: sticky; top: 0; }
+  .preview-table td { padding: 8px 12px; border-bottom: 1px solid #f3f4f6; white-space: nowrap; color: #1a1a1a; }
+  .preview-table tbody tr:last-child td { border-bottom: none; }
+  .preview-table tbody tr:hover td { background: #fafbff; }
+
+  /* 내보내기 */
+  .export-options { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+  .export-card {
+    flex: 1; min-width: 170px; border: 1.5px solid #e5e7eb; border-radius: 12px;
+    padding: 22px 20px; cursor: pointer; transition: all .15s; text-align: center;
+  }
+  .export-card:hover { border-color: #374151; background: #f9fafb; }
+  .export-card-primary {
+    border-color: #1a1a1a; background: #1a1a1a;
+  }
+  .export-card-primary:hover { background: #374151; border-color: #374151; }
+  .export-card-primary .export-label { color: #fff; }
+  .export-card-primary .export-desc { color: #9ca3af; }
+  .export-icon { font-size: 32px; margin-bottom: 10px; }
+  .export-label { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+  .export-desc { font-size: 12px; color: #6b7280; line-height: 1.6; }
+  .html-export-guide {
+    background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px;
+    padding: 16px 18px; font-size: 13px; color: #374151; line-height: 1.8;
+  }
+  .html-export-guide strong { display: block; margin-bottom: 8px; color: #1a1a1a; font-size: 13px; }
+  .html-export-guide ol { padding-left: 18px; }
+  .html-export-guide li { margin-bottom: 4px; }
+  .html-export-guide code {
+    background: #e5e7eb; border-radius: 4px; padding: 1px 6px;
+    font-size: 12px; font-family: monospace; color: #1a1a1a;
+  }
+
+  /* 목록 필터 버튼 */
+  .list-filter-btn {
+    border: 1.5px solid #d1d5db; border-radius: 6px; background: #fff;
+    padding: 6px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif; color: #6b7280; transition: all .12s;
+  }
+  .list-filter-btn:hover { border-color: #374151; color: #374151; }
+  .list-filter-btn.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+
+  /* 기본/사용자 배지 */
+  .badge-builtin {
+    display: inline-block; background: #f3f4f6; color: #6b7280;
+    font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px;
+    letter-spacing: .3px; margin-left: 6px; vertical-align: middle;
+  }
+  .badge-user {
+    display: inline-block; background: #eff6ff; color: #2563eb;
+    font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px;
+    letter-spacing: .3px; margin-left: 6px; vertical-align: middle;
+  }
+  .badge-modified {
+    display: inline-block; background: #fff7ed; color: #f97316;
+    font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px;
+    letter-spacing: .3px; margin-left: 6px; vertical-align: middle;
+  }
+  .badge-deleted {
+    display: inline-block; background: #fff0f0; color: #ef4444;
+    font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px;
+    letter-spacing: .3px; margin-left: 6px; vertical-align: middle;
+  }
+
+  /* toast */
+  .toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: #1a1a1a; color: #fff; padding: 12px 22px; border-radius: 24px;
+    font-size: 13px; font-weight: 600; z-index: 9999;
+    opacity: 0; transition: all .3s; pointer-events: none; white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -289,10 +512,186 @@
       <span class="search-icon">&#128269;</span>
       <input type="text" id="searchInput" placeholder="제조사 또는 차량명을 입력해주세요." oninput="onSearch(this.value)">
     </div>
+    <button class="manage-btn" onclick="openManageModal()">⚙ 차종 관리</button>
   </div>
 
   <div id="content"></div>
 </div>
+
+<!-- 차종 관리 모달 -->
+<div class="modal-overlay" id="manageModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>차종 관리</h2>
+      <button class="modal-close" onclick="closeManageModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-tabs">
+        <button class="modal-tab active" id="tab-add" onclick="switchTab('add')">+ 차종 추가</button>
+        <button class="modal-tab" id="tab-list" onclick="switchTab('list')">내 차종 목록</button>
+        <button class="modal-tab" id="tab-excel" onclick="switchTab('excel')">📊 엑셀 업로드</button>
+        <button class="modal-tab" id="tab-export" onclick="switchTab('export')">⬇ 내보내기</button>
+      </div>
+
+      <!-- 추가 폼 -->
+      <div id="panel-add">
+        <p class="section-title" id="form-title">새 차종 추가</p>
+        <input type="hidden" id="edit-idx" value="">
+
+        <div class="form-row">
+          <div class="form-group" style="flex:2; min-width:160px;">
+            <label>제조사</label>
+            <select id="f-brand">
+              <option value="">-- 선택 --</option>
+            </select>
+            <span class="form-hint">기존 제조사 선택 또는 아래에 새 제조사 입력</span>
+          </div>
+          <div class="form-group" style="flex:2; min-width:160px;">
+            <label>새 제조사명 (직접 입력 시)</label>
+            <input type="text" id="f-brand-new" placeholder="예: TESLA (테슬라)">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group" style="flex:3;">
+            <label>차종명 <span style="color:#ef4444">*</span></label>
+            <input type="text" id="f-name" placeholder="예: 모델3">
+          </div>
+          <div class="form-group" style="flex:3;">
+            <label>연식</label>
+            <input type="text" id="f-year" placeholder="예: 2021~">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>운전석 (mm)</label>
+            <input type="number" id="f-d" placeholder="예: 650">
+          </div>
+          <div class="form-group">
+            <label>조수석 (mm)</label>
+            <input type="number" id="f-p" placeholder="예: 450">
+          </div>
+          <div class="form-group">
+            <label>후방 (mm)</label>
+            <input type="number" id="f-r" placeholder="없으면 비워두세요">
+          </div>
+          <div class="form-group">
+            <label>후방 표시</label>
+            <input type="text" id="f-rdisplay" placeholder="예: RB382/300mm">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>호환 어댑터 <span style="color:#ef4444">*</span></label>
+            <select id="f-adapter">
+              <option value="U-Type">U-Type</option>
+              <option value="B1 Type">B1 Type</option>
+              <option value="B2-1 Type">B2-1 Type</option>
+              <option value="B2-2 Type">B2-2 Type</option>
+              <option value="B3 Type">B3 Type</option>
+              <option value="B4 Type">B4 Type</option>
+              <option value="B5 Type">B5 Type</option>
+              <option value="C Type">C Type</option>
+              <option value="준비중">준비중</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-cancel" onclick="resetForm()">초기화</button>
+          <button class="btn-save" onclick="saveModel()">저장</button>
+        </div>
+      </div>
+
+      <!-- 내 차종 목록 -->
+      <div id="panel-list" style="display:none;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
+          <p class="section-title" style="margin-bottom:0;flex:1;min-width:120px;">전체 차종 목록</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="list-filter-btn active" id="filter-all"    onclick="setListFilter('all')">전체</button>
+            <button class="list-filter-btn"        id="filter-builtin" onclick="setListFilter('builtin')">기본 차종</button>
+            <button class="list-filter-btn"        id="filter-user"   onclick="setListFilter('user')">내가 추가한 차종</button>
+          </div>
+          <input type="text" id="listSearch" placeholder="검색..." oninput="renderUserList()"
+            style="border:1.5px solid #d1d5db;border-radius:7px;padding:7px 11px;font-size:13px;font-family:'Noto Sans KR',sans-serif;outline:none;width:160px;">
+        </div>
+        <div class="user-models-list" id="userModelsList"></div>
+      </div>
+
+      <!-- 엑셀 업로드 -->
+      <div id="panel-excel" style="display:none;">
+        <p class="section-title">엑셀로 차종 일괄 추가</p>
+        <div class="excel-guide">
+          <div class="excel-cols">
+            <strong>엑셀 컬럼 순서 (A~I)</strong>
+            <div class="col-list">
+              <span class="col-badge">A 제조사</span>
+              <span class="col-badge">B 차종명</span>
+              <span class="col-badge">C 연식</span>
+              <span class="col-badge">D 운전석(mm)</span>
+              <span class="col-badge">E 조수석(mm)</span>
+              <span class="col-badge">F 후방(mm)</span>
+              <span class="col-badge">G 후방표시</span>
+              <span class="col-badge">H 어댑터</span>
+            </div>
+            <p class="form-hint" style="margin-top:8px;">· 1행은 헤더(제목)로 자동 무시됩니다.<br>· 운전석/조수석/후방은 숫자만 입력 (없으면 빈칸)<br>· 어댑터 예: U-Type, B2-1 Type, 준비중</p>
+          </div>
+          <button class="btn-sample" onclick="downloadSample()">📥 샘플 엑셀 다운로드</button>
+        </div>
+        <div class="excel-drop-zone" id="excelDropZone" onclick="document.getElementById('excelFileInput').click()">
+          <div class="drop-icon">📂</div>
+          <div class="drop-text">클릭하거나 파일을 여기에 끌어다 놓으세요</div>
+          <div class="drop-sub">.xlsx, .xls 파일만 가능</div>
+          <input type="file" id="excelFileInput" accept=".xlsx,.xls" style="display:none" onchange="handleExcelFile(this)">
+        </div>
+        <div id="excelPreview" style="display:none;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+            <p class="section-title" style="margin-bottom:0;">미리보기 (<span id="previewCount">0</span>건)</p>
+            <button class="btn-save" style="width:auto;margin:0;padding:9px 20px;" onclick="importExcelData()">모두 추가</button>
+          </div>
+          <div class="preview-table-wrap">
+            <table class="preview-table" id="previewTable"></table>
+          </div>
+        </div>
+      </div>
+
+      <!-- 내보내기 -->
+      <div id="panel-export" style="display:none;">
+        <p class="section-title">데이터 내보내기</p>
+        <div class="export-options">
+          <div class="export-card export-card-primary" onclick="exportHtml()">
+            <div class="export-icon">🌐</div>
+            <div class="export-label">HTML 파일로 저장</div>
+            <div class="export-desc">변경사항이 반영된 HTML 파일 다운로드<br>다운로드 후 Shopify/Cafe24에 재업로드</div>
+          </div>
+          <div class="export-card" onclick="exportAll()">
+            <div class="export-icon">📊</div>
+            <div class="export-label">전체 데이터 내보내기</div>
+            <div class="export-desc">기본 데이터 + 내가 추가한 차종 모두<br>Excel 파일로 저장</div>
+          </div>
+          <div class="export-card" onclick="exportUserOnly()">
+            <div class="export-icon">⭐</div>
+            <div class="export-label">내 차종만 내보내기</div>
+            <div class="export-desc">내가 직접 추가한 차종만<br>Excel 파일로 저장</div>
+          </div>
+        </div>
+        <div class="html-export-guide">
+          <strong>📌 HTML 저장 후 재업로드 방법</strong>
+          <ol>
+            <li>"HTML 파일로 저장" 클릭 → <code>wiper.html</code> 다운로드</li>
+            <li>Shopify/Cafe24 관리자 → 파일 업로드 메뉴에서 기존 파일 교체</li>
+            <li>페이지 새로고침 시 변경사항 즉시 반영 ✓</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
 
 <script>
 const DATA = {
@@ -328,7 +727,6 @@ const DATA = {
       { name: '쏘나타 DN8/센슈어스', year: '2019.04', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
       { name: '쏘나타 디엣지', year: '2023~', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
       { name: '쏘나타 디엣지(택시용)', year: '2025.03월 이후', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '쏘나타 디엣지 택시(중국출고분)', year: '2024~2025.02', d: 600, p: 450, r: null, rDisplay: null, a: 'B11 Type' },
       { name: '쏠라티', year: '2015~', d: 650, p: 600, r: null, rDisplay: null, a: 'U-Type' },
       { name: '아반떼 HD', year: '2006.05~2010', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
       { name: '아반떼 MD', year: '2010.08~2015', d: 650, p: 350, r: null, rDisplay: null, a: 'U-Type' },
@@ -440,9 +838,6 @@ const DATA = {
   'RENAULT SAMSUNG (삼성)': {
     icon: '🔵',
     models: [
-      { name: '그랑콜레우스', year: '2025~현재', d: 600, p: 430, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'QM3', year: '~2016.07', d: 650, p: 350, r: 290, rDisplay: 'RB880/290mm', a: 'B3 Type' },
-      { name: 'QM3', year: '2016.08~현재', d: 650, p: 350, r: 290, rDisplay: 'RB880/290mm', a: 'B6 Type' },
       { name: 'SM3 뉴제너레이션', year: '2005~2009', d: 550, p: 400, r: null, rDisplay: null, a: 'U-Type' },
       { name: '뉴/네오SM3', year: '2009.08~2019', d: 600, p: 400, r: null, rDisplay: null, a: 'U-Type' },
       { name: 'SM5 임프레션', year: '2005~2009.12', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
@@ -462,10 +857,6 @@ const DATA = {
     icon: '🟤',
     models: [
       { name: '뉴 렉스턴', year: '2006~2017', d: 500, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '렉스턴 스포츠', year: '', d: 650, p: 500, r: 330, rDisplay: 'RB383/330mm', a: 'B2-1 Type' },
-      { name: '렉스턴 칸', year: '', d: 650, p: 500, r: 330, rDisplay: 'RB383/330mm', a: 'B2-1 Type' },
-      { name: '렉스턴 G4', year: '', d: 650, p: 500, r: 330, rDisplay: 'RB383/330mm', a: 'B2-1 Type' },
-      { name: '렉스턴 올뉴', year: '', d: 650, p: 500, r: 330, rDisplay: 'RB383/330mm', a: 'B2-1 Type' },
       { name: '무쏘/스포츠', year: '', d: 500, p: 450, r: null, rDisplay: null, a: 'U-Type' },
       { name: '더뉴무쏘EV', year: '2025.03~', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
       { name: '로디우스', year: '2004~2013', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
@@ -511,11 +902,7 @@ const DATA = {
       { name: '콜로라도', year: '2019~', d: 550, p: 450, r: null, rDisplay: null, a: 'U-Type' },
       { name: '크루즈', year: '2011~2016', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
       { name: '토스카', year: '2006~2011', d: 550, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '트랙스', year: '2013~2015.06', d: 600, p: 350, r: null, rDisplay: null, a: 'B2-2 Type' },
       { name: '트랙스', year: '2016~2020', d: 600, p: 350, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '트랙스 크로스오버', year: '2023~현재', d: 600, p: 450, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '트레일블레이저', year: '', d: 600, p: 450, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '아베오', year: '', d: 650, p: 350, r: null, rDisplay: null, a: 'B1 Type' },
       { name: '트래버스', year: '2019~', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
       { name: '프리마', year: '', d: 600, p: 600, r: null, rDisplay: null, a: 'U-Type' },
     ]
@@ -1117,7 +1504,7 @@ function render() {
   let html = ''; let found = 0;
 
   brands.forEach(brand => {
-    let models = DATA[brand].models;
+    let models = DATA[brand].models.filter(m => !m._deleted);
     if (q) models = models.filter(m => {
         const haystack = buildHaystack(brand, m);
         return matches(haystack, q);
@@ -1166,7 +1553,618 @@ function render() {
   document.getElementById('content').innerHTML = html;
 }
 
-buildDD(); render();
+// ── 차종 관리 ──────────────────────────────────────────────────────────────
+
+const LS_KEY          = 'wiperUserModels';
+const LS_OVERRIDES    = 'wiperOverrides';   // 기본 차종 수정본
+const LS_DELETED      = 'wiperDeleted';     // 기본 차종 삭제 목록
+
+function loadOverrides() {
+  try { return JSON.parse(localStorage.getItem(LS_OVERRIDES) || '{}'); } catch(e) { return {}; }
+}
+function saveOverrides(obj) { localStorage.setItem(LS_OVERRIDES, JSON.stringify(obj)); }
+function loadDeleted() {
+  try { return JSON.parse(localStorage.getItem(LS_DELETED) || '[]'); } catch(e) { return []; }
+}
+function saveDeleted(arr) { localStorage.setItem(LS_DELETED, JSON.stringify(arr)); }
+
+// 기본 차종 고유키: "브랜드||이름||연식"
+function builtinKey(brand, m) {
+  return `${brand}||${m.name}||${m.year||''}`;
+}
+
+function loadUserModels() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); } catch(e) { return []; }
+}
+function saveUserModels(arr) {
+  localStorage.setItem(LS_KEY, JSON.stringify(arr));
+}
+
+// 사용자 데이터를 DATA에 병합
+function mergeUserData() {
+  const users     = loadUserModels();
+  const overrides = loadOverrides();
+  const deleted   = loadDeleted();
+
+  // 기본 DATA에 override/deleted 플래그 표시
+  Object.entries(DATA).forEach(([brand, info]) => {
+    if (info._user) return; // 사용자 제조사는 건너뜀
+    info.models.forEach(m => {
+      const key = builtinKey(brand, m);
+      m._builtinKey = key;
+      m._deleted    = deleted.includes(key);
+      if (overrides[key]) {
+        // 수정된 값 덮어쓰기
+        Object.assign(m, overrides[key], { _builtinKey: key, _deleted: m._deleted, _overridden: true });
+      }
+    });
+  });
+
+  // 사용자 추가 차종 병합
+  users.forEach(item => {
+    if (!DATA[item.brand]) DATA[item.brand] = { icon: '⭐', models: [], _user: true };
+    if (!DATA[item.brand]._userIds) DATA[item.brand]._userIds = [];
+    if (!DATA[item.brand]._userIds.includes(item.id)) {
+      DATA[item.brand].models.push({ ...item.model, _userId: item.id });
+      DATA[item.brand]._userIds.push(item.id);
+    }
+  });
+}
+
+// 제조사 셀렉트 빌드
+function buildBrandSelect() {
+  const sel = document.getElementById('f-brand');
+  sel.innerHTML = '<option value="">-- 선택 --</option>';
+  Object.keys(DATA).forEach(k => {
+    const opt = document.createElement('option');
+    opt.value = k;
+    opt.textContent = k;
+    sel.appendChild(opt);
+  });
+}
+
+// 모달 열기
+function openManageModal() {
+  const pw = prompt('비밀번호를 입력해주세요.');
+  if (pw === null) return;
+  if (pw !== 'ekqhsl0701!') {
+    showToast('비밀번호가 올바르지 않습니다.');
+    return;
+  }
+  buildBrandSelect();
+  renderUserList();
+  document.getElementById('manageModal').classList.add('open');
+}
+function closeManageModal() {
+  document.getElementById('manageModal').classList.remove('open');
+  resetForm();
+}
+// 모달 외부 클릭 닫기
+document.getElementById('manageModal').addEventListener('click', function(e) {
+  if (e.target === this) closeManageModal();
+});
+
+// 탭 전환
+function switchTab(tab) {
+  const panels = ['add','list','excel','export'];
+  panels.forEach(p => {
+    document.getElementById('panel-' + p).style.display = tab === p ? '' : 'none';
+    document.getElementById('tab-' + p).classList.toggle('active', tab === p);
+  });
+  if (tab === 'list') renderUserList();
+}
+
+// 폼 초기화
+function resetForm() {
+  document.getElementById('edit-idx').value = '';
+  document.getElementById('form-title').textContent = '새 차종 추가';
+  ['f-brand','f-brand-new','f-name','f-year','f-d','f-p','f-r','f-rdisplay'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('f-adapter').value = 'U-Type';
+}
+
+// 저장
+function saveModel() {
+  const brandSel = document.getElementById('f-brand').value.trim();
+  const brandNew = document.getElementById('f-brand-new').value.trim();
+  const brand = brandNew || brandSel;
+  const name  = document.getElementById('f-name').value.trim();
+  const year  = document.getElementById('f-year').value.trim();
+  const d     = parseInt(document.getElementById('f-d').value) || null;
+  const p     = parseInt(document.getElementById('f-p').value) || null;
+  const r     = parseInt(document.getElementById('f-r').value) || null;
+  const rDisplay = document.getElementById('f-rdisplay').value.trim() || null;
+  const a     = document.getElementById('f-adapter').value;
+  const editIdx = document.getElementById('edit-idx').value;
+
+  if (!brand) { showToast('제조사를 선택하거나 입력해주세요.'); return; }
+  if (!name)  { showToast('차종명을 입력해주세요.'); return; }
+
+  const users = loadUserModels();
+  const model = { name, year, d, p, r, rDisplay, a };
+
+  if (editIdx.startsWith('builtin:')) {
+    // 기본 차종 수정 → overrides에 저장
+    const key = editIdx.replace('builtin:', '');
+    const overrides = loadOverrides();
+    overrides[key] = model;
+    saveOverrides(overrides);
+  } else if (editIdx.startsWith('user:')) {
+    // 사용자 추가 차종 수정
+    const idx = parseInt(editIdx.replace('user:', ''));
+    const oldItem = users[idx];
+    if (oldItem && DATA[oldItem.brand]) {
+      DATA[oldItem.brand].models = DATA[oldItem.brand].models.filter(m => m._userId !== oldItem.id);
+      if (DATA[oldItem.brand]._userIds)
+        DATA[oldItem.brand]._userIds = DATA[oldItem.brand]._userIds.filter(id => id !== oldItem.id);
+    }
+    users[idx] = { id: oldItem.id, brand, model };
+    saveUserModels(users);
+  } else {
+    // 신규 추가
+    users.push({ id: Date.now().toString(), brand, model });
+    saveUserModels(users);
+  }
+
+  // DATA 재구성 (플래그 초기화 후 재병합)
+  resetDataFlags();
+  mergeUserData();
+  buildDD();
+  render();
+  renderUserList();
+  resetForm();
+  showToast(editIdx !== '' ? '차종이 수정되었습니다.' : '차종이 추가되었습니다.');
+  switchTab('list');
+}
+
+// 편집 시작 (사용자 추가 차종)
+function editModel(idx) {
+  const users = loadUserModels();
+  const item = users[idx];
+  if (!item) return;
+  switchTab('add');
+  document.getElementById('edit-idx').value = 'user:' + idx;
+  document.getElementById('form-title').textContent = '차종 수정';
+  const sel = document.getElementById('f-brand');
+  let found = false;
+  for (let o of sel.options) { if (o.value === item.brand) { o.selected = true; found = true; break; } }
+  if (!found) document.getElementById('f-brand-new').value = item.brand;
+  document.getElementById('f-name').value     = item.model.name || '';
+  document.getElementById('f-year').value     = item.model.year || '';
+  document.getElementById('f-d').value        = item.model.d || '';
+  document.getElementById('f-p').value        = item.model.p || '';
+  document.getElementById('f-r').value        = item.model.r || '';
+  document.getElementById('f-rdisplay').value = item.model.rDisplay || '';
+  document.getElementById('f-adapter').value  = item.model.a || 'U-Type';
+}
+
+// 기본 차종 편집 시작
+function editBuiltin(brand, builtinKey) {
+  // DATA에서 해당 모델 찾기
+  const info = DATA[brand];
+  if (!info) return;
+  const m = info.models.find(x => x._builtinKey === builtinKey);
+  if (!m) return;
+  switchTab('add');
+  document.getElementById('edit-idx').value = 'builtin:' + builtinKey;
+  document.getElementById('form-title').textContent = '기본 차종 수정';
+  const sel = document.getElementById('f-brand');
+  let found = false;
+  for (let o of sel.options) { if (o.value === brand) { o.selected = true; found = true; break; } }
+  if (!found) document.getElementById('f-brand-new').value = brand;
+  document.getElementById('f-name').value     = m.name || '';
+  document.getElementById('f-year').value     = m.year || '';
+  document.getElementById('f-d').value        = m.d || '';
+  document.getElementById('f-p').value        = m.p || '';
+  document.getElementById('f-r').value        = m.r || '';
+  document.getElementById('f-rdisplay').value = m.rDisplay || '';
+  document.getElementById('f-adapter').value  = m.a || 'U-Type';
+}
+
+// 사용자 추가 차종 삭제
+function deleteModel(idx) {
+  const users = loadUserModels();
+  const item = users[idx];
+  if (!item) return;
+  if (!confirm(`"${item.model.name}" 차종을 삭제할까요?`)) return;
+  if (DATA[item.brand]) {
+    DATA[item.brand].models = DATA[item.brand].models.filter(m => m._userId !== item.id);
+    if (DATA[item.brand]._userIds)
+      DATA[item.brand]._userIds = DATA[item.brand]._userIds.filter(id => id !== item.id);
+    if (DATA[item.brand]._user && DATA[item.brand].models.length === 0)
+      delete DATA[item.brand];
+  }
+  users.splice(idx, 1);
+  saveUserModels(users);
+  resetDataFlags();
+  mergeUserData();
+  buildDD(); render(); renderUserList();
+  showToast('차종이 삭제되었습니다.');
+}
+
+// 기본 차종 삭제 (숨김 처리)
+function deleteBuiltin(builtinKey, name) {
+  if (!confirm(`"${name}" 차종을 삭제할까요?
+(기본 차종은 숨김 처리됩니다)`)) return;
+  const deleted = loadDeleted();
+  if (!deleted.includes(builtinKey)) deleted.push(builtinKey);
+  saveDeleted(deleted);
+  resetDataFlags();
+  mergeUserData();
+  buildDD(); render(); renderUserList();
+  showToast('차종이 숨김 처리되었습니다.');
+}
+
+// 기본 차종 복원
+function restoreBuiltin(builtinKey) {
+  const deleted = loadDeleted().filter(k => k !== builtinKey);
+  saveDeleted(deleted);
+  const overrides = loadOverrides();
+  delete overrides[builtinKey];
+  saveOverrides(overrides);
+  resetDataFlags();
+  mergeUserData();
+  buildDD(); render(); renderUserList();
+  showToast('차종이 복원되었습니다.');
+}
+
+// DATA 플래그 초기화 (재병합 전 호출)
+function resetDataFlags() {
+  Object.values(DATA).forEach(info => {
+    if (info._user) return;
+    info.models.forEach(m => {
+      delete m._deleted;
+      delete m._overridden;
+    });
+    delete info._userIds;
+    // 사용자 추가 제조사가 아닌 경우 사용자 추가 모델만 제거
+    if (!info._user) {
+      info.models = info.models.filter(m => !m._userId);
+    }
+  });
+  // 사용자 추가 제조사 제거 (재병합에서 다시 추가됨)
+  Object.keys(DATA).forEach(k => {
+    if (DATA[k]._user) delete DATA[k];
+  });
+}
+
+let listFilter = 'all';
+function setListFilter(f) {
+  listFilter = f;
+  ['all','builtin','user'].forEach(x => {
+    document.getElementById('filter-' + x).classList.toggle('active', x === f);
+  });
+  renderUserList();
+}
+
+// 목록 렌더링 (기본 + 사용자 통합)
+function renderUserList() {
+  const el       = document.getElementById('userModelsList');
+  const users    = loadUserModels();
+  const overrides= loadOverrides();
+  const deleted  = loadDeleted();
+  const searchQ  = (document.getElementById('listSearch')?.value || '').trim().toLowerCase();
+  let items = [];
+
+  // 기본 차종 수집
+  if (listFilter !== 'user') {
+    Object.entries(DATA).forEach(([brand, info]) => {
+      if (info._user) return;
+      info.models.forEach(m => {
+        if (!m._builtinKey) return;
+        items.push({ type: 'builtin', brand, m, key: m._builtinKey });
+      });
+    });
+  }
+
+  // 사용자 추가 차종 수집
+  if (listFilter !== 'builtin') {
+    users.forEach((item, i) => {
+      items.push({ type: 'user', brand: item.brand, m: item.model, idx: i, id: item.id });
+    });
+  }
+
+  // 검색 필터
+  if (searchQ) {
+    items = items.filter(it => {
+      const hay = (it.brand + ' ' + it.m.name + ' ' + (it.m.year||'')).toLowerCase();
+      return hay.includes(searchQ);
+    });
+  }
+
+  if (!items.length) {
+    el.innerHTML = '<div class="empty-user">표시할 차종이 없습니다.</div>';
+    return;
+  }
+
+  el.innerHTML = items.map(it => {
+    const m = it.m;
+    const sizes = [m.d ? `운전석 ${m.d}mm` : null, m.p ? `조수석 ${m.p}mm` : null, m.r ? `후방 ${m.r}mm` : null].filter(Boolean).join(' · ');
+
+    let badge = '';
+    let btns  = '';
+
+    if (it.type === 'builtin') {
+      if (m._deleted) {
+        badge = '<span class="badge-deleted">숨김</span>';
+        btns  = `<button class="btn-edit" onclick="restoreBuiltin('${escHtml(it.key)}')">복원</button>`;
+      } else if (m._overridden) {
+        badge = '<span class="badge-modified">수정됨</span>';
+        btns  = `<button class="btn-edit" onclick="editBuiltin('${escHtml(it.brand)}','${escHtml(it.key)}')">수정</button>`
+              + `<button class="btn-del"  onclick="deleteBuiltin('${escHtml(it.key)}','${escHtml(m.name)}')">숨김</button>`
+              + `<button class="btn-cancel" style="padding:6px 8px;font-size:11px;" onclick="restoreBuiltin('${escHtml(it.key)}')">복원</button>`;
+      } else {
+        badge = '<span class="badge-builtin">기본</span>';
+        btns  = `<button class="btn-edit" onclick="editBuiltin('${escHtml(it.brand)}','${escHtml(it.key)}')">수정</button>`
+              + `<button class="btn-del"  onclick="deleteBuiltin('${escHtml(it.key)}','${escHtml(m.name)}')">숨김</button>`;
+      }
+    } else {
+      badge = '<span class="badge-user">추가</span>';
+      btns  = `<button class="btn-edit" onclick="editModel(${it.idx})">수정</button>`
+            + `<button class="btn-del"  onclick="deleteModel(${it.idx})">삭제</button>`;
+    }
+
+    return `<div class="user-model-item" style="${m._deleted ? 'opacity:.5;' : ''}">
+      <div class="user-model-info">
+        <div class="user-model-name">${escHtml(it.brand)} &nbsp;›&nbsp; ${escHtml(m.name)}${badge}${m.year ? ` <span style="font-weight:400;color:#6b7280;font-size:12px;">(${escHtml(m.year)})</span>` : ''}</div>
+        <div class="user-model-detail">${sizes || '사이즈 미입력'} &nbsp;·&nbsp; 어댑터: ${escHtml(m.a)}</div>
+      </div>
+      <div class="user-model-btns">${btns}</div>
+    </div>`;
+  }).join('');
+}
+
+function escHtml(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Toast
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ── 엑셀 업로드 / 내보내기 ─────────────────────────────────────────────────
+
+let previewRows = [];
+
+// 드래그앤드롭
+(function(){
+  const zone = document.getElementById('excelDropZone');
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault(); zone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) processExcelFile(file);
+  });
+})();
+
+function handleExcelFile(input) {
+  if (input.files[0]) processExcelFile(input.files[0]);
+  input.value = '';
+}
+
+function processExcelFile(file) {
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const wb = XLSX.read(e.target.result, { type: 'array' });
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+      // 헤더 제외
+      const dataRows = rows.slice(1).filter(r => r[0] || r[1]);
+      previewRows = dataRows.map(r => ({
+        brand:    String(r[0] || '').trim(),
+        name:     String(r[1] || '').trim(),
+        year:     String(r[2] || '').trim(),
+        d:        parseInt(r[3]) || null,
+        p:        parseInt(r[4]) || null,
+        r:        parseInt(r[5]) || null,
+        rDisplay: String(r[6] || '').trim() || null,
+        a:        String(r[7] || '').trim() || 'U-Type'
+      })).filter(r => r.brand && r.name);
+
+      renderPreview(previewRows);
+    } catch(err) {
+      showToast('엑셀 파일을 읽을 수 없습니다.');
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function renderPreview(rows) {
+  const wrap = document.getElementById('excelPreview');
+  const table = document.getElementById('previewTable');
+  document.getElementById('previewCount').textContent = rows.length;
+  if (!rows.length) { wrap.style.display = 'none'; return; }
+
+  const heads = ['제조사','차종명','연식','운전석','조수석','후방','후방표시','어댑터'];
+  table.innerHTML = '<thead><tr>' + heads.map(h=>`<th>${h}</th>`).join('') + '</tr></thead>'
+    + '<tbody>' + rows.map(r =>
+      `<tr><td>${escHtml(r.brand)}</td><td>${escHtml(r.name)}</td><td>${escHtml(r.year)}</td>`
+      + `<td>${r.d||'-'}</td><td>${r.p||'-'}</td><td>${r.r||'-'}</td>`
+      + `<td>${escHtml(r.rDisplay||'')}</td><td>${escHtml(r.a)}</td></tr>`
+    ).join('') + '</tbody>';
+  wrap.style.display = '';
+}
+
+function importExcelData() {
+  if (!previewRows.length) return;
+  const users = loadUserModels();
+  previewRows.forEach(r => {
+    users.push({ id: Date.now().toString() + Math.random(), brand: r.brand,
+      model: { name: r.name, year: r.year, d: r.d, p: r.p, r: r.r, rDisplay: r.rDisplay, a: r.a }
+    });
+  });
+  saveUserModels(users);
+  mergeUserData();
+  buildDD();
+  render();
+  showToast(`${previewRows.length}건 추가 완료!`);
+  previewRows = [];
+  document.getElementById('excelPreview').style.display = 'none';
+  document.getElementById('previewTable').innerHTML = '';
+}
+
+function downloadSample() {
+  const ws = XLSX.utils.aoa_to_sheet([
+    ['제조사','차종명','연식','운전석(mm)','조수석(mm)','후방(mm)','후방표시','어댑터'],
+    ['TESLA (테슬라)','모델3','2021~',650,450,'','','U-Type'],
+    ['TESLA (테슬라)','모델Y','2022~',650,400,300,'RB382/300mm','U-Type'],
+    ['BMW (비엠더블유)','1시리즈','F20 2011~19',600,480,'','','B2-1 Type'],
+  ]);
+  // 컬럼 너비
+  ws['!cols'] = [18,14,14,12,12,10,14,12].map(w=>({wch:w}));
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, '차종데이터');
+  XLSX.writeFile(wb, '와이퍼_차종_샘플.xlsx');
+}
+
+// ── 내보내기 ──────────────────────────────────────────────────────────────────
+
+function buildExportSheet(includeBuiltin) {
+  const rows = [['제조사','차종명','연식','운전석(mm)','조수석(mm)','후방(mm)','후방표시','어댑터']];
+  const users = loadUserModels();
+  const userIds = new Set(users.map(u => u.id));
+
+  if (includeBuiltin) {
+    Object.entries(DATA).forEach(([brand, info]) => {
+      info.models.forEach(m => {
+        if (!m._userId) { // 기본 데이터
+          rows.push([brand, m.name, m.year||'', m.d||'', m.p||'', m.r||'', m.rDisplay||'', m.a]);
+        }
+      });
+    });
+  }
+  // 사용자 추가 데이터
+  users.forEach(item => {
+    const m = item.model;
+    rows.push([item.brand, m.name, m.year||'', m.d||'', m.p||'', m.r||'', m.rDisplay||'', m.a]);
+  });
+  return rows;
+}
+
+function exportHtml() {
+  // 현재 DATA(기본+override+deleted 적용)를 기반으로 HTML 재생성
+  // 1. 현재 파일의 HTML 문자열 가져오기
+  // 2. DATA 객체에서 런타임 플래그 제거 후 직렬화
+  // 3. HTML 내 const DATA = { ... }; 부분을 교체
+  // 4. localStorage 데이터는 이미 DATA에 병합됐으므로 LS 초기화 코드 삽입
+
+  // DATA에서 런타임 플래그 제거한 순수 데이터 생성
+  const cleanData = {};
+  const overrides = loadOverrides();
+  const deleted   = loadDeleted();
+  const users     = loadUserModels();
+
+  // 기본 차종 (override/deleted 반영, 숨김 제외)
+  Object.entries(DATA).forEach(([brand, info]) => {
+    const models = info.models
+      .filter(m => !m._deleted && !m._userId)  // 숨김·사용자추가 제외
+      .map(m => {
+        const key = m._builtinKey;
+        const base = { name: m.name, year: m.year, d: m.d, p: m.p, r: m.r, rDisplay: m.rDisplay, a: m.a };
+        return base;
+      });
+
+    // 사용자 추가 차종도 포함
+    const userModels = info.models
+      .filter(m => m._userId)
+      .map(m => ({ name: m.name, year: m.year, d: m.d, p: m.p, r: m.r, rDisplay: m.rDisplay, a: m.a }));
+
+    const allModels = [...models, ...userModels];
+    if (allModels.length === 0) return;
+
+    cleanData[brand] = { icon: info.icon || '🚗', models: allModels };
+  });
+
+  // 추가로 사용자가 만든 새 제조사 (DATA에 _user로 표시된 것)
+  users.forEach(item => {
+    if (!cleanData[item.brand]) {
+      cleanData[item.brand] = { icon: '⭐', models: [] };
+    }
+    // 이미 위에서 추가됐으면 skip
+    const exists = cleanData[item.brand].models.find(m =>
+      m.name === item.model.name && m.year === item.model.year
+    );
+    if (!exists) {
+      cleanData[item.brand].models.push({ ...item.model });
+    }
+  });
+
+  // 현재 문서의 HTML 소스 가져오기
+  const htmlSource = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+  // DATA 교체: "const DATA = {" ... "};" 부분을 cleanData로 교체
+  const dataStr = 'const DATA = ' + JSON.stringify(cleanData, null, 2) + ';';
+
+  // 정규식으로 기존 DATA 블록 교체
+  const replaced = htmlSource.replace(
+    /const DATA = \{[\s\S]*?\};\s*\n(let selBrand)/,
+    dataStr + '\n$1'
+  );
+
+  if (replaced === htmlSource) {
+    showToast('HTML 생성 중 오류가 발생했습니다.');
+    return;
+  }
+
+  // localStorage 초기화 코드 삽입 (병합된 데이터가 DATA에 이미 있으므로)
+  const clearLsScript = '<scr' + 'ipt>\n'
+    + '  localStorage.removeItem(\'' + LS_KEY + '\');\n'
+    + '  localStorage.removeItem(\'' + LS_OVERRIDES + '\');\n'
+    + '  localStorage.removeItem(\'' + LS_DELETED + '\');\n'
+    + '<\/scr' + 'ipt>\n</body>';
+
+  const finalHtml = replaced.replace('</body>', clearLsScript);
+
+  // 다운로드
+  const blob = new Blob([finalHtml], { type: 'text/html;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'wiper.html';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('HTML 파일이 저장되었습니다. 재업로드 후 반영됩니다!');
+}
+
+function exportAll() {
+  const rows = buildExportSheet(true);
+  const ws = XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols'] = [20,16,16,12,12,10,14,12].map(w=>({wch:w}));
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, '전체차종');
+  XLSX.writeFile(wb, '와이퍼_전체차종.xlsx');
+  showToast('엑셀 파일이 저장되었습니다.');
+}
+
+function exportUserOnly() {
+  const users = loadUserModels();
+  if (!users.length) { showToast('추가된 차종이 없습니다.'); return; }
+  const rows = [['제조사','차종명','연식','운전석(mm)','조수석(mm)','후방(mm)','후방표시','어댑터']];
+  users.forEach(item => {
+    const m = item.model;
+    rows.push([item.brand, m.name, m.year||'', m.d||'', m.p||'', m.r||'', m.rDisplay||'', m.a]);
+  });
+  const ws = XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols'] = [20,16,16,12,12,10,14,12].map(w=>({wch:w}));
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, '내차종');
+  XLSX.writeFile(wb, '와이퍼_내차종.xlsx');
+  showToast('엑셀 파일이 저장되었습니다.');
+}
+
+// 초기 로드 시 사용자 데이터 병합
+mergeUserData();
+buildDD();
+render();
 </script>
 </body>
 </html>
