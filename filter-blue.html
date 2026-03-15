@@ -143,12 +143,12 @@
   }
 
   .badge-code {
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 700;
     color: #6366f1;
     background: #eef2ff;
     border-radius: 6px;
-    padding: 3px 8px;
+    padding: 4px 10px;
     letter-spacing: .5px;
   }
 
@@ -161,12 +161,12 @@
   }
 
   .badge-incompatible {
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 700;
     color: #ef4444;
     background: #fef2f2;
     border-radius: 6px;
-    padding: 3px 8px;
+    padding: 4px 8px;
   }
 
   /* Empty state */
@@ -464,6 +464,129 @@
     .mgr-tab { font-size: 12px; padding: 8px 10px 12px; }
   }
 
+
+  
+
+  /* ── 폼 제조사 select ── */
+  .f-select-brand {
+    width: 100%; height: 40px; border: 1px solid #e5e7eb;
+    border-radius: 8px; padding: 0 12px;
+    font-family: 'Noto Sans KR', sans-serif; font-size: 14px;
+    color: #1a1a1a; background: #fff; outline: none; box-sizing: border-box;
+  }
+  .f-select-brand:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+
+
+  /* ── 제조사 드롭다운 + 검색창 row ── */
+  .filter-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  /* 제조사 드롭다운 */
+  .brand-select-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+  .brand-select-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    height: 44px;
+    padding: 0 14px;
+    min-width: 130px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    transition: border-color .12s;
+    white-space: nowrap;
+  }
+  .brand-select-btn:hover { border-color: #9ca3af; }
+  .brand-select-btn.open { border-color: #6366f1; }
+  .brand-select-btn svg { flex-shrink: 0; color: #9ca3af; transition: transform .15s; }
+  .brand-select-btn.open svg { transform: rotate(180deg); }
+
+  .brand-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 200px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.1);
+    z-index: 300;
+    overflow: hidden;
+  }
+  .brand-dropdown.open { display: block; }
+  .brand-option {
+    padding: 11px 16px;
+    font-size: 14px;
+    color: #374151;
+    cursor: pointer;
+    transition: background .1s;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .brand-option:last-child { border-bottom: none; }
+  .brand-option:hover { background: #f5f3ff; color: #6366f1; }
+  .brand-option.selected { color: #6366f1; font-weight: 600; background: #f5f3ff; }
+
+  /* 검색창 */
+  .filter-search-wrap {
+    flex: 1;
+    position: relative;
+  }
+  .filter-search-wrap svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    pointer-events: none;
+  }
+  .filter-search-input {
+    width: 100%;
+    height: 44px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #fff;
+    padding: 0 16px 0 42px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    color: #1a1a1a;
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .filter-search-input::placeholder { color: #c0c4cc; }
+  .filter-search-input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99,102,241,.1);
+  }
+  .filter-ac-list {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0; right: 0;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    z-index: 200;
+    overflow: hidden;
+    display: none;
+    pointer-events: none;
+  }
+  .filter-ac-list.open { display: block; pointer-events: auto; }
+
 </style>
 </head>
 <body>
@@ -478,15 +601,32 @@
   <a href="index.html" class="back-link"><span>‹</span> 호환표 안내</a>
   <div class="page-header">
     <h1>블루 필터 호환표</h1>
-    <p>차종과 년식을 확인하고 맞는 블루 필터를 선택하세요.</p>
+    <p>차종과 년식을 확인하고 맞는 블루 필터를 선택하세요.<br><span style="font-size:12px;color:#9ca3af;">검색이 안되는 차종의 경우 추가 예정입니다.</span></p>
   </div>
 
-  <div class="search-wrap" style="position:relative;margin-bottom:28px;">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#9ca3af;pointer-events:none;">
-      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-    </svg>
-    <input class="search-input" type="text" id="searchInput" placeholder="차종 검색 (예: 투싼, 코나, 쏘렌토…)" autocomplete="off">
-    <div class="ac-list" id="acList"></div>
+    <div class="filter-row" id="filterRow">
+    <div class="brand-select-wrap" id="brandSelectWrap">
+      <button class="brand-select-btn" id="brandSelectBtn" onclick="toggleBrandDropdown()">
+        <span id="brandLabel">제조사</span>
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="brand-dropdown" id="brandDropdown">
+    <div class="brand-option  selected" data-val="전체" onclick="selectBrand('전체',this)">전체 제조사</div>
+    <div class="brand-option" data-val="현대" onclick="selectBrand('현대',this)">HYUNDAI (현대)</div>
+    <div class="brand-option" data-val="기아" onclick="selectBrand('기아',this)">KIA (기아)</div>
+    <div class="brand-option" data-val="제네시스" onclick="selectBrand('제네시스',this)">GENESIS (제네시스)</div>
+    <div class="brand-option" data-val="쌍용" onclick="selectBrand('쌍용',this)">KGM (쌍용)</div>
+    <div class="brand-option" data-val="쉐보레" onclick="selectBrand('쉐보레',this)">CHEVROLET (쉐보레)</div>
+    <div class="brand-option" data-val="르노" onclick="selectBrand('르노',this)">RENAULT (르노)</div>
+      </div>
+    </div>
+    <div class="filter-search-wrap">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input class="filter-search-input" type="text" id="searchInput" placeholder="제조사 또는 차종명을 입력해주세요." autocomplete="off">
+      <div class="filter-ac-list ac-list" id="acList"></div>
+    </div>
   </div>
 
   <div id="carList"></div>
@@ -495,7 +635,7 @@
     <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
       <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
     </svg>
-    <p>아직 등록된 차종이 없습니다.<br>로고를 더블클릭해 차종을 추가하세요.</p>
+    <p id="emptyMsg">검색 결과가 없습니다.</p>
   </div>
 </div>
 
@@ -532,25 +672,36 @@
       <input type="hidden" id="eId">
       <input type="hidden" id="eType">
       <div class="f-row">
-        <label class="f-label">차종명 <span style="color:#ef4444">*</span></label>
-        <input class="f-input" id="fModel" placeholder="예: 싼타페, 투싼">
+        <label class="f-label">제조사</label>
+        <select class="f-select-brand" id="fBrand">
+          <option value="">선택 안함</option>
+          <option value="현대">현대</option>
+          <option value="기아">기아</option>
+          <option value="제네시스">제네시스</option>
+          <option value="쌍용">쌍용</option>
+          <option value="쉐보레">쉐보레</option>
+          <option value="르노">르노</option>
+        </select>
+      </div>
+      <div class="f-row2">
+        <div>
+          <label class="f-label">차종명 <span style="color:#ef4444">*</span></label>
+          <input class="f-input" id="fModel" placeholder="예: 그랜저">
+        </div>
+        <div>
+          <label class="f-label">모델명</label>
+          <input class="f-input" id="fModelName" placeholder="예: 그랜저 HG/HEV">
+        </div>
       </div>
       <div class="f-row2">
         <div>
           <label class="f-label">연식</label>
-          <input class="f-input" id="fYear" placeholder="예: 2021~">
+          <input class="f-input" id="fYear" placeholder="예: 2011~">
         </div>
         <div>
-          <label class="f-label">품번</label>
-          <input class="f-input" id="fCode" placeholder="예: CB-123">
+          <label class="f-label">품번 <span style="color:#9ca3af;font-weight:400">(없으면 호환불가)</span></label>
+          <input class="f-input" id="fCode" placeholder="예: DK118">
         </div>
-      </div>
-      <div class="f-row">
-        <label class="f-label">호환 여부</label>
-        <select class="f-select" id="fCompat">
-          <option value="호환">호환</option>
-          <option value="호환불가">호환불가</option>
-        </select>
       </div>
       <button class="btn-save" id="saveBtn" onclick="saveModel()">저장하기</button>
     </div>
@@ -563,6 +714,7 @@
         <button class="fbtn" onclick="setFilter('base',this)">기본 차종</button>
         <button class="fbtn" onclick="setFilter('user',this)">내가 추가한 차종</button>
         <input class="l-search" type="text" id="lSearch" placeholder="검색…" oninput="renderList()">
+        <button class="fbtn" style="margin-left:auto;color:#ef4444;border-color:#fca5a5;background:#fff5f5;" onclick="deleteAllModels()">전체 삭제</button>
       </div>
       <div class="list-wrap" id="listWrap"></div>
     </div>
@@ -617,6 +769,55 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
+
+
+// ── 제조사 드롭다운 ──
+var currentBrand = '전체';
+
+function toggleBrandDropdown() {
+  var btn = document.getElementById('brandSelectBtn');
+  var dd  = document.getElementById('brandDropdown');
+  btn.classList.toggle('open');
+  dd.classList.toggle('open');
+}
+
+function selectBrand(val, el) {
+  currentBrand = val;
+  document.getElementById('brandLabel').textContent = val === '전체' ? '제조사' : el.textContent.trim();
+  document.querySelectorAll('.brand-option').forEach(function(o){ o.classList.remove('selected'); });
+  el.classList.add('selected');
+  document.getElementById('brandSelectBtn').classList.remove('open');
+  document.getElementById('brandDropdown').classList.remove('open');
+  var q = document.getElementById('searchInput').value.trim().toLowerCase();
+  filterMain(q);
+  refreshCarNames();
+  if (q) showAc(q);
+}
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('#brandSelectWrap')) {
+    var btn = document.getElementById('brandSelectBtn');
+    var dd  = document.getElementById('brandDropdown');
+    if (btn) btn.classList.remove('open');
+    if (dd)  dd.classList.remove('open');
+  }
+});
+
+
+// ── 제조사 한글/영문 매핑 ──
+var BRAND_NORMALIZE = {
+  '현대':'현대','hyundai':'현대','HYUNDAI':'현대','Hyundai':'현대',
+  '기아':'기아','kia':'기아','KIA':'기아','Kia':'기아',
+  '제네시스':'제네시스','genesis':'제네시스','GENESIS':'제네시스','Genesis':'제네시스',
+  '쌍용':'쌍용','kgm':'쌍용','KGM':'쌍용','ssangyong':'쌍용','SSANGYONG':'쌍용','쌍룡':'쌍용',
+  '쉐보레':'쉐보레','chevrolet':'쉐보레','CHEVROLET':'쉐보레','Chevrolet':'쉐보레','chevy':'쉐보레','GM':'쉐보레','gm':'쉐보레',
+  '르노':'르노','renault':'르노','RENAULT':'르노','Renault':'르노','르노삼성':'르노','samsung':'르노','SAMSUNG':'르노',
+};
+function normalizeBrand(val) {
+  if (!val) return '';
+  var trimmed = val.trim();
+  return BRAND_NORMALIZE[trimmed] || trimmed;
+}
 var LS_ADD  = 'blueFilterAdded';
 var LS_EDIT = 'blueFilterEdited';
 function loadAdded()  { try { return JSON.parse(localStorage.getItem(LS_ADD))  || []; } catch(e) { return []; } }
@@ -633,6 +834,7 @@ function collectBase() {
       row.setAttribute('data-rid', rid);
       BASE.push({
         rid: rid, car: car,
+        modelName: '',
         year:  (row.querySelector('.row-year') || {}).textContent || '',
         code:  (row.querySelector('.badge-code') || {}).textContent || '',
         compat: row.querySelector('.badge-incompatible') ? '호환불가' : '호환'
@@ -670,10 +872,11 @@ function applyEdits() {
 }
 
 function buildRowHtml(u) {
+  var yearTxt = [u.modelName, u.year].filter(Boolean).join(' ');
   if (u.compat === '호환불가') {
-    return '<div class="row incompatible" data-uid="'+u.id+'"><span class="row-year">'+(u.year||'')+'</span><div class="row-right"><span class="badge-incompatible">호환불가</span></div></div>';
+    return '<div class="row incompatible" data-uid="'+u.id+'"><span class="row-year">'+yearTxt+'</span><div class="row-right"><span class="badge-incompatible">호환불가</span></div></div>';
   }
-  return '<div class="row" data-uid="'+u.id+'"><span class="row-year">'+(u.year||'')+'</span><div class="row-right">'+(u.code?'<span class="badge-code">'+u.code+'</span>':'')+'</div></div>';
+  return '<div class="row" data-uid="'+u.id+'"><span class="row-year">'+yearTxt+'</span><div class="row-right">'+(u.code?'<span class="badge-code">'+u.code+'</span>':'')+'</div></div>';
 }
 
 function mergeAdded() {
@@ -683,7 +886,7 @@ function mergeAdded() {
     var g = cl.querySelector('.car-group[data-car="'+u.model+'"][data-user]');
     if (!g) {
       g = document.createElement('div');
-      g.className = 'car-group'; g.dataset.car = u.model; g.dataset.user = '1';
+      g.className = 'car-group'; g.dataset.car = u.model; g.dataset.brand = u.brand || ''; g.dataset.user = '1';
       g.innerHTML = '<div class="group-label">'+u.model+'</div><div class="list"></div>';
       cl.appendChild(g);
     }
@@ -703,7 +906,9 @@ var carNames = [];
 function refreshCarNames() {
   carNames = [];
   document.querySelectorAll('#carList .car-group').forEach(function(g) {
-    if (g.style.display !== 'none') carNames.push(g.dataset.car);
+    if (g.style.display === 'none') return;
+    var brandMatch = (currentBrand === '전체') || (g.dataset.brand === currentBrand);
+    if (brandMatch) carNames.push(g.dataset.car);
   });
   var es = document.getElementById('emptyState');
   if (es) es.classList.toggle('visible', carNames.length === 0);
@@ -713,9 +918,15 @@ function filterMain(q) {
   var visible = 0;
   document.querySelectorAll('#carList .car-group').forEach(function(g) {
     if (g.style.display === 'none') return;
-    var match = !q || g.dataset.car.toLowerCase().includes(q);
-    g.classList.toggle('hidden', !match);
-    if (match) visible++;
+    var brandMatch = (currentBrand === '전체') || (g.dataset.brand === currentBrand);
+    // 차종명 OR 모델명/연식 텍스트 검색
+    var carName = g.dataset.car.toLowerCase();
+    var rowTexts = Array.prototype.map.call(g.querySelectorAll('.row-year'), function(el) {
+      return el.textContent.toLowerCase();
+    }).join(' ');
+    var carMatch = !q || carName.includes(q) || rowTexts.includes(q);
+    g.classList.toggle('hidden', !brandMatch || !carMatch);
+    if (brandMatch && carMatch) visible++;
   });
   var es = document.getElementById('emptyState');
   if (es) es.classList.toggle('visible', visible === 0);
@@ -726,7 +937,7 @@ function showAc(q) {
   var list = document.getElementById('acList');
   acIdx = -1;
   if (!q) { list.classList.remove('open'); return; }
-  var hits = carNames.filter(function(n){ return n.toLowerCase().includes(q); }).slice(0,8);
+  var hits = carNames.filter(function(n){ return n.toLowerCase().includes(q) || (document.querySelector('#carList .car-group[data-car="'+n+'"] .row-year') && Array.prototype.some.call(document.querySelectorAll('#carList .car-group[data-car="'+n+'"] .row-year'), function(el){ return el.textContent.toLowerCase().includes(q); })); }).slice(0,8);
   if (!hits.length) { list.classList.remove('open'); return; }
   list.innerHTML = hits.map(function(n) {
     var esc = q.replace(/[-[\]{}()*+?.,\^$|#]/g, '\$&');
@@ -807,28 +1018,31 @@ function goTab(tab, el) {
 
 function resetForm() {
   document.getElementById('eId').value=''; document.getElementById('eType').value='';
+  document.getElementById('fBrand').value='';
   document.getElementById('fModel').value=''; document.getElementById('fModel').disabled=false;
+  document.getElementById('fModelName').value='';
   document.getElementById('fYear').value=''; document.getElementById('fCode').value='';
-  document.getElementById('fCompat').value='호환';
   document.getElementById('saveBtn').textContent='저장하기';
 }
 
 function saveModel() {
   var eId=document.getElementById('eId').value, eType=document.getElementById('eType').value;
+  var brand=document.getElementById('fBrand').value;
   var model=document.getElementById('fModel').value.trim();
   if (!model) { toast('차종명을 입력하세요'); return; }
+  var modelName=document.getElementById('fModelName').value.trim();
   var year=document.getElementById('fYear').value.trim();
   var code=document.getElementById('fCode').value.trim();
-  var compat=document.getElementById('fCompat').value;
+  var compat=code ? '호환' : '호환불가';
   if (eType==='base') {
-    var edits=loadEdits(); edits[eId]={year:year,code:code,compat:compat}; saveEdits(edits);
+    var edits=loadEdits(); edits[eId]={modelName:modelName,year:year,code:code,compat:compat}; saveEdits(edits);
     applyEdits(); refreshCarNames();
   } else if (eType==='user') {
     var users=loadAdded(); var idx=users.findIndex(function(u){ return u.id===eId; });
-    if (idx>=0) users[idx]={id:eId,model:model,year:year,code:code,compat:compat};
+    if (idx>=0) users[idx]={id:eId,brand:brand,model:model,modelName:modelName,year:year,code:code,compat:compat};
     saveAdded(users); rebuildAdded();
   } else {
-    var users2=loadAdded(); users2.push({id:Date.now()+'',model:model,year:year,code:code,compat:compat});
+    var users2=loadAdded(); users2.push({id:Date.now()+'',brand:brand,model:model,modelName:modelName,year:year,code:code,compat:compat});
     saveAdded(users2); rebuildAdded();
   }
   resetForm(); toast(eId?'수정되었습니다':'차종이 추가되었습니다');
@@ -839,8 +1053,8 @@ function editBase(rid) {
   var edits=loadEdits(); var cur=(edits[rid]&&edits[rid]!==null)?edits[rid]:b;
   document.getElementById('eId').value=rid; document.getElementById('eType').value='base';
   document.getElementById('fModel').value=b.car; document.getElementById('fModel').disabled=true;
+  document.getElementById('fModelName').value=cur.modelName||'';
   document.getElementById('fYear').value=cur.year||''; document.getElementById('fCode').value=cur.code||'';
-  document.getElementById('fCompat').value=cur.compat||'호환';
   document.getElementById('saveBtn').textContent='수정 저장';
   goTab('add', document.querySelector('[data-tab="add"]'));
 }
@@ -856,9 +1070,10 @@ function restoreBase(rid) {
 function editUser(id) {
   var u=loadAdded().find(function(x){ return x.id===id; }); if (!u) return;
   document.getElementById('eId').value=u.id; document.getElementById('eType').value='user';
+  document.getElementById('fBrand').value=u.brand||'';
   document.getElementById('fModel').value=u.model; document.getElementById('fModel').disabled=false;
+  document.getElementById('fModelName').value=u.modelName||'';
   document.getElementById('fYear').value=u.year||''; document.getElementById('fCode').value=u.code||'';
-  document.getElementById('fCompat').value=u.compat||'호환';
   document.getElementById('saveBtn').textContent='수정 저장';
   goTab('add', document.querySelector('[data-tab="add"]'));
 }
@@ -883,10 +1098,10 @@ function renderList() {
   var baseItems=(filterMode==='user')?[]:BASE.map(function(r) {
     var isHidden=(r.rid in edits && edits[r.rid]===null);
     var cur=(r.rid in edits && edits[r.rid]!==null)?edits[r.rid]:r;
-    return {type:'base',rid:r.rid,car:r.car,year:cur.year,code:cur.code,compat:cur.compat,edited:(r.rid in edits&&edits[r.rid]!==null),hidden:isHidden};
+    return {type:'base',rid:r.rid,car:r.car,modelName:cur.modelName||'',year:cur.year,code:cur.code,compat:cur.compat,edited:(r.rid in edits&&edits[r.rid]!==null),hidden:isHidden};
   });
   var userItems=(filterMode==='base')?[]:added.map(function(u) {
-    return {type:'user',id:u.id,car:u.model,year:u.year,code:u.code,compat:u.compat};
+    return {type:'user',id:u.id,car:u.model,modelName:u.modelName||'',year:u.year,code:u.code,compat:u.compat};
   });
   var all=baseItems.concat(userItems);
   if (sq) all=all.filter(function(it){ return it.car.toLowerCase().includes(sq)||(it.year||'').includes(sq)||(it.code||'').includes(sq); });
@@ -905,7 +1120,7 @@ function renderList() {
       if (it.type==='user') { var ab=document.createElement('span'); ab.className='badge-added'; ab.textContent='추가됨'; name.appendChild(ab); }
       if (it.hidden) row.style.opacity='0.45';
       var meta=document.createElement('div'); meta.className='list-item-meta';
-      var parts=[]; if(it.code) parts.push(it.code); if(it.compat==='호환불가') parts.push('호환불가');
+      var parts=[]; if(it.modelName) parts.push(it.modelName); if(it.code) parts.push(it.code); if(it.compat==='호환불가') parts.push('호환불가');
       meta.textContent=parts.join(' · ');
       info.appendChild(name); info.appendChild(meta); row.appendChild(info);
       var btns=document.createElement('div'); btns.className='list-item-btns';
@@ -937,7 +1152,7 @@ function readExcel(file) {
       var raw=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
       if (raw.length<2) { toast('데이터가 없습니다'); return; }
       previewRows=raw.slice(1).filter(function(r){return r[0];}).map(function(r){
-        return {model:String(r[0]||'').trim(),year:String(r[1]||'').trim(),code:String(r[2]||'').trim(),compat:String(r[3]||'호환').trim()||'호환'};
+        var c=String(r[4]||'').trim(); return {brand:normalizeBrand(String(r[0]||'')),model:String(r[1]||'').trim(),modelName:String(r[2]||'').trim(),year:String(r[3]||'').trim(),code:c,compat:c?'호환':'호환불가'};
       });
       var tbl=document.getElementById('previewTbl');
       tbl.innerHTML='<thead><tr><th>차종명</th><th>연식</th><th>품번</th><th>호환여부</th></tr></thead><tbody>'+
@@ -950,32 +1165,32 @@ function readExcel(file) {
 function importData() {
   if (!previewRows.length) return;
   var cnt=previewRows.length, users=loadAdded();
-  previewRows.forEach(function(r){users.push({id:Date.now()+Math.random().toString(36).slice(2),model:r.model,year:r.year,code:r.code,compat:r.compat});});
+  previewRows.forEach(function(r){users.push({id:Date.now()+Math.random().toString(36).slice(2),brand:r.brand,model:r.model,modelName:r.modelName,year:r.year,code:r.code,compat:r.compat});});
   saveAdded(users); rebuildAdded(); previewRows=[];
   document.getElementById('previewArea').style.display='none'; document.getElementById('fileIn').value='';
   toast(cnt+'건 추가되었습니다'); goTab('list',document.querySelector('[data-tab="list"]'));
 }
 function dlSample() {
-  var ws=XLSX.utils.aoa_to_sheet([['차종명','연식','품번','호환여부'],['투싼','2024~','CB-001','호환'],['싼타페TM','','','호환불가']]);
-  ws['!cols']=[{wch:14},{wch:16},{wch:16},{wch:10}];
+  var ws=XLSX.utils.aoa_to_sheet([['제조사','차종명','모델명','연식','품번(없으면 호환불가)'],['현대','그랜저','그랜저 HG/HEV','2011~','DK118'],['기아','싼타페TM','싼타페TM','','']]);
+  ws['!cols']=[{wch:12},{wch:14},{wch:20},{wch:16},{wch:16}];
   var wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'샘플'); XLSX.writeFile(wb,'블루 필터 호환표_샘플.xlsx');
 }
 
 function makeRows() {
-  var edits=loadEdits(), rows=[['차종','년식/모델','품번','호환여부']];
-  BASE.forEach(function(b){ if(edits[b.rid]===null) return; var c=(b.rid in edits)?edits[b.rid]:b; rows.push([b.car,c.year||'',c.code||'',c.compat||'호환']); });
-  loadAdded().forEach(function(u){ rows.push([u.model,u.year||'',u.code||'',u.compat||'호환']); });
+  var edits=loadEdits(), rows=[['차종','모델명','연식','품번','호환여부']];
+  BASE.forEach(function(b){ if(edits[b.rid]===null) return; var c=(b.rid in edits)?edits[b.rid]:b; rows.push([b.car,c.modelName||'',c.year||'',c.code||'',c.compat||'호환']); });
+  loadAdded().forEach(function(u){ rows.push([u.model,u.modelName||'',u.year||'',u.code||'',u.compat||'호환']); });
   return rows;
 }
 function writeXlsx(rows,name) {
-  var ws=XLSX.utils.aoa_to_sheet(rows); ws['!cols']=[{wch:14},{wch:30},{wch:16},{wch:10}];
+  var ws=XLSX.utils.aoa_to_sheet(rows); ws['!cols']=[{wch:14},{wch:22},{wch:16},{wch:16},{wch:10}];
   var wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'호환표'); XLSX.writeFile(wb,name);
 }
 function exportAll()  { writeXlsx(makeRows(),'다보니_블루 필터 호환표_전체.xlsx'); closeMgr(); }
 function exportMine() {
-  var edits=loadEdits(), added=loadAdded(), rows=[['차종','년식/모델','품번','호환여부']];
-  BASE.filter(function(b){return b.rid in edits&&edits[b.rid]!==null;}).forEach(function(b){var e=edits[b.rid];rows.push([b.car,e.year||'',e.code||'',e.compat||'호환']);});
-  added.forEach(function(u){rows.push([u.model,u.year||'',u.code||'',u.compat||'호환']);});
+  var edits=loadEdits(), added=loadAdded(), rows=[['차종','모델명','연식','품번','호환여부']];
+  BASE.filter(function(b){return b.rid in edits&&edits[b.rid]!==null;}).forEach(function(b){var e=edits[b.rid];rows.push([b.car,e.modelName||'',e.year||'',e.code||'',e.compat||'호환']);});
+  added.forEach(function(u){rows.push([u.model,u.modelName||'',u.year||'',u.code||'',u.compat||'호환']);});
   if (rows.length===1){toast('수정/추가된 차종이 없습니다');return;}
   writeXlsx(rows,'다보니_블루 필터 호환표_수정내역.xlsx'); closeMgr();
 }
@@ -1004,6 +1219,17 @@ function exportHtml() {
   var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='filter-blue.html';
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
   toast('HTML 파일이 저장되었습니다'); closeMgr();
+}
+
+
+function deleteAllModels() {
+  var added = loadAdded();
+  if (!added.length) { toast('삭제할 차종이 없습니다'); return; }
+  if (!confirm('추가한 차종 ' + added.length + '개를 모두 삭제하시겠습니까?')) return;
+  saveAdded([]);
+  rebuildAdded();
+  renderList();
+  toast('전체 삭제되었습니다');
 }
 
 var toastTimer;

@@ -462,6 +462,129 @@
     .mgr-tabs { overflow-x: auto; }
     .mgr-tab { font-size: 12px; padding: 8px 10px 12px; }
   }
+
+  
+
+  /* ── 폼 제조사 select ── */
+  .f-select-brand {
+    width: 100%; height: 40px; border: 1px solid #e5e7eb;
+    border-radius: 8px; padding: 0 12px;
+    font-family: 'Noto Sans KR', sans-serif; font-size: 14px;
+    color: #1a1a1a; background: #fff; outline: none; box-sizing: border-box;
+  }
+  .f-select-brand:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+
+
+  /* ── 제조사 드롭다운 + 검색창 row ── */
+  .filter-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  /* 제조사 드롭다운 */
+  .brand-select-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+  .brand-select-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    height: 44px;
+    padding: 0 14px;
+    min-width: 130px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    transition: border-color .12s;
+    white-space: nowrap;
+  }
+  .brand-select-btn:hover { border-color: #9ca3af; }
+  .brand-select-btn.open { border-color: #6366f1; }
+  .brand-select-btn svg { flex-shrink: 0; color: #9ca3af; transition: transform .15s; }
+  .brand-select-btn.open svg { transform: rotate(180deg); }
+
+  .brand-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 200px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.1);
+    z-index: 300;
+    overflow: hidden;
+  }
+  .brand-dropdown.open { display: block; }
+  .brand-option {
+    padding: 11px 16px;
+    font-size: 14px;
+    color: #374151;
+    cursor: pointer;
+    transition: background .1s;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .brand-option:last-child { border-bottom: none; }
+  .brand-option:hover { background: #f5f3ff; color: #6366f1; }
+  .brand-option.selected { color: #6366f1; font-weight: 600; background: #f5f3ff; }
+
+  /* 검색창 */
+  .filter-search-wrap {
+    flex: 1;
+    position: relative;
+  }
+  .filter-search-wrap svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    pointer-events: none;
+  }
+  .filter-search-input {
+    width: 100%;
+    height: 44px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #fff;
+    padding: 0 16px 0 42px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    color: #1a1a1a;
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .filter-search-input::placeholder { color: #c0c4cc; }
+  .filter-search-input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99,102,241,.1);
+  }
+  .filter-ac-list {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0; right: 0;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    z-index: 200;
+    overflow: hidden;
+    display: none;
+    pointer-events: none;
+  }
+  .filter-ac-list.open { display: block; pointer-events: auto; }
+
 </style>
 </head>
 <body>
@@ -480,23 +603,38 @@
 
   <div class="page-header">
     <h1>후방 와이퍼 사이즈 호환표</h1>
-    <p>차종과 년식을 확인하고 맞는 후방 와이퍼를 선택하세요.</p>
+    <p>차종과 년식을 확인하고 맞는 후방 와이퍼를 선택하세요.<br><span style="font-size:12px;color:#9ca3af;">검색이 안되는 차종의 경우 추가 예정입니다.</span></p>
   </div>
 
-  <div class="search-row" style="display:block;">
-    <div class="search-wrap" style="position:relative;">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#9ca3af;pointer-events:none;">
+    <div class="filter-row" id="filterRow">
+    <div class="brand-select-wrap" id="brandSelectWrap">
+      <button class="brand-select-btn" id="brandSelectBtn" onclick="toggleBrandDropdown()">
+        <span id="brandLabel">제조사</span>
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="brand-dropdown" id="brandDropdown">
+    <div class="brand-option  selected" data-val="전체" onclick="selectBrand('전체',this)">전체 제조사</div>
+    <div class="brand-option" data-val="현대" onclick="selectBrand('현대',this)">HYUNDAI (현대)</div>
+    <div class="brand-option" data-val="기아" onclick="selectBrand('기아',this)">KIA (기아)</div>
+    <div class="brand-option" data-val="제네시스" onclick="selectBrand('제네시스',this)">GENESIS (제네시스)</div>
+    <div class="brand-option" data-val="쌍용" onclick="selectBrand('쌍용',this)">KGM (쌍용)</div>
+    <div class="brand-option" data-val="쉐보레" onclick="selectBrand('쉐보레',this)">CHEVROLET (쉐보레)</div>
+    <div class="brand-option" data-val="르노" onclick="selectBrand('르노',this)">RENAULT (르노)</div>
+      </div>
+    </div>
+    <div class="filter-search-wrap">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
       </svg>
-      <input class="search-input" type="text" id="searchInput" placeholder="차종 검색 (예: 투싼, 코나, 쏘렌토…)" autocomplete="off" style="width:100%;height:44px;border:1px solid #e5e7eb;border-radius:10px;background:#fff;padding:0 16px 0 42px;font-family:'Noto Sans KR',sans-serif;font-size:14px;color:#1a1a1a;outline:none;">
-      <div class="ac-list" id="acList"></div>
+      <input class="filter-search-input" type="text" id="searchInput" placeholder="제조사 또는 차종명을 입력해주세요." autocomplete="off">
+      <div class="filter-ac-list ac-list" id="acList"></div>
     </div>
   </div>
 
   <div id="carList">
 
     <!-- 넥쏘 -->
-    <div class="car-group" data-car="넥쏘">
+    <div class="car-group" data-car="넥쏘" data-brand="현대">
       <div class="group-label">넥쏘</div>
       <div class="list">
         <div class="row"><span class="row-year">넥쏘 (18년~현재)</span><div class="row-right"><span class="badge-code">RB680</span><span class="badge-size">350mm</span></div></div>
@@ -504,7 +642,7 @@
     </div>
 
     <!-- 니로 -->
-    <div class="car-group" data-car="니로">
+    <div class="car-group" data-car="니로" data-brand="현대">
       <div class="group-label">니로</div>
       <div class="list">
         <div class="row"><span class="row-year">니로/더뉴니로 (16년~21년)</span><div class="row-right"><span class="badge-code">RB332</span><span class="badge-size">300mm</span></div></div>
@@ -514,7 +652,7 @@
     </div>
 
     <!-- 레이 -->
-    <div class="car-group" data-car="레이">
+    <div class="car-group" data-car="레이" data-brand="기아">
       <div class="group-label">레이</div>
       <div class="list">
         <div class="row"><span class="row-year">레이/더뉴레이(EV포함) (11년~현재)</span><div class="row-right"><span class="badge-code">RB580</span><span class="badge-size">280mm</span></div></div>
@@ -522,7 +660,7 @@
     </div>
 
     <!-- 렉스턴 -->
-    <div class="car-group" data-car="렉스턴">
+    <div class="car-group" data-car="렉스턴" data-brand="쌍용">
       <div class="group-label">렉스턴</div>
       <div class="list">
         <div class="row"><span class="row-year">스포츠/칸/G4/올뉴렉스턴</span><div class="row-right"><span class="badge-code">RB383</span><span class="badge-size">330mm</span></div></div>
@@ -530,7 +668,7 @@
     </div>
 
     <!-- 마티즈 -->
-    <div class="car-group" data-car="마티즈">
+    <div class="car-group" data-car="마티즈" data-brand="쉐보레">
       <div class="group-label">마티즈</div>
       <div class="list">
         <div class="row"><span class="row-year">마티즈 크리에이티브 (2009~2011)</span><div class="row-right"><span class="badge-code">RB320</span><span class="badge-size">300mm</span></div></div>
@@ -538,7 +676,7 @@
     </div>
 
     <!-- 맥스크루즈 -->
-    <div class="car-group" data-car="맥스크루즈">
+    <div class="car-group" data-car="맥스크루즈" data-brand="현대">
       <div class="group-label">맥스크루즈</div>
       <div class="list">
         <div class="row"><span class="row-year">(더뉴)맥스크루즈 (13년~19년)</span><div class="row-right"><span class="badge-code">RB383</span><span class="badge-size">330mm</span></div></div>
@@ -546,7 +684,7 @@
     </div>
 
     <!-- 모닝 -->
-    <div class="car-group" data-car="모닝">
+    <div class="car-group" data-car="모닝" data-brand="기아">
       <div class="group-label">모닝</div>
       <div class="list">
         <div class="row"><span class="row-year">(올뉴/더뉴모닝) (12년~16년)</span><div class="row-right"><span class="badge-code">RB590</span><span class="badge-size">300mm</span></div></div>
@@ -556,7 +694,7 @@
     </div>
 
     <!-- 모하비 -->
-    <div class="car-group" data-car="모하비">
+    <div class="car-group" data-car="모하비" data-brand="기아">
       <div class="group-label">모하비</div>
       <div class="list">
         <div class="row"><span class="row-year">(더뉴)모하비 (07년~19년08월)</span><div class="row-right"><span class="badge-code">RB680</span><span class="badge-size">350mm</span></div></div>
@@ -565,7 +703,7 @@
     </div>
 
     <!-- 싼타페 -->
-    <div class="car-group" data-car="싼타페">
+    <div class="car-group" data-car="싼타페" data-brand="현대">
       <div class="group-label">싼타페</div>
       <div class="list">
         <div class="row"><span class="row-year">싼타페CM/더스타일 (05년~12년)</span><div class="row-right"><span class="badge-code">RB680</span><span class="badge-size">350mm</span></div></div>
@@ -577,7 +715,7 @@
     </div>
 
     <!-- 쏘렌토 -->
-    <div class="car-group" data-car="쏘렌토">
+    <div class="car-group" data-car="쏘렌토" data-brand="기아">
       <div class="group-label">쏘렌토</div>
       <div class="list">
         <div class="row"><span class="row-year">쏘렌토R/뉴쏘렌토R (09년~14년)</span><div class="row-right"><span class="badge-code">RB580</span><span class="badge-size">280mm</span></div></div>
@@ -587,7 +725,7 @@
     </div>
 
     <!-- 세라토 -->
-    <div class="car-group" data-car="세라토">
+    <div class="car-group" data-car="세라토" data-brand="기아">
       <div class="group-label">세라토</div>
       <div class="list">
         <div class="row"><span class="row-year">(뉴)쎄라토 (03년~08년)</span><div class="row-right"><span class="badge-code">RB680</span><span class="badge-size">350mm</span></div></div>
@@ -595,7 +733,7 @@
     </div>
 
     <!-- 셀토스 -->
-    <div class="car-group" data-car="셀토스">
+    <div class="car-group" data-car="셀토스" data-brand="기아">
       <div class="group-label">셀토스</div>
       <div class="list">
         <div class="row"><span class="row-year">셀토스 (19년7월~현재)</span><div class="row-right"><span class="badge-code">RB382</span><span class="badge-size">300mm</span></div></div>
@@ -603,7 +741,7 @@
     </div>
 
     <!-- 스타렉스 -->
-    <div class="car-group" data-car="스타렉스">
+    <div class="car-group" data-car="스타렉스" data-brand="현대">
       <div class="group-label">스타렉스</div>
       <div class="list">
         <div class="row"><span class="row-year">(더뉴)그랜드 스타렉스 (08년~21년)</span><div class="row-right"><span class="badge-code">RB680</span><span class="badge-size">350mm</span></div></div>
@@ -611,7 +749,7 @@
     </div>
 
     <!-- 스파크 -->
-    <div class="car-group" data-car="스파크">
+    <div class="car-group" data-car="스파크" data-brand="쉐보레">
       <div class="group-label">스파크</div>
       <div class="list">
         <div class="row"><span class="row-year">스파크 (2011년~2015년)</span><div class="row-right"><span class="badge-code">RB320</span><span class="badge-size">300mm</span></div></div>
@@ -621,7 +759,7 @@
     </div>
 
     <!-- 스토닉 -->
-    <div class="car-group" data-car="스토닉">
+    <div class="car-group" data-car="스토닉" data-brand="기아">
       <div class="group-label">스토닉</div>
       <div class="list">
         <div class="row"><span class="row-year">스토닉 (17년~현재)</span><div class="row-right"><span class="badge-code">RB580</span><span class="badge-size">280mm</span></div></div>
@@ -639,7 +777,7 @@
     </div>
 
     <!-- 쏘울 -->
-    <div class="car-group" data-car="쏘울">
+    <div class="car-group" data-car="쏘울" data-brand="기아">
       <div class="group-label">쏘울</div>
       <div class="list">
         <div class="row"><span class="row-year">더뉴/올뉴쏘울/쏘울EV (08년~19년)</span><div class="row-right"><span class="badge-code">RB580</span><span class="badge-size">280mm</span></div></div>
@@ -647,7 +785,7 @@
     </div>
 
     <!-- 엑센트 -->
-    <div class="car-group" data-car="엑센트">
+    <div class="car-group" data-car="엑센트" data-brand="현대">
       <div class="group-label">엑센트</div>
       <div class="list">
         <div class="row"><span class="row-year">뉴엑센트/위트 (10년~19년)</span><div class="row-right"><span class="badge-code">RB580</span><span class="badge-size">280mm</span></div></div>
@@ -655,7 +793,7 @@
     </div>
 
     <!-- 제네시스 -->
-    <div class="car-group" data-car="제네시스">
+    <div class="car-group" data-car="제네시스" data-brand="제네시스">
       <div class="group-label">제네시스</div>
       <div class="list">
         <div class="row"><span class="row-year">제네시스 GV70 (21년~현재)</span><div class="row-right"><span class="badge-code">RB380</span><span class="badge-size">280mm</span></div></div>
@@ -664,7 +802,7 @@
     </div>
 
     <!-- 카니발 -->
-    <div class="car-group" data-car="카니발">
+    <div class="car-group" data-car="카니발" data-brand="기아">
       <div class="group-label">카니발</div>
       <div class="list">
         <div class="row"><span class="row-year">(올뉴/더뉴)카니발 (14년06월~20년6월)</span><div class="row-right"><span class="badge-code">RB383</span><span class="badge-size">330mm</span></div></div>
@@ -673,7 +811,7 @@
     </div>
 
     <!-- 카렌스 -->
-    <div class="car-group" data-car="카렌스">
+    <div class="car-group" data-car="카렌스" data-brand="기아">
       <div class="group-label">카렌스</div>
       <div class="list">
         <div class="row"><span class="row-year">뉴 카렌스 (06년~13년)</span><div class="row-right"><span class="badge-code">RB680</span><span class="badge-size">350mm</span></div></div>
@@ -682,7 +820,7 @@
     </div>
 
     <!-- 캐스퍼 -->
-    <div class="car-group" data-car="캐스퍼">
+    <div class="car-group" data-car="캐스퍼" data-brand="현대">
       <div class="group-label">캐스퍼</div>
       <div class="list">
         <div class="row"><span class="row-year">캐스퍼 (21년~현재)</span><div class="row-right"><span class="badge-code">RB380</span><span class="badge-size">280mm</span></div></div>
@@ -690,7 +828,7 @@
     </div>
 
     <!-- 코나 -->
-    <div class="car-group" data-car="코나">
+    <div class="car-group" data-car="코나" data-brand="현대">
       <div class="group-label">코나</div>
       <div class="list">
         <div class="row"><span class="row-year">코나/코나EV (17년~22년)</span><div class="row-right"><span class="badge-code">RB580</span><span class="badge-size">280mm</span></div></div>
@@ -699,7 +837,7 @@
     </div>
 
     <!-- 투싼 -->
-    <div class="car-group" data-car="투싼">
+    <div class="car-group" data-car="투싼" data-brand="현대">
       <div class="group-label">투싼</div>
       <div class="list">
         <div class="row"><span class="row-year">뉴투싼/ix (09년~15년03월)</span><div class="row-right"><span class="badge-code">RB590</span><span class="badge-size">300mm</span></div></div>
@@ -710,7 +848,7 @@
     </div>
 
     <!-- 팰리세이드 -->
-    <div class="car-group" data-car="팰리세이드">
+    <div class="car-group" data-car="팰리세이드" data-brand="현대">
       <div class="group-label">팰리세이드</div>
       <div class="list">
         <div class="row"><span class="row-year">팰리세이드 (19년~24년까지) · LX2 포함</span><div class="row-right"><span class="badge-code">RB660</span><span class="badge-size">300mm</span></div></div>
@@ -719,7 +857,7 @@
     </div>
 
     <!-- 포르테 -->
-    <div class="car-group" data-car="포르테">
+    <div class="car-group" data-car="포르테" data-brand="기아">
       <div class="group-label">포르테</div>
       <div class="list">
         <div class="row"><span class="row-year">포르테 해치백 (10년~13년)</span><div class="row-right"><span class="badge-code">RB660</span><span class="badge-size">300mm</span></div></div>
@@ -727,7 +865,7 @@
     </div>
 
     <!-- 프라이드 -->
-    <div class="car-group" data-car="프라이드">
+    <div class="car-group" data-car="프라이드" data-brand="기아">
       <div class="group-label">프라이드</div>
       <div class="list">
         <div class="row"><span class="row-year">뉴 프라이드 2세대 (05년~11년)</span><div class="row-right"><span class="badge-code">RB660</span><span class="badge-size">300mm</span></div></div>
@@ -736,7 +874,7 @@
     </div>
 
     <!-- i30 -->
-    <div class="car-group" data-car="i30">
+    <div class="car-group" data-car="i30" data-brand="현대">
       <div class="group-label">i30</div>
       <div class="list">
         <div class="row"><span class="row-year">i30 (07년~11년09월)</span><div class="row-right"><span class="badge-code">RB590</span><span class="badge-size">300mm</span></div></div>
@@ -746,7 +884,7 @@
     </div>
 
     <!-- i40 -->
-    <div class="car-group" data-car="i40">
+    <div class="car-group" data-car="i40" data-brand="현대">
       <div class="group-label">i40</div>
       <div class="list">
         <div class="row"><span class="row-year">i40/더뉴 i40 (11년~19년)</span><div class="row-right"><span class="badge-code">RB680</span><span class="badge-size">350mm</span></div></div>
@@ -754,7 +892,7 @@
     </div>
 
     <!-- K3 -->
-    <div class="car-group" data-car="K3">
+    <div class="car-group" data-car="K3" data-brand="기아">
       <div class="group-label">K3</div>
       <div class="list">
         <div class="row"><span class="row-year">올뉴 K3 GT (19년~현재)</span><div class="row-right"><span class="badge-code">RB680</span><span class="badge-size">350mm</span></div></div>
@@ -762,7 +900,7 @@
     </div>
 
     <!-- QM3 -->
-    <div class="car-group" data-car="QM3">
+    <div class="car-group" data-car="QM3" data-brand="르노">
       <div class="group-label">QM3</div>
       <div class="list">
         <div class="row"><span class="row-year">QM3 (2013~2016.6월까지)</span><div class="row-right"><span class="badge-code">RB880</span><span class="badge-size">290mm</span></div></div>
@@ -771,7 +909,7 @@
     </div>
 
     <!-- 캡처 -->
-    <div class="car-group" data-car="캡처">
+    <div class="car-group" data-car="캡처" data-brand="르노">
       <div class="group-label">캡처</div>
       <div class="list">
         <div class="row"><span class="row-year">캡처 (2020년~2022년)</span><div class="row-right"><span class="badge-code">RB880</span><span class="badge-size">290mm</span></div></div>
@@ -779,7 +917,7 @@
     </div>
 
     <!-- QM5 -->
-    <div class="car-group" data-car="QM5">
+    <div class="car-group" data-car="QM5" data-brand="르노">
       <div class="group-label">QM5</div>
       <div class="list">
         <div class="row"><span class="row-year">QM5 (2007.12~2013.12)</span><div class="row-right"><span class="badge-code">RB460</span><span class="badge-size">400mm</span></div></div>
@@ -788,7 +926,7 @@
     </div>
 
     <!-- QM6 -->
-    <div class="car-group" data-car="QM6">
+    <div class="car-group" data-car="QM6" data-brand="르노">
       <div class="group-label">QM6</div>
       <div class="list">
         <div class="row"><span class="row-year">QM6 (2016~2019.06)</span><div class="row-right"><span class="badge-code">RB870</span><span class="badge-size">230mm</span></div></div>
@@ -797,7 +935,7 @@
     </div>
 
     <!-- 티볼리 -->
-    <div class="car-group" data-car="티볼리">
+    <div class="car-group" data-car="티볼리" data-brand="쌍용">
       <div class="group-label">티볼리</div>
       <div class="list">
         <div class="row"><span class="row-year">티볼리 에어 (15년~19년)</span><div class="row-right"><span class="badge-code">RB361</span><span class="badge-size">250mm</span></div></div>
@@ -808,7 +946,7 @@
     </div>
 
     <!-- 토레스 -->
-    <div class="car-group" data-car="토레스">
+    <div class="car-group" data-car="토레스" data-brand="쌍용">
       <div class="group-label">토레스</div>
       <div class="list">
         <div class="row"><span class="row-year">토레스/EVX</span><div class="row-right"><span class="badge-code">RB361</span><span class="badge-size">250mm</span></div></div>
@@ -816,7 +954,7 @@
     </div>
 
     <!-- 코란도 -->
-    <div class="car-group" data-car="코란도">
+    <div class="car-group" data-car="코란도" data-brand="쌍용">
       <div class="group-label">코란도</div>
       <div class="list">
         <div class="row"><span class="row-year">뷰티풀 코란도 (19년~현재)</span><div class="row-right"><span class="badge-code">RB360</span><span class="badge-size">280mm</span></div></div>
@@ -825,7 +963,7 @@
     </div>
 
     <!-- 액티언 -->
-    <div class="car-group" data-car="액티언">
+    <div class="car-group" data-car="액티언" data-brand="쌍용">
       <div class="group-label">액티언</div>
       <div class="list">
         <div class="row"><span class="row-year">2세대 액티언 (24년8월이후)</span><div class="row-right"><span class="badge-code">RB360</span><span class="badge-size">280mm</span></div></div>
@@ -878,6 +1016,18 @@
       <input type="hidden" id="eId">
       <input type="hidden" id="eType">
       <div class="f-row">
+        <label class="f-label">제조사</label>
+        <select class="f-select-brand" id="fBrand">
+          <option value="">선택 안함</option>
+          <option value="현대">현대</option>
+          <option value="기아">기아</option>
+          <option value="제네시스">제네시스</option>
+          <option value="쌍용">쌍용</option>
+          <option value="쉐보레">쉐보레</option>
+          <option value="르노">르노</option>
+        </select>
+      </div>
+      <div class="f-row">
         <label class="f-label">차종명 <span style="color:#ef4444">*</span></label>
         <input class="f-input" id="fModel" placeholder="예: 싼타페, 투싼">
       </div>
@@ -915,6 +1065,7 @@
         <button class="fbtn" onclick="setFilter('base',this)">기본 차종</button>
         <button class="fbtn" onclick="setFilter('user',this)">내가 추가한 차종</button>
         <input class="l-search" type="text" id="lSearch" placeholder="검색…" oninput="renderList()">
+        <button class="fbtn" style="margin-left:auto;color:#ef4444;border-color:#fca5a5;background:#fff5f5;" onclick="deleteAllModels()">전체 삭제</button>
       </div>
       <div class="list-wrap" id="listWrap"></div>
     </div>
@@ -971,6 +1122,55 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 // ── 스토리지 ──
+
+
+// ── 제조사 드롭다운 ──
+var currentBrand = '전체';
+
+function toggleBrandDropdown() {
+  var btn = document.getElementById('brandSelectBtn');
+  var dd  = document.getElementById('brandDropdown');
+  btn.classList.toggle('open');
+  dd.classList.toggle('open');
+}
+
+function selectBrand(val, el) {
+  currentBrand = val;
+  document.getElementById('brandLabel').textContent = val === '전체' ? '제조사' : el.textContent.trim();
+  document.querySelectorAll('.brand-option').forEach(function(o){ o.classList.remove('selected'); });
+  el.classList.add('selected');
+  document.getElementById('brandSelectBtn').classList.remove('open');
+  document.getElementById('brandDropdown').classList.remove('open');
+  var q = document.getElementById('searchInput').value.trim().toLowerCase();
+  filterMain(q);
+  refreshCarNames();
+  if (q) showAc(q);
+}
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('#brandSelectWrap')) {
+    var btn = document.getElementById('brandSelectBtn');
+    var dd  = document.getElementById('brandDropdown');
+    if (btn) btn.classList.remove('open');
+    if (dd)  dd.classList.remove('open');
+  }
+});
+
+
+// ── 제조사 한글/영문 매핑 ──
+var BRAND_NORMALIZE = {
+  '현대':'현대','hyundai':'현대','HYUNDAI':'현대','Hyundai':'현대',
+  '기아':'기아','kia':'기아','KIA':'기아','Kia':'기아',
+  '제네시스':'제네시스','genesis':'제네시스','GENESIS':'제네시스','Genesis':'제네시스',
+  '쌍용':'쌍용','kgm':'쌍용','KGM':'쌍용','ssangyong':'쌍용','SSANGYONG':'쌍용','쌍룡':'쌍용',
+  '쉐보레':'쉐보레','chevrolet':'쉐보레','CHEVROLET':'쉐보레','Chevrolet':'쉐보레','chevy':'쉐보레','GM':'쉐보레','gm':'쉐보레',
+  '르노':'르노','renault':'르노','RENAULT':'르노','Renault':'르노','르노삼성':'르노','samsung':'르노','SAMSUNG':'르노',
+};
+function normalizeBrand(val) {
+  if (!val) return '';
+  var trimmed = val.trim();
+  return BRAND_NORMALIZE[trimmed] || trimmed;
+}
 var LS_ADD  = 'rearUserModels';
 var LS_EDIT = 'rearEditedModels';
 function loadAdded()  { try { return JSON.parse(localStorage.getItem(LS_ADD))  || []; } catch(e) { return []; } }
@@ -1063,7 +1263,9 @@ var carNames = [];
 function refreshCarNames() {
   carNames = [];
   document.querySelectorAll('#carList .car-group').forEach(function(g) {
-    if (g.style.display !== 'none') carNames.push(g.dataset.car);
+    if (g.style.display === 'none') return;
+    var brandMatch = (currentBrand === '전체') || (g.dataset.brand === currentBrand);
+    if (brandMatch) carNames.push(g.dataset.car);
   });
 }
 
@@ -1071,9 +1273,15 @@ function filterMain(q) {
   var visible = 0;
   document.querySelectorAll('#carList .car-group').forEach(function(g) {
     if (g.style.display === 'none') return;
-    var match = !q || g.dataset.car.toLowerCase().includes(q);
-    g.classList.toggle('hidden', !match);
-    if (match) visible++;
+    var brandMatch = (currentBrand === '전체') || (g.dataset.brand === currentBrand);
+    // 차종명 OR 모델명/연식 텍스트 검색
+    var carName = g.dataset.car.toLowerCase();
+    var rowTexts = Array.prototype.map.call(g.querySelectorAll('.row-year'), function(el) {
+      return el.textContent.toLowerCase();
+    }).join(' ');
+    var carMatch = !q || carName.includes(q) || rowTexts.includes(q);
+    g.classList.toggle('hidden', !brandMatch || !carMatch);
+    if (brandMatch && carMatch) visible++;
   });
   var es = document.getElementById('emptyState');
   if (es) es.classList.toggle('visible', visible === 0);
@@ -1335,8 +1543,8 @@ function readExcel(file) {
       var ws = wb.Sheets[wb.SheetNames[0]];
       var raw = XLSX.utils.sheet_to_json(ws, {header:1, defval:''});
       if (raw.length < 2) { toast('데이터가 없습니다'); return; }
-      previewRows = raw.slice(1).filter(function(r){ return r[0]; }).map(function(r){
-        return { model:String(r[0]||'').trim(), year:String(r[1]||'').trim(), code:String(r[2]||'').trim(), size:String(r[3]||'').trim(), compat:String(r[4]||'호환').trim()||'호환' };
+      previewRows = raw.slice(1).filter(function(r){ return r[0]||r[1]; }).map(function(r){
+        return { brand:normalizeBrand(String(r[0]||'')), model:String(r[1]||'').trim(), year:String(r[2]||'').trim(), code:String(r[3]||'').trim(), size:String(r[4]||'').trim(), compat:String(r[5]||'호환').trim()||'호환' };
       });
       var tbl = document.getElementById('previewTbl');
       tbl.innerHTML = '<thead><tr><th>차종명</th><th>연식</th><th>코드</th><th>사이즈</th><th>호환</th></tr></thead><tbody>' +
@@ -1357,8 +1565,8 @@ function importData() {
   toast(cnt+'건 추가되었습니다'); goTab('list', document.querySelector('[data-tab="list"]'));
 }
 function dlSample() {
-  var ws = XLSX.utils.aoa_to_sheet([['차종명','연식','제품코드','사이즈(mm)','호환여부'],['투싼','2024~','RB735','350','호환'],['싼타페TM','','','','호환불가']]);
-  ws['!cols']=[{wch:14},{wch:16},{wch:12},{wch:12},{wch:10}];
+  var ws = XLSX.utils.aoa_to_sheet([['제조사','차종명','연식','제품코드','사이즈(mm)','호환여부'],['현대','투싼','2024~','RB735','350','호환'],['기아','싼타페TM','','','','호환불가']]);
+  ws['!cols']=[{wch:12},{wch:14},{wch:16},{wch:12},{wch:12},{wch:10}];
   var wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'샘플'); XLSX.writeFile(wb,'후방와이퍼_업로드샘플.xlsx');
 }
 
@@ -1412,6 +1620,17 @@ function exportHtml() {
 }
 
 // ── Toast ──
+
+function deleteAllModels() {
+  var added = loadAdded();
+  if (!added.length) { toast('삭제할 차종이 없습니다'); return; }
+  if (!confirm('추가한 차종 ' + added.length + '개를 모두 삭제하시겠습니까?')) return;
+  saveAdded([]);
+  rebuildAdded();
+  renderList();
+  toast('전체 삭제되었습니다');
+}
+
 var toastTimer;
 function toast(msg) {
   var t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
