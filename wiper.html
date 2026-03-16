@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
+<html lang="ko"><head>
 <meta charset="UTF-8">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>와이퍼 사이즈 검색</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -507,12 +506,12 @@
     <div class="mfr-dropdown">
       <button class="mfr-btn" id="mfrBtn" onclick="toggleDD()">
         <span id="mfrLabel">제조사</span>
-        <span class="chevron">&#8964;</span>
+        <span class="chevron">⌄</span>
       </button>
       <div class="mfr-menu" id="mfrMenu"></div>
     </div>
     <div class="search-box">
-      <span class="search-icon">&#128269;</span>
+      <span class="search-icon">🔍</span>
       <input type="text" id="searchInput" placeholder="제조사 또는 차량명을 입력해주세요." oninput="onSearch(this.value)">
     </div>
 
@@ -531,9 +530,7 @@
     </div>
     <div class="modal-body" style="padding:24px;">
       <p style="font-size:13px;color:#6b7280;margin-bottom:14px;">비밀번호를 입력해주세요.</p>
-      <input type="text" id="pwInput" placeholder="비밀번호"
-        style="width:100%;border:1.5px solid #d1d5db;border-radius:8px;padding:10px 12px;font-size:14px;font-family:'Noto Sans KR',sans-serif;outline:none;box-sizing:border-box;"
-        onkeydown="if(event.key==='Enter')checkPw()">
+      <input type="text" id="pwInput" placeholder="비밀번호" style="width:100%;border:1.5px solid #d1d5db;border-radius:8px;padding:10px 12px;font-size:14px;font-family:'Noto Sans KR',sans-serif;outline:none;box-sizing:border-box;" onkeydown="if(event.key==='Enter')checkPw()">
       <p id="pwError" style="color:#ef4444;font-size:12px;margin-top:8px;display:none;">비밀번호가 올바르지 않습니다.</p>
       <div class="btn-row" style="margin-top:18px;">
         <button class="btn-cancel" onclick="closePwModal()">취소</button>
@@ -634,12 +631,11 @@
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
           <p class="section-title" style="margin-bottom:0;flex:1;min-width:120px;">전체 차종 목록</p>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <button class="list-filter-btn active" id="filter-all"    onclick="setListFilter('all')">전체</button>
-            <button class="list-filter-btn"        id="filter-builtin" onclick="setListFilter('builtin')">기본 차종</button>
-            <button class="list-filter-btn"        id="filter-user"   onclick="setListFilter('user')">내가 추가한 차종</button>
+            <button class="list-filter-btn active" id="filter-all" onclick="setListFilter('all')">전체</button>
+            <button class="list-filter-btn" id="filter-builtin" onclick="setListFilter('builtin')">기본 차종</button>
+            <button class="list-filter-btn" id="filter-user" onclick="setListFilter('user')">내가 추가한 차종</button>
           </div>
-          <input type="text" id="listSearch" placeholder="검색..." oninput="renderUserList()"
-            style="border:1.5px solid #d1d5db;border-radius:7px;padding:7px 11px;font-size:13px;font-family:'Noto Sans KR',sans-serif;outline:none;width:160px;">
+          <input type="text" id="listSearch" placeholder="검색..." oninput="renderUserList()" style="border:1.5px solid #d1d5db;border-radius:7px;padding:7px 11px;font-size:13px;font-family:'Noto Sans KR',sans-serif;outline:none;width:160px;">
         </div>
         <div class="user-models-list" id="userModelsList"></div>
       </div>
@@ -719,746 +715,5706 @@
 
 <script>
 const DATA = {
-  'HYUNDAI (현대)': {
-    icon: '🚗',
-    models: [
-      { name: '그랜저 TG', year: '2005.06~2010.11', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '그랜저 HG', year: '2011.01~2016.11', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '그랜저 IG', year: '2016.11~', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '더뉴그랜저IG', year: '2020~', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '디올뉴그랜저GN7', year: '2023~', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '넥쏘', year: '2018~', d: 650, p: 400, r: 350, rDisplay: 'RB680/350mm', a: 'U-Type' },
-      { name: '마이티', year: '~2015', d: 450, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '마이티', year: '2015~', d: 500, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '맥스크루즈', year: '2013.03~2019', d: 650, p: 350, r: 330, rDisplay: 'RB383/330mm', a: 'U-Type' },
-      { name: '베뉴', year: '2019.07~', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '베라크루즈', year: '2010.05~2015.01', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '베르나', year: '2005.09~2010.05', d: 550, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '더뉴벨로스터', year: '2011.03~2017.05', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '더올뉴벨로스터', year: '2018~2022', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '뉴스타렉스', year: '2004~2007', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '그랜드스타렉스', year: '2007.05~2018', d: 600, p: 500, r: 350, rDisplay: 'RB680/350mm', a: 'U-Type' },
-      { name: '더뉴그랜드스타렉스', year: '2018~', d: 600, p: 500, r: 350, rDisplay: 'RB680/350mm', a: 'U-Type' },
-      { name: '스타리아', year: '2021~', d: 700, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '싼타페 CM', year: '2005.11~2012.04', d: 600, p: 450, r: 350, rDisplay: 'RB680/350mm', a: 'U-Type' },
-      { name: '싼타페 DM', year: '2012.04~2018.01', d: 650, p: 350, r: 330, rDisplay: 'RB383/330mm', a: 'U-Type' },
-      { name: '싼타페 TM', year: '2018.02~', d: 650, p: 400, r: null, rDisplay: '호환불가', a: 'U-Type' },
-      { name: '더뉴싼타페', year: '2020.06~2023', d: 650, p: 400, r: 300, rDisplay: 'RB382/300mm', a: 'U-Type' },
-      { name: '싼타페 MX5', year: '2023~', d: 650, p: 450, r: 275, rDisplay: 'RBX28/275mm', a: 'U-Type' },
-      { name: '쏘나타 NF', year: '2004.09~2009.08', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '쏘나타 YF', year: '2009.09~', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '쏘나타 LF/뉴라이즈', year: '2014.03~2019.02', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '쏘나타 DN8/센슈어스', year: '2019.04', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '쏘나타 디엣지', year: '2023~', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '쏘나타 디엣지(택시용)', year: '2025.03월 이후', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '쏠라티', year: '2015~', d: 650, p: 600, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '아반떼 HD', year: '2006.05~2010', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '아반떼 MD', year: '2010.08~2015', d: 650, p: 350, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '아반떼 AD', year: '2015.09~2020', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '더뉴아반떼', year: '2018.09~', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '아반떼 CN7', year: '2020.04~', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '아이오닉 더뉴/Q', year: '2016~2020', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '아이오닉5', year: '', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '아이오닉6', year: '', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '아이오닉9', year: '', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '에쿠스', year: '2011~2015', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '엑센트', year: '2010.11~2019', d: 650, p: 400, r: 280, rDisplay: 'RB580/280mm', a: 'U-Type' },
-      { name: '엑시언트', year: '', d: 700, p: 700, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '카운티', year: '', d: 550, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '캐스퍼', year: '', d: 550, p: 400, r: 280, rDisplay: 'RB380/280mm', a: 'U-Type' },
-      { name: '코나 OS', year: '2017~2023', d: 650, p: 400, r: 280, rDisplay: 'RB580/280mm', a: 'U-Type' },
-      { name: '코나 SX2', year: '2023~', d: 650, p: 400, r: 300, rDisplay: 'RB382/300mm', a: 'U-Type' },
-      { name: '투싼', year: '2004.04~2009.07', d: 600, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '투싼 / 투싼IX', year: '2009.08~2015', d: 600, p: 400, r: 300, rDisplay: 'RB590/300mm', a: 'U-Type' },
-      { name: '올뉴투싼', year: '2015.03~2020', d: 650, p: 400, r: 350, rDisplay: 'RB680/350mm', a: 'U-Type' },
-      { name: '투싼 NX4', year: '2020.09~2023', d: 650, p: 400, r: 280, rDisplay: 'RB380/280mm', a: 'U-Type' },
-      { name: '투싼 NX4', year: '2024~', d: 650, p: 400, r: 350, rDisplay: 'RB735/350mm', a: 'U-Type' },
-      { name: '더 뉴 팰리세이드(LX2)', year: '', d: 650, p: 500, r: 300, rDisplay: 'RB660/300mm', a: 'U-Type' },
-      { name: '팰리세이드', year: '', d: 650, p: 500, r: 300, rDisplay: 'RB660/300mm', a: 'U-Type' },
-      { name: '디 올 뉴팰리세이드(LX3)', year: '2025~', d: 650, p: 450, r: 350, rDisplay: 'RB735/350mm', a: 'U-Type' },
-      { name: '포터2(일반/전기)', year: '1986~2004', d: 450, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '포터', year: '2004~', d: 500, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'I30', year: '2009.05~2011', d: 600, p: 450, r: 300, rDisplay: 'RB590/300mm', a: 'U-Type' },
-      { name: '뉴/더뉴I30(GD)', year: '2012~2015', d: 650, p: 350, r: 300, rDisplay: 'RB332/300mm', a: 'U-Type' },
-      { name: 'I30 디스커버리(PD)', year: '2016.09~', d: 650, p: 400, r: 280, rDisplay: 'RB380/280mm', a: 'U-Type' },
-      { name: 'I40 VF', year: '2011~2019', d: 650, p: 400, r: 350, rDisplay: 'RB680/350mm', a: 'U-Type' },
+  "HYUNDAI (현대)": {
+    "icon": "🚗",
+    "models": [
+      {
+        "name": "그랜저 TG",
+        "year": "2005.06~2010.11",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "그랜저 HG",
+        "year": "2011.01~2016.11",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "그랜저 IG",
+        "year": "2016.11~",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "더뉴그랜저IG",
+        "year": "2020~",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "디올뉴그랜저GN7",
+        "year": "2023~",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "넥쏘",
+        "year": "2018~",
+        "d": 650,
+        "p": 400,
+        "r": 350,
+        "rDisplay": "RB680/350mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "마이티",
+        "year": "~2015",
+        "d": 450,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "마이티",
+        "year": "2015~",
+        "d": 500,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "맥스크루즈",
+        "year": "2013.03~2019",
+        "d": 650,
+        "p": 350,
+        "r": 330,
+        "rDisplay": "RB383/330mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "베뉴",
+        "year": "2019.07~",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "베라크루즈",
+        "year": "2010.05~2015.01",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "베르나",
+        "year": "2005.09~2010.05",
+        "d": 550,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "더뉴벨로스터",
+        "year": "2011.03~2017.05",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "더올뉴벨로스터",
+        "year": "2018~2022",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "뉴스타렉스",
+        "year": "2004~2007",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "그랜드스타렉스",
+        "year": "2007.05~2018",
+        "d": 600,
+        "p": 500,
+        "r": 350,
+        "rDisplay": "RB680/350mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "더뉴그랜드스타렉스",
+        "year": "2018~",
+        "d": 600,
+        "p": 500,
+        "r": 350,
+        "rDisplay": "RB680/350mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "스타리아",
+        "year": "2021~",
+        "d": 700,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "싼타페 CM",
+        "year": "2005.11~2012.04",
+        "d": 600,
+        "p": 450,
+        "r": 350,
+        "rDisplay": "RB680/350mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "싼타페 DM",
+        "year": "2012.04~2018.01",
+        "d": 650,
+        "p": 350,
+        "r": 330,
+        "rDisplay": "RB383/330mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "싼타페 TM",
+        "year": "2018.02~",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": "호환불가",
+        "a": "U-Type"
+      },
+      {
+        "name": "더뉴싼타페",
+        "year": "2020.06~2023",
+        "d": 650,
+        "p": 400,
+        "r": 300,
+        "rDisplay": "RB382/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "싼타페 MX5",
+        "year": "2023~",
+        "d": 650,
+        "p": 450,
+        "r": 275,
+        "rDisplay": "RBX28/275mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "쏘나타 NF",
+        "year": "2004.09~2009.08",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "쏘나타 YF",
+        "year": "2009.09~",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "쏘나타 LF/뉴라이즈",
+        "year": "2014.03~2019.02",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "쏘나타 DN8/센슈어스",
+        "year": "2019.04",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "쏘나타 디엣지",
+        "year": "2023~",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "쏘나타 디엣지(택시용)",
+        "year": "2025.03월 이후",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "쏠라티",
+        "year": "2015~",
+        "d": 650,
+        "p": 600,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "아반떼 HD",
+        "year": "2006.05~2010",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "아반떼 MD",
+        "year": "2010.08~2015",
+        "d": 650,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "아반떼 AD",
+        "year": "2015.09~2020",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "더뉴아반떼",
+        "year": "2018.09~",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "아반떼 CN7",
+        "year": "2020.04~",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "아이오닉 더뉴/Q",
+        "year": "2016~2020",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "아이오닉5",
+        "year": "",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "아이오닉6",
+        "year": "",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "아이오닉9",
+        "year": "",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "에쿠스",
+        "year": "2011~2015",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "엑센트",
+        "year": "2010.11~2019",
+        "d": 650,
+        "p": 400,
+        "r": 280,
+        "rDisplay": "RB580/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "엑시언트",
+        "year": "",
+        "d": 700,
+        "p": 700,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "카운티",
+        "year": "",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "캐스퍼",
+        "year": "",
+        "d": 550,
+        "p": 400,
+        "r": 280,
+        "rDisplay": "RB380/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "코나 OS",
+        "year": "2017~2023",
+        "d": 650,
+        "p": 400,
+        "r": 280,
+        "rDisplay": "RB580/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "코나 SX2",
+        "year": "2023~",
+        "d": 650,
+        "p": 400,
+        "r": 300,
+        "rDisplay": "RB382/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "투싼",
+        "year": "2004.04~2009.07",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "투싼 / 투싼IX",
+        "year": "2009.08~2015",
+        "d": 600,
+        "p": 400,
+        "r": 300,
+        "rDisplay": "RB590/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "올뉴투싼",
+        "year": "2015.03~2020",
+        "d": 650,
+        "p": 400,
+        "r": 350,
+        "rDisplay": "RB680/350mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "투싼 NX4",
+        "year": "2020.09~2023",
+        "d": 650,
+        "p": 400,
+        "r": 280,
+        "rDisplay": "RB380/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "투싼 NX4",
+        "year": "2024~",
+        "d": 650,
+        "p": 400,
+        "r": 350,
+        "rDisplay": "RB735/350mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "더 뉴 팰리세이드(LX2)",
+        "year": "",
+        "d": 650,
+        "p": 500,
+        "r": 300,
+        "rDisplay": "RB660/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "팰리세이드",
+        "year": "",
+        "d": 650,
+        "p": 500,
+        "r": 300,
+        "rDisplay": "RB660/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "디 올 뉴팰리세이드(LX3)",
+        "year": "2025~",
+        "d": 650,
+        "p": 450,
+        "r": 350,
+        "rDisplay": "RB735/350mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "포터2(일반/전기)",
+        "year": "1986~2004",
+        "d": 450,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "포터",
+        "year": "2004~",
+        "d": 500,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "I30",
+        "year": "2009.05~2011",
+        "d": 600,
+        "p": 450,
+        "r": 300,
+        "rDisplay": "RB590/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "뉴/더뉴I30(GD)",
+        "year": "2012~2015",
+        "d": 650,
+        "p": 350,
+        "r": 300,
+        "rDisplay": "RB332/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "I30 디스커버리(PD)",
+        "year": "2016.09~",
+        "d": 650,
+        "p": 400,
+        "r": 280,
+        "rDisplay": "RB380/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "I40 VF",
+        "year": "2011~2019",
+        "d": 650,
+        "p": 400,
+        "r": 350,
+        "rDisplay": "RB680/350mm",
+        "a": "U-Type"
+      }
     ]
   },
-  'KIA (기아)': {
-    icon: '🚙',
-    models: [
-      { name: '니로 HEV/EV/PHEV(DE)', year: '2016~2022.5', d: 650, p: 400, r: 300, rDisplay: 'RB332/300mm', a: 'U-Type' },
-      { name: '디올뉴니로/EV(SG2)', year: '2022.06~', d: 650, p: 400, r: 300, rDisplay: 'RB382/300mm', a: 'U-Type' },
-      { name: '레이/레이EV', year: '2011.11~2018.03', d: 550, p: 400, r: 280, rDisplay: 'RB580/280mm', a: 'U-Type' },
-      { name: '더뉴/더뉴기아레이', year: '2017.12~', d: 550, p: 400, r: 280, rDisplay: 'RB580/280mm', a: 'U-Type' },
-      { name: '더레이 EV', year: '2023.09~', d: 550, p: 400, r: 280, rDisplay: 'RB580/280mm', a: 'U-Type' },
-      { name: '뉴/올뉴/더뉴모닝', year: '2004~2016', d: 550, p: 400, r: 300, rDisplay: 'RB590/300mm', a: 'U-Type' },
-      { name: '올뉴모닝 / JA', year: '2017.01~', d: 600, p: 350, r: 280, rDisplay: 'RB380/280mm', a: 'U-Type' },
-      { name: '모닝어반', year: '2020~', d: 600, p: 350, r: 280, rDisplay: 'RB380/280mm', a: 'U-Type' },
-      { name: '더뉴모하비', year: '2008~2019', d: 600, p: 500, r: 350, rDisplay: 'RB680/350mm', a: 'U-Type' },
-      { name: '모하비더마스터', year: '2020~', d: 600, p: 500, r: 300, rDisplay: 'RB660/300mm', a: 'U-Type' },
-      { name: '봉고 트럭', year: '', d: 450, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '봉고 프론티어', year: '', d: 550, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '봉고2', year: '', d: 550, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '봉고3', year: '2004~', d: 550, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '셀토스/더뉴셀토스(SP2)', year: '2019~', d: 600, p: 450, r: 300, rDisplay: 'RB382/300mm', a: 'U-Type' },
-      { name: '디올뉴셀토스(SP3)', year: '2026.01~', d: 600, p: 450, r: 300, rDisplay: 'RB382/300mm', a: 'U-Type' },
-      { name: '스토닉', year: '2017~', d: 650, p: 400, r: 280, rDisplay: 'RB580/280mm', a: 'U-Type' },
-      { name: '스팅어', year: '2017~', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '뉴스포티지', year: '2004~2010.03', d: 600, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '스포티지R', year: '2010.04~2015.08', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '올뉴스포티지', year: '2015.09~2021', d: 650, p: 400, r: 280, rDisplay: 'RB380/280mm', a: 'U-Type' },
-      { name: '스포티지 NQ5', year: '2021.07~', d: 650, p: 450, r: 300, rDisplay: 'RB382/300mm', a: 'U-Type' },
-      { name: '쏘렌토', year: '2000.05~2009.03', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '쏘렌토R/뉴쏘렌토R', year: '2009~2014', d: 600, p: 500, r: 280, rDisplay: 'RB580/280mm', a: 'U-Type' },
-      { name: '올뉴/더뉴 쏘렌토', year: '2014.08~2020', d: 650, p: 400, r: 300, rDisplay: 'RB382/300mm', a: 'U-Type' },
-      { name: '쏘렌토 MQ4', year: '2020.03~', d: 650, p: 400, r: 300, rDisplay: 'RB382/300mm', a: 'U-Type' },
-      { name: '쏘울/올뉴/부스터', year: '2008~', d: 600, p: 500, r: 280, rDisplay: 'RB580/280mm', a: 'U-Type' },
-      { name: '오피러스', year: '', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '그랜드카니발/R', year: '2005~2020', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '뉴카니발', year: '', d: 650, p: 450, r: 330, rDisplay: 'RB383/330mm', a: 'U-Type' },
-      { name: '올뉴/더뉴카니발', year: '', d: 650, p: 450, r: 330, rDisplay: 'RB383/330mm', a: 'U-Type' },
-      { name: '카니발4세대 KA4', year: '2020~', d: 650, p: 500, r: 300, rDisplay: 'RB382/300mm', a: 'U-Type' },
-      { name: '뉴카렌스', year: '2006.04~2013.03', d: 650, p: 400, r: 350, rDisplay: 'RB680/350mm', a: 'U-Type' },
-      { name: '올뉴&더뉴카렌스', year: '2014~2019', d: 650, p: 650, r: 280, rDisplay: 'RB380/280mm', a: 'U-Type' },
-      { name: '타스만', year: '2025~', d: 550, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '텔루라이드', year: '2021~', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '포르테', year: '2008~2017', d: 600, p: 500, r: 300, rDisplay: 'RB660/300mm', a: 'U-Type' },
-      { name: '프라이드', year: '2011.09~2017', d: 650, p: 400, r: 280, rDisplay: 'RB580/280mm', a: 'U-Type' },
-      { name: 'EV3', year: '2024~', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'EV4', year: '2025~', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'EV5', year: '2025~', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'EV6', year: '', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'EV9', year: '', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'K3/더뉴', year: '2012~2018.02', d: 650, p: 350, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'K3 올뉴/더뉴', year: '2018.03~2020.04', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'K5/올뉴', year: '2010.04~2015.06', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '올뉴K5', year: '2015.07~2019', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'K5 DL3', year: '2020~', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'K7 더프리스티지', year: '2009~2012', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'K7 더뉴/올뉴/프리미어', year: '2012~2019.06', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'K8', year: '2021~', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'K9/더뉴K9', year: '2012~2018.04', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'THE K9', year: '2018.05~', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'PV5', year: '2025.06~', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
+  "KIA (기아)": {
+    "icon": "🚙",
+    "models": [
+      {
+        "name": "니로 HEV/EV/PHEV(DE)",
+        "year": "2016~2022.5",
+        "d": 650,
+        "p": 400,
+        "r": 300,
+        "rDisplay": "RB332/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "디올뉴니로/EV(SG2)",
+        "year": "2022.06~",
+        "d": 650,
+        "p": 400,
+        "r": 300,
+        "rDisplay": "RB382/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "레이/레이EV",
+        "year": "2011.11~2018.03",
+        "d": 550,
+        "p": 400,
+        "r": 280,
+        "rDisplay": "RB580/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "더뉴/더뉴기아레이",
+        "year": "2017.12~",
+        "d": 550,
+        "p": 400,
+        "r": 280,
+        "rDisplay": "RB580/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "더레이 EV",
+        "year": "2023.09~",
+        "d": 550,
+        "p": 400,
+        "r": 280,
+        "rDisplay": "RB580/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "뉴/올뉴/더뉴모닝",
+        "year": "2004~2016",
+        "d": 550,
+        "p": 400,
+        "r": 300,
+        "rDisplay": "RB590/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "올뉴모닝 / JA",
+        "year": "2017.01~",
+        "d": 600,
+        "p": 350,
+        "r": 280,
+        "rDisplay": "RB380/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "모닝어반",
+        "year": "2020~",
+        "d": 600,
+        "p": 350,
+        "r": 280,
+        "rDisplay": "RB380/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "더뉴모하비",
+        "year": "2008~2019",
+        "d": 600,
+        "p": 500,
+        "r": 350,
+        "rDisplay": "RB680/350mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "모하비더마스터",
+        "year": "2020~",
+        "d": 600,
+        "p": 500,
+        "r": 300,
+        "rDisplay": "RB660/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "봉고 트럭",
+        "year": "",
+        "d": 450,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "봉고 프론티어",
+        "year": "",
+        "d": 550,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "봉고2",
+        "year": "",
+        "d": 550,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "봉고3",
+        "year": "2004~",
+        "d": 550,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "셀토스/더뉴셀토스(SP2)",
+        "year": "2019~",
+        "d": 600,
+        "p": 450,
+        "r": 300,
+        "rDisplay": "RB382/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "디올뉴셀토스(SP3)",
+        "year": "2026.01~",
+        "d": 600,
+        "p": 450,
+        "r": 300,
+        "rDisplay": "RB382/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "스토닉",
+        "year": "2017~",
+        "d": 650,
+        "p": 400,
+        "r": 280,
+        "rDisplay": "RB580/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "스팅어",
+        "year": "2017~",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "뉴스포티지",
+        "year": "2004~2010.03",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "스포티지R",
+        "year": "2010.04~2015.08",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "올뉴스포티지",
+        "year": "2015.09~2021",
+        "d": 650,
+        "p": 400,
+        "r": 280,
+        "rDisplay": "RB380/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "스포티지 NQ5",
+        "year": "2021.07~",
+        "d": 650,
+        "p": 450,
+        "r": 300,
+        "rDisplay": "RB382/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "쏘렌토",
+        "year": "2000.05~2009.03",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "쏘렌토R/뉴쏘렌토R",
+        "year": "2009~2014",
+        "d": 600,
+        "p": 500,
+        "r": 280,
+        "rDisplay": "RB580/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "올뉴/더뉴 쏘렌토",
+        "year": "2014.08~2020",
+        "d": 650,
+        "p": 400,
+        "r": 300,
+        "rDisplay": "RB382/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "쏘렌토 MQ4",
+        "year": "2020.03~",
+        "d": 650,
+        "p": 400,
+        "r": 300,
+        "rDisplay": "RB382/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "쏘울/올뉴/부스터",
+        "year": "2008~",
+        "d": 600,
+        "p": 500,
+        "r": 280,
+        "rDisplay": "RB580/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "오피러스",
+        "year": "",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "그랜드카니발/R",
+        "year": "2005~2020",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "뉴카니발",
+        "year": "",
+        "d": 650,
+        "p": 450,
+        "r": 330,
+        "rDisplay": "RB383/330mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "올뉴/더뉴카니발",
+        "year": "",
+        "d": 650,
+        "p": 450,
+        "r": 330,
+        "rDisplay": "RB383/330mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "카니발4세대 KA4",
+        "year": "2020~",
+        "d": 650,
+        "p": 500,
+        "r": 300,
+        "rDisplay": "RB382/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "뉴카렌스",
+        "year": "2006.04~2013.03",
+        "d": 650,
+        "p": 400,
+        "r": 350,
+        "rDisplay": "RB680/350mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "올뉴&더뉴카렌스",
+        "year": "2014~2019",
+        "d": 650,
+        "p": 650,
+        "r": 280,
+        "rDisplay": "RB380/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "타스만",
+        "year": "2025~",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "텔루라이드",
+        "year": "2021~",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "포르테",
+        "year": "2008~2017",
+        "d": 600,
+        "p": 500,
+        "r": 300,
+        "rDisplay": "RB660/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "프라이드",
+        "year": "2011.09~2017",
+        "d": 650,
+        "p": 400,
+        "r": 280,
+        "rDisplay": "RB580/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "EV3",
+        "year": "2024~",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "EV4",
+        "year": "2025~",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "EV5",
+        "year": "2025~",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "EV6",
+        "year": "",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "EV9",
+        "year": "",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "K3/더뉴",
+        "year": "2012~2018.02",
+        "d": 650,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "K3 올뉴/더뉴",
+        "year": "2018.03~2020.04",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "K5/올뉴",
+        "year": "2010.04~2015.06",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "올뉴K5",
+        "year": "2015.07~2019",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "K5 DL3",
+        "year": "2020~",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "K7 더프리스티지",
+        "year": "2009~2012",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "K7 더뉴/올뉴/프리미어",
+        "year": "2012~2019.06",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "K8",
+        "year": "2021~",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "K9/더뉴K9",
+        "year": "2012~2018.04",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "THE K9",
+        "year": "2018.05~",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "PV5",
+        "year": "2025.06~",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      }
     ]
   },
-  'GENESIS (제네시스)': {
-    icon: '⭐',
-    models: [
-      { name: '제네시스 BH', year: '2011~2013', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '제네시스 DH', year: '2014~2016.06', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '제네시스 쿠페', year: '2008~2016', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'EQ900', year: '2015~2018.11', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'G70', year: '', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'G80', year: '', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'G90 HI', year: '2015~2021', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'G90 RS4', year: '2021.12~', d: 650, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'GV60', year: '', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'GV70', year: '', d: 650, p: 450, r: 280, rDisplay: 'RB380/280mm', a: 'U-Type' },
-      { name: 'GV80', year: '', d: 650, p: 450, r: 330, rDisplay: 'RB383/330mm', a: 'U-Type' },
+  "GENESIS (제네시스)": {
+    "icon": "⭐",
+    "models": [
+      {
+        "name": "제네시스 BH",
+        "year": "2011~2013",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "제네시스 DH",
+        "year": "2014~2016.06",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "제네시스 쿠페",
+        "year": "2008~2016",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "EQ900",
+        "year": "2015~2018.11",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "G70",
+        "year": "",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "G80",
+        "year": "",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "G90 HI",
+        "year": "2015~2021",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "G90 RS4",
+        "year": "2021.12~",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "GV60",
+        "year": "",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "GV70",
+        "year": "",
+        "d": 650,
+        "p": 450,
+        "r": 280,
+        "rDisplay": "RB380/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "GV80",
+        "year": "",
+        "d": 650,
+        "p": 450,
+        "r": 330,
+        "rDisplay": "RB383/330mm",
+        "a": "U-Type"
+      }
     ]
   },
-  'RENAULT SAMSUNG (삼성)': {
-    icon: '🔵',
-    models: [
-      { name: 'SM3 뉴제너레이션', year: '2005~2009', d: 550, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '뉴/네오SM3', year: '2009.08~2019', d: 600, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'SM5 임프레션', year: '2005~2009.12', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '뉴SM5', year: '2010~', d: 600, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'SM6', year: '2016~', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'SM7 뉴아트', year: '2004.12~2011.08', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '올뉴SM7/노바', year: '2011~2019', d: 600, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'QM5 네오', year: '2014.01~2016', d: 600, p: 450, r: 400, rDisplay: 'RB460/400mm', a: 'U-Type' },
-      { name: 'QM6', year: '2016~2019', d: 650, p: 400, r: 230, rDisplay: 'RB870/230mm', a: 'U-Type' },
-      { name: '뉴QM6', year: '2019~', d: 650, p: 450, r: 230, rDisplay: 'RB870/230mm', a: 'U-Type' },
-      { name: 'XM3', year: '2020~2024', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '마스터', year: '', d: 650, p: 650, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '아르카나', year: '', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
+  "RENAULT SAMSUNG (삼성)": {
+    "icon": "🔵",
+    "models": [
+      {
+        "name": "SM3 뉴제너레이션",
+        "year": "2005~2009",
+        "d": 550,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "뉴/네오SM3",
+        "year": "2009.08~2019",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "SM5 임프레션",
+        "year": "2005~2009.12",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "뉴SM5",
+        "year": "2010~",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "SM6",
+        "year": "2016~",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "SM7 뉴아트",
+        "year": "2004.12~2011.08",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "올뉴SM7/노바",
+        "year": "2011~2019",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "QM5 네오",
+        "year": "2014.01~2016",
+        "d": 600,
+        "p": 450,
+        "r": 400,
+        "rDisplay": "RB460/400mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "QM6",
+        "year": "2016~2019",
+        "d": 650,
+        "p": 400,
+        "r": 230,
+        "rDisplay": "RB870/230mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "뉴QM6",
+        "year": "2019~",
+        "d": 650,
+        "p": 450,
+        "r": 230,
+        "rDisplay": "RB870/230mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "XM3",
+        "year": "2020~2024",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "마스터",
+        "year": "",
+        "d": 650,
+        "p": 650,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "아르카나",
+        "year": "",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      }
     ]
   },
-  'KGM': {
-    icon: '🟤',
-    models: [
-      { name: '뉴 렉스턴', year: '2006~2017', d: 500, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '무쏘/스포츠', year: '', d: 500, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '더뉴무쏘EV', year: '2025.03~', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '로디우스', year: '2004~2013', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '액티언/스포츠', year: '', d: 550, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '액티언 2세대', year: '2024.08', d: 600, p: 450, r: 280, rDisplay: 'RB360/280mm', a: 'U-Type' },
-      { name: '카이런', year: '', d: 550, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '코란도C', year: '2011~', d: 600, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '코란도스포츠', year: '2012~2018', d: 550, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '코란도투리스모', year: '2013~2019', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '코란도뷰티풀/리스펙', year: '2019~', d: 600, p: 450, r: 280, rDisplay: 'RB360/280mm', a: 'U-Type' },
-      { name: '코란도이모션/EV', year: '2022~', d: 600, p: 450, r: 280, rDisplay: 'RB360/280mm', a: 'U-Type' },
-      { name: '토레스', year: '2022~', d: 600, p: 450, r: 250, rDisplay: 'RB361/250mm', a: 'U-Type' },
-      { name: '토레스 EVX', year: '', d: 600, p: 450, r: 250, rDisplay: 'RB361/250mm', a: 'U-Type' },
-      { name: '티볼리에어', year: '2015~2019', d: 600, p: 400, r: 250, rDisplay: 'RB361/250mm', a: 'U-Type' },
-      { name: '티볼리아머', year: '2017~2019', d: 600, p: 400, r: 280, rDisplay: 'RB360/280mm', a: 'U-Type' },
-      { name: '베리뉴티볼리', year: '2019.06~2023', d: 600, p: 400, r: 250, rDisplay: 'RB361/250mm', a: 'U-Type' },
-      { name: '더뉴티볼리/에어', year: '2023~', d: 600, p: 400, r: 250, rDisplay: 'RB361/250mm', a: 'U-Type' },
+  "KGM": {
+    "icon": "🟤",
+    "models": [
+      {
+        "name": "뉴 렉스턴",
+        "year": "2006~2017",
+        "d": 500,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "무쏘/스포츠",
+        "year": "",
+        "d": 500,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "더뉴무쏘EV",
+        "year": "2025.03~",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "로디우스",
+        "year": "2004~2013",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "액티언/스포츠",
+        "year": "",
+        "d": 550,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "액티언 2세대",
+        "year": "2024.08",
+        "d": 600,
+        "p": 450,
+        "r": 280,
+        "rDisplay": "RB360/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "카이런",
+        "year": "",
+        "d": 550,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "코란도C",
+        "year": "2011~",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "코란도스포츠",
+        "year": "2012~2018",
+        "d": 550,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "코란도투리스모",
+        "year": "2013~2019",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "코란도뷰티풀/리스펙",
+        "year": "2019~",
+        "d": 600,
+        "p": 450,
+        "r": 280,
+        "rDisplay": "RB360/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "코란도이모션/EV",
+        "year": "2022~",
+        "d": 600,
+        "p": 450,
+        "r": 280,
+        "rDisplay": "RB360/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "토레스",
+        "year": "2022~",
+        "d": 600,
+        "p": 450,
+        "r": 250,
+        "rDisplay": "RB361/250mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "토레스 EVX",
+        "year": "",
+        "d": 600,
+        "p": 450,
+        "r": 250,
+        "rDisplay": "RB361/250mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "티볼리에어",
+        "year": "2015~2019",
+        "d": 600,
+        "p": 400,
+        "r": 250,
+        "rDisplay": "RB361/250mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "티볼리아머",
+        "year": "2017~2019",
+        "d": 600,
+        "p": 400,
+        "r": 280,
+        "rDisplay": "RB360/280mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "베리뉴티볼리",
+        "year": "2019.06~2023",
+        "d": 600,
+        "p": 400,
+        "r": 250,
+        "rDisplay": "RB361/250mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "더뉴티볼리/에어",
+        "year": "2023~",
+        "d": 600,
+        "p": 400,
+        "r": 250,
+        "rDisplay": "RB361/250mm",
+        "a": "U-Type"
+      }
     ]
   },
-  'CHEVROLET (쉐보레)': {
-    icon: '🟡',
-    models: [
-      { name: '노부스', year: '2004~', d: 700, p: 700, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '다마스', year: '1991~2021', d: 400, p: 350, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '라세티', year: '', d: 550, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '라세티프리미어', year: '', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '마티즈', year: '', d: 500, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '마티즈', year: '2005.03~2009.09', d: 550, p: 350, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '마티즈', year: '2009.08~', d: 600, p: 400, r: 300, rDisplay: 'RB320/300mm', a: 'U-Type' },
-      { name: '말리부', year: '2011~2016', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '말리부', year: '2016~', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '스파크', year: '2009~2015.06', d: 600, p: 400, r: 300, rDisplay: 'RB320/300mm', a: 'U-Type' },
-      { name: '더 넥스트 스파크', year: '2015.07~2018', d: 600, p: 350, r: 230, rDisplay: 'RB369/230mm', a: 'U-Type' },
-      { name: '더뉴스파크', year: '2018.06~', d: 600, p: 350, r: 230, rDisplay: 'RB369/230mm', a: 'U-Type' },
-      { name: '알페온', year: '2010~2015', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '올란도', year: '2011~2018', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '윈스톰', year: '2006~2010', d: 600, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '이쿼녹스', year: '2017~', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '임팔라', year: '2012~2019', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '카마로', year: '2010~2015', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '카마로', year: '2016~', d: 550, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '캡티바', year: '2011~2018', d: 600, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '콜로라도', year: '2019~', d: 550, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '크루즈', year: '2011~2016', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '토스카', year: '2006~2011', d: 550, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '트랙스', year: '2016~2020', d: 600, p: 350, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '트래버스', year: '2019~', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '프리마', year: '', d: 600, p: 600, r: null, rDisplay: null, a: 'U-Type' },
+  "CHEVROLET (쉐보레)": {
+    "icon": "🟡",
+    "models": [
+      {
+        "name": "노부스",
+        "year": "2004~",
+        "d": 700,
+        "p": 700,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "다마스",
+        "year": "1991~2021",
+        "d": 400,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "라세티",
+        "year": "",
+        "d": 550,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "라세티프리미어",
+        "year": "",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "마티즈",
+        "year": "",
+        "d": 500,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "마티즈",
+        "year": "2005.03~2009.09",
+        "d": 550,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "마티즈",
+        "year": "2009.08~",
+        "d": 600,
+        "p": 400,
+        "r": 300,
+        "rDisplay": "RB320/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "말리부",
+        "year": "2011~2016",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "말리부",
+        "year": "2016~",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "스파크",
+        "year": "2009~2015.06",
+        "d": 600,
+        "p": 400,
+        "r": 300,
+        "rDisplay": "RB320/300mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "더 넥스트 스파크",
+        "year": "2015.07~2018",
+        "d": 600,
+        "p": 350,
+        "r": 230,
+        "rDisplay": "RB369/230mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "더뉴스파크",
+        "year": "2018.06~",
+        "d": 600,
+        "p": 350,
+        "r": 230,
+        "rDisplay": "RB369/230mm",
+        "a": "U-Type"
+      },
+      {
+        "name": "알페온",
+        "year": "2010~2015",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "올란도",
+        "year": "2011~2018",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "윈스톰",
+        "year": "2006~2010",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "이쿼녹스",
+        "year": "2017~",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "임팔라",
+        "year": "2012~2019",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "카마로",
+        "year": "2010~2015",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "카마로",
+        "year": "2016~",
+        "d": 550,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "캡티바",
+        "year": "2011~2018",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "콜로라도",
+        "year": "2019~",
+        "d": 550,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "크루즈",
+        "year": "2011~2016",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "토스카",
+        "year": "2006~2011",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "트랙스",
+        "year": "2016~2020",
+        "d": 600,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "트래버스",
+        "year": "2019~",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "프리마",
+        "year": "",
+        "d": 600,
+        "p": 600,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      }
     ]
   },
-  'AUDI (아우디)': {
-    icon: '🚗',
-    models: [
-      { name: 'А3/S3/RS3', year: '22년~현재', d: 650, p: 480, r: null, rDisplay: null, a: 'B12 Type' },
-      { name: 'А3/S3/RS3', year: '8P 05년~12년', d: 600, p: 450, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'А3/S3/RS3', year: '8V 13년~20년', d: 650, p: 450, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'А3/S3/RS3', year: '8Y 20년~22년', d: 650, p: 450, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'A1/S1/RS1', year: '8X 10년~18년', d: 600, p: 400, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'A1/S1/RS1', year: 'GB 18년~현재', d: 650, p: 450, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'A4/S4/RS4', year: 'B8 09년~15년', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'A4/S4/RS4', year: 'B9 16년~현재', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'A5/S5/RS5', year: '25년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'A5/S5/RS5', year: '8T 07년~16년', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'A5/S5/RS5', year: 'F5 17년~25년', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'A6 E-Tron', year: '25년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'A6/S6/RS6', year: '24년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'A6/S6/RS6', year: 'C6 04년~11년', d: 550, p: 550, r: null, rDisplay: null, a: 'F Type' },
-      { name: 'A6/S6/RS6', year: 'C7 11년~17년', d: 650, p: 530, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'A6/S6/RS6', year: 'C8 18년~22년', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'A7/A7L/S7/RS7', year: '4G9 18년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'A7/A7L/S7/RS7', year: '4GB 10년~17년', d: 600, p: 530, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'A8/A8L/S8/S8L/RS8', year: 'D4/4H 10년~18년', d: 650, p: 530, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'A8/A8L/S8/S8L/RS8', year: 'D5/4N 18년~21년', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'Q2/SQ2', year: 'GA 16년~현재', d: 600, p: 450, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'Q3/SQ3/RSQ3', year: '8U 11년~18년', d: 600, p: 530, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'Q3/SQ3/RSQ3', year: 'F3 18년~현재', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'Q4 E-Tron', year: '19년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'Q5/SQ5/RSQ5', year: '25년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'Q5/SQ5/RSQ5', year: '80A 17년~25년', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'Q5/SQ5/RSQ5', year: '8R 08년~17년', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'Q6 E-Tron', year: '25년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'Q7/SQ7/RSQ7', year: '20년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'Q7/SQ7/RSQ7', year: '4L 05년~15년', d: 650, p: 600, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'Q7/SQ7/RSQ7', year: '4M 15년~19년', d: 650, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'Q8/SQ8/RS08 E-Tron', year: '18년~23년', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'Q8/SQ8/RS08 E-Tron', year: '23년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'R8', year: '42 06년~15년', d: 550, p: 500, r: null, rDisplay: null, a: 'F Type' },
-      { name: 'R8', year: '4S 16년~현재', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'TT/TTS/TTRS', year: '8J 06년~14년', d: 550, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'TT/TTS/TTRS', year: '8S 15년~23년', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
+  "AUDI (아우디)": {
+    "icon": "🚗",
+    "models": [
+      {
+        "name": "А3/S3/RS3",
+        "year": "22년~현재",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B12 Type"
+      },
+      {
+        "name": "А3/S3/RS3",
+        "year": "8P 05년~12년",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "А3/S3/RS3",
+        "year": "8V 13년~20년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "А3/S3/RS3",
+        "year": "8Y 20년~22년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "A1/S1/RS1",
+        "year": "8X 10년~18년",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "A1/S1/RS1",
+        "year": "GB 18년~현재",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "A4/S4/RS4",
+        "year": "B8 09년~15년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "A4/S4/RS4",
+        "year": "B9 16년~현재",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "A5/S5/RS5",
+        "year": "25년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "A5/S5/RS5",
+        "year": "8T 07년~16년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "A5/S5/RS5",
+        "year": "F5 17년~25년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "A6 E-Tron",
+        "year": "25년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "A6/S6/RS6",
+        "year": "24년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "A6/S6/RS6",
+        "year": "C6 04년~11년",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "F Type"
+      },
+      {
+        "name": "A6/S6/RS6",
+        "year": "C7 11년~17년",
+        "d": 650,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "A6/S6/RS6",
+        "year": "C8 18년~22년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "A7/A7L/S7/RS7",
+        "year": "4G9 18년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "A7/A7L/S7/RS7",
+        "year": "4GB 10년~17년",
+        "d": 600,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "A8/A8L/S8/S8L/RS8",
+        "year": "D4/4H 10년~18년",
+        "d": 650,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "A8/A8L/S8/S8L/RS8",
+        "year": "D5/4N 18년~21년",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "Q2/SQ2",
+        "year": "GA 16년~현재",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "Q3/SQ3/RSQ3",
+        "year": "8U 11년~18년",
+        "d": 600,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "Q3/SQ3/RSQ3",
+        "year": "F3 18년~현재",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "Q4 E-Tron",
+        "year": "19년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "Q5/SQ5/RSQ5",
+        "year": "25년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "Q5/SQ5/RSQ5",
+        "year": "80A 17년~25년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "Q5/SQ5/RSQ5",
+        "year": "8R 08년~17년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "Q6 E-Tron",
+        "year": "25년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "Q7/SQ7/RSQ7",
+        "year": "20년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "Q7/SQ7/RSQ7",
+        "year": "4L 05년~15년",
+        "d": 650,
+        "p": 600,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "Q7/SQ7/RSQ7",
+        "year": "4M 15년~19년",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "Q8/SQ8/RS08 E-Tron",
+        "year": "18년~23년",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "Q8/SQ8/RS08 E-Tron",
+        "year": "23년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "R8",
+        "year": "42 06년~15년",
+        "d": 550,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "F Type"
+      },
+      {
+        "name": "R8",
+        "year": "4S 16년~현재",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "TT/TTS/TTRS",
+        "year": "8J 06년~14년",
+        "d": 550,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "TT/TTS/TTRS",
+        "year": "8S 15년~23년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      }
     ]
   },
-  'BENZ (벤츠)': {
-    icon: '⭐',
-    models: [
-      { name: 'A CLASS', year: '16년~19년', d: 600, p: 480, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'A CLASS', year: 'W169 04년~12년', d: 550, p: 650, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'A CLASS', year: 'W176 13년~15년', d: 600, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'A CLASS', year: 'W177, V177 19년~현재', d: 600, p: 480, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'AMG GT', year: '19년~현재', d: 500, p: 500, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'AMG GT', year: 'C190, R190 14년~18년', d: 500, p: 500, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'AMG GT 4도어', year: 'M256/M177 19년~현재', d: 600, p: 550, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'B CLASS', year: '16년~19년', d: 650, p: 480, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'B CLASS', year: 'W245 05년~11년', d: 650, p: 550, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'B CLASS', year: 'W246 11년~15년', d: 650, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'C CLASS', year: '13년04월~14년05월', d: 600, p: 600, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'C CLASS', year: 'W204,C204 08년~13년06월', d: 600, p: 600, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'C CLASS', year: 'W205, C205(전기) 14년~14년9월', d: 550, p: 550, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'C CLASS', year: 'W205, C205(후기) 14년10월~21년', d: 550, p: 550, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'C CLASS', year: 'W206 21년~현재', d: 550, p: 550, r: null, rDisplay: null, a: 'B12 or B14 Type' },
-      { name: 'CL', year: 'C216 06년~13년', d: 650, p: 650, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'CLA', year: '16년~19년', d: 600, p: 480, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'CLA', year: 'C117 13년~15년', d: 600, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'CLA', year: 'C118 20년~현재', d: 600, p: 480, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'CLE', year: 'C236/A236 23년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'CLS', year: '15년~17년', d: 600, p: 550, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'CLS', year: 'C257 18년~현재', d: 600, p: 550, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'CLS', year: 'W218, X218 ,C218 11년~14년', d: 600, p: 600, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'CLS', year: 'W219 05년~11년', d: 650, p: 650, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'CLS', year: 'X218 12~14년', d: 600, p: 550, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'E CLASS', year: '14년~16년', d: 600, p: 600, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'E CLASS', year: 'W212,S212, C207,A207 09년~14년', d: 600, p: 600, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'E CLASS', year: 'W213;418 C238, A238 16년~23년', d: 600, p: 550, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'E CLASS', year: 'W214 24년~현재', d: 550, p: 550, r: null, rDisplay: null, a: 'B12 or B14 Type' },
-      { name: 'EQA', year: 'H243 21년~24년', d: 650, p: 480, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'EQB', year: 'X243 22년~24년', d: 650, p: 550, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'EQC', year: 'N293 19년~현재', d: 550, p: 550, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'EQE', year: 'V295 22년~현재', d: 650, p: 530, r: null, rDisplay: null, a: 'B12 or B14 Type' },
-      { name: 'EQE SUV', year: 'X294 23년~현재', d: 650, p: 500, r: null, rDisplay: null, a: 'B12 or B14 Type' },
-      { name: 'EQS', year: '21년~현재', d: 650, p: 530, r: null, rDisplay: null, a: 'B12 or B14 Type' },
-      { name: 'EQS SUV', year: '20년~현재', d: 650, p: 500, r: null, rDisplay: null, a: 'B12 or B14 Type' },
-      { name: 'EQV', year: '20년~현재', d: 700, p: 450, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'GL', year: 'X164 07년~12년', d: 700, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'GL', year: 'X166 12년~19년', d: 650, p: 550, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'GLA', year: '16년~19년', d: 600, p: 480, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'GLA', year: 'H247 20년~현재', d: 650, p: 480, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'GLA', year: 'X156 13년~15년', d: 600, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'GLB', year: 'X247 20년~24년', d: 600, p: 550, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'GLC', year: 'X253,C253 15년~22년', d: 550, p: 550, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'GLC', year: 'X254,C254 23년08월~현재', d: 550, p: 550, r: null, rDisplay: null, a: 'B12 or B14 Type' },
-      { name: 'GLE', year: 'W166,C292 15년~19년', d: 650, p: 550, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'GLE', year: 'W167,C293 19년~현재', d: 650, p: 550, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: 'GLK', year: '2015년', d: 550, p: 480, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'GLK', year: 'X204 08년~14년', d: 550, p: 450, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'GLS', year: 'X166 16년~19년', d: 650, p: 550, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'GLS', year: 'X167 20년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'ML CLASS', year: '2012년', d: 700, p: 530, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'ML CLASS', year: 'W164 05년~11년', d: 650, p: 530, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'ML CLASS', year: 'W166 11년~19년', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'R CLASS', year: 'W251 06년~15년', d: 650, p: 530, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'S CLASS', year: 'W221 06년~13년', d: 650, p: 650, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'S CLASS', year: 'W222 14년~21년', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'S CLASS', year: 'W223 21년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'SL', year: 'R230 02년~12년', d: 650, p: 650, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'SL', year: 'R231 12년~20년', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'SLC', year: 'R172 17년~20년', d: 550, p: 550, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'SLK', year: 'R172 11년~16년', d: 550, p: 550, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'SLS AMG', year: 'C197 10년~14년', d: 500, p: 500, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'V CLASS', year: 'W447 15년~현재', d: 700, p: 450, r: null, rDisplay: null, a: 'G&H Type' },
-      { name: '스프린터', year: 'W906 08년~18년', d: 650, p: 600, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '스프린터', year: 'W907 19년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '지바겐', year: 'W463 90년~18년', d: 400, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '지바겐', year: 'W463b,W464 18년~현재', d: 430, p: 430, r: null, rDisplay: null, a: 'G&H Type' },
+  "BENZ (벤츠)": {
+    "icon": "⭐",
+    "models": [
+      {
+        "name": "A CLASS",
+        "year": "16년~19년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "A CLASS",
+        "year": "W169 04년~12년",
+        "d": 550,
+        "p": 650,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "A CLASS",
+        "year": "W176 13년~15년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "A CLASS",
+        "year": "W177, V177 19년~현재",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "AMG GT",
+        "year": "19년~현재",
+        "d": 500,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "AMG GT",
+        "year": "C190, R190 14년~18년",
+        "d": 500,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "AMG GT 4도어",
+        "year": "M256/M177 19년~현재",
+        "d": 600,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "B CLASS",
+        "year": "16년~19년",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "B CLASS",
+        "year": "W245 05년~11년",
+        "d": 650,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "B CLASS",
+        "year": "W246 11년~15년",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "C CLASS",
+        "year": "13년04월~14년05월",
+        "d": 600,
+        "p": 600,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "C CLASS",
+        "year": "W204,C204 08년~13년06월",
+        "d": 600,
+        "p": 600,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "C CLASS",
+        "year": "W205, C205(전기) 14년~14년9월",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "C CLASS",
+        "year": "W205, C205(후기) 14년10월~21년",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "C CLASS",
+        "year": "W206 21년~현재",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B12 or B14 Type"
+      },
+      {
+        "name": "CL",
+        "year": "C216 06년~13년",
+        "d": 650,
+        "p": 650,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "CLA",
+        "year": "16년~19년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "CLA",
+        "year": "C117 13년~15년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "CLA",
+        "year": "C118 20년~현재",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "CLE",
+        "year": "C236/A236 23년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "CLS",
+        "year": "15년~17년",
+        "d": 600,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "CLS",
+        "year": "C257 18년~현재",
+        "d": 600,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "CLS",
+        "year": "W218, X218 ,C218 11년~14년",
+        "d": 600,
+        "p": 600,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "CLS",
+        "year": "W219 05년~11년",
+        "d": 650,
+        "p": 650,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "CLS",
+        "year": "X218 12~14년",
+        "d": 600,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "E CLASS",
+        "year": "14년~16년",
+        "d": 600,
+        "p": 600,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "E CLASS",
+        "year": "W212,S212, C207,A207 09년~14년",
+        "d": 600,
+        "p": 600,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "E CLASS",
+        "year": "W213;418 C238, A238 16년~23년",
+        "d": 600,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "E CLASS",
+        "year": "W214 24년~현재",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B12 or B14 Type"
+      },
+      {
+        "name": "EQA",
+        "year": "H243 21년~24년",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "EQB",
+        "year": "X243 22년~24년",
+        "d": 650,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "EQC",
+        "year": "N293 19년~현재",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "EQE",
+        "year": "V295 22년~현재",
+        "d": 650,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B12 or B14 Type"
+      },
+      {
+        "name": "EQE SUV",
+        "year": "X294 23년~현재",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B12 or B14 Type"
+      },
+      {
+        "name": "EQS",
+        "year": "21년~현재",
+        "d": 650,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B12 or B14 Type"
+      },
+      {
+        "name": "EQS SUV",
+        "year": "20년~현재",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B12 or B14 Type"
+      },
+      {
+        "name": "EQV",
+        "year": "20년~현재",
+        "d": 700,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "GL",
+        "year": "X164 07년~12년",
+        "d": 700,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "GL",
+        "year": "X166 12년~19년",
+        "d": 650,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "GLA",
+        "year": "16년~19년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "GLA",
+        "year": "H247 20년~현재",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "GLA",
+        "year": "X156 13년~15년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "GLB",
+        "year": "X247 20년~24년",
+        "d": 600,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "GLC",
+        "year": "X253,C253 15년~22년",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "GLC",
+        "year": "X254,C254 23년08월~현재",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B12 or B14 Type"
+      },
+      {
+        "name": "GLE",
+        "year": "W166,C292 15년~19년",
+        "d": 650,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "GLE",
+        "year": "W167,C293 19년~현재",
+        "d": 650,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "GLK",
+        "year": "2015년",
+        "d": 550,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "GLK",
+        "year": "X204 08년~14년",
+        "d": 550,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "GLS",
+        "year": "X166 16년~19년",
+        "d": 650,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "GLS",
+        "year": "X167 20년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "ML CLASS",
+        "year": "2012년",
+        "d": 700,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "ML CLASS",
+        "year": "W164 05년~11년",
+        "d": 650,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "ML CLASS",
+        "year": "W166 11년~19년",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "R CLASS",
+        "year": "W251 06년~15년",
+        "d": 650,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "S CLASS",
+        "year": "W221 06년~13년",
+        "d": 650,
+        "p": 650,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "S CLASS",
+        "year": "W222 14년~21년",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "S CLASS",
+        "year": "W223 21년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "SL",
+        "year": "R230 02년~12년",
+        "d": 650,
+        "p": 650,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "SL",
+        "year": "R231 12년~20년",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "SLC",
+        "year": "R172 17년~20년",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "SLK",
+        "year": "R172 11년~16년",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "SLS AMG",
+        "year": "C197 10년~14년",
+        "d": 500,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "V CLASS",
+        "year": "W447 15년~현재",
+        "d": 700,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      },
+      {
+        "name": "스프린터",
+        "year": "W906 08년~18년",
+        "d": 650,
+        "p": 600,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "스프린터",
+        "year": "W907 19년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "지바겐",
+        "year": "W463 90년~18년",
+        "d": 400,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "지바겐",
+        "year": "W463b,W464 18년~현재",
+        "d": 430,
+        "p": 430,
+        "r": null,
+        "rDisplay": null,
+        "a": "G&H Type"
+      }
     ]
   },
-  'BMW': {
-    icon: '🔵',
-    models: [
-      { name: '1시리즈', year: 'E81,E82,E87,E88 04년~11년', d: 500, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '1시리즈', year: 'F20.F21 11년~19년', d: 550, p: 450, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '1시리즈', year: 'F40 19년~현재', d: 650, p: 430, r: null, rDisplay: null, a: 'B12 Type' },
-      { name: '2시리즈', year: 'F22.F23 14년~현재', d: 550, p: 450, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '2시리즈', year: 'F44 19년~현재', d: 650, p: 430, r: null, rDisplay: null, a: 'B12 Type' },
-      { name: '2시리즈', year: 'F45 14년~22년', d: 650, p: 480, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '2시리즈', year: 'F46 14년~현재', d: 650, p: 480, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '2시리즈', year: 'U06 23년~현재', d: 650, p: 430, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '3시리즈', year: '13년-15년', d: 600, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '3시리즈', year: 'E90,E91,E92(전기) 05년-09년(상반기)', d: 600, p: 480, r: null, rDisplay: null, a: 'C Type' },
-      { name: '3시리즈', year: 'E90,E91,E92(후기) 09년(하반기)~12년', d: 600, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '3시리즈', year: 'E93/전기 06년~09년', d: 600, p: 400, r: null, rDisplay: null, a: 'C Type' },
-      { name: '3시리즈', year: 'E93/후기 09년~13년', d: 600, p: 400, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '3시리즈', year: 'F30.F31 12년~18년', d: 580, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '3시리즈', year: 'G20.G21 19년~현재', d: 600, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '4시리즈', year: 'F32,F33,F36 13년~20년', d: 600, p: 450, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '4시리즈', year: 'G22,G23,G26 20년~현재', d: 600, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '5시리즈', year: '12년~17년', d: 650, p: 450, r: null, rDisplay: null, a: 'C Type' },
-      { name: '5시리즈', year: 'E60,E61 03년~10년', d: 600, p: 550, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '5시리즈', year: 'F10,F11 10년~16년', d: 650, p: 450, r: null, rDisplay: null, a: 'C Type' },
-      { name: '5시리즈', year: 'G30.G31 17년~23년', d: 650, p: 450, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '5시리즈', year: 'G60 23년~현재', d: 650, p: 450, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '6시리즈', year: 'E63, E64 03년~10년', d: 600, p: 550, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '6시리즈', year: 'F06,F12,F13 12년~18년', d: 650, p: 430, r: null, rDisplay: null, a: 'C Type' },
-      { name: '7시리즈', year: 'F01,F02 08년 ~ 15년', d: 650, p: 450, r: null, rDisplay: null, a: 'C Type' },
-      { name: '7시리즈', year: 'G11.G12 15년~22년', d: 650, p: 480, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '7시리즈', year: 'G70 23년~현재', d: 650, p: 450, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '8시리즈', year: 'G14, G15, G16 18년~현재', d: 650, p: 430, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '13 / 3s', year: 'I01 13년~22년', d: 700, p: 600, r: null, rDisplay: null, a: 'C Type' },
-      { name: '3시리즈 GT', year: 'F34 13년~19년', d: 600, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '5시리즈 GT', year: 'F07 10년~17년', d: 650, p: 450, r: null, rDisplay: null, a: 'C Type' },
-      { name: '6시리즈 GT', year: 'G32 17년~현재', d: 650, p: 480, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'i4', year: 'G26(E) 21년~현재', d: 600, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'i5', year: '24년~현재', d: 600, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'i7', year: 'G70(E) 22년~현재', d: 650, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'i8', year: 'I12 14년~20년', d: 700, p: 600, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'ix', year: 'I20 25년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'ix 1', year: 'U11 25년~현재', d: 650, p: 400, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'ix 2', year: 'U10 24년~현재', d: 600, p: 480, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'ix 3', year: 'G08 25년~현재', d: 650, p: 500, r: null, rDisplay: null, a: 'B5 Type' },
-      { name: 'M2', year: 'F87 16년~21년', d: 550, p: 450, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'M2', year: 'G87 23년~현재', d: 600, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'M3', year: 'E90,E92,E93(전기) 07년~09년(상반기)', d: 600, p: 400, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'M3', year: 'E90,E92,E93(후기) 09년(하반기)~12년', d: 600, p: 400, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'M3', year: 'F80 14년~20년', d: 600, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'M3', year: 'G80,G81 20년~현재', d: 600, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'M4', year: 'F82.F83 14년~20년', d: 600, p: 450, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'M5', year: 'E60,E61 05년~10년', d: 600, p: 550, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'M5', year: 'F10 12년~16년', d: 650, p: 450, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'M5', year: 'F90 18년~현재', d: 650, p: 450, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'M6', year: 'E63, E64 05년~10년', d: 600, p: 580, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'M6', year: 'F06,F12,F13 12년~18년', d: 650, p: 430, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'M8', year: 'F91,F92,F93 19년~현재', d: 650, p: 430, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'X1', year: 'E84 08년~15년', d: 600, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'X1', year: 'F48 15년~22년', d: 650, p: 400, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'X1', year: 'U11 22년~현재', d: 650, p: 400, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'X2', year: 'F39 18년~23년', d: 600, p: 500, r: null, rDisplay: null, a: 'B6 Type' },
-      { name: 'X2', year: 'U10 24년~현재', d: 600, p: 480, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'X3', year: 'E83 03년~10년', d: 550, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'X3', year: 'F25 10년~17년', d: 650, p: 500, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'X3', year: 'G01, F97 17년~24년', d: 650, p: 500, r: null, rDisplay: null, a: 'B5 Type' },
-      { name: 'X3', year: 'G45 25년~현재', d: 600, p: 480, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'X4', year: 'F26 14년~18년', d: 650, p: 500, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'X4', year: 'G02, F98 18년~현재', d: 650, p: 500, r: null, rDisplay: null, a: 'B5 Type' },
-      { name: 'X5', year: 'E53 99년~07년', d: 600, p: 530, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'X5', year: 'E70(전기) 06년~12년', d: 600, p: 500, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'X5', year: 'E70(후기) 12년~13년', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'X5', year: 'F15/F85 13년~18년', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'X5', year: 'G05 18년~현재', d: 650, p: 500, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'X6', year: 'E71(전기) 07년~12년', d: 600, p: 480, r: null, rDisplay: null, a: 'C Type' },
-      { name: 'X6', year: 'E71(후기) 12년~14년', d: 600, p: 480, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'X6', year: 'F16 14년~19년', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'X6', year: 'G06 19년~현재', d: 650, p: 500, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'X7', year: 'G07 18년~현재', d: 650, p: 500, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'Z4', year: 'E85,E86 02년~09년', d: 500, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'Z4', year: 'E89 09년~16년', d: 530, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'Z4', year: 'G29 19년~현재', d: 550, p: 525, r: null, rDisplay: null, a: 'B2-2 Type' },
+  "BMW": {
+    "icon": "🔵",
+    "models": [
+      {
+        "name": "1시리즈",
+        "year": "E81,E82,E87,E88 04년~11년",
+        "d": 500,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "1시리즈",
+        "year": "F20.F21 11년~19년",
+        "d": 550,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "1시리즈",
+        "year": "F40 19년~현재",
+        "d": 650,
+        "p": 430,
+        "r": null,
+        "rDisplay": null,
+        "a": "B12 Type"
+      },
+      {
+        "name": "2시리즈",
+        "year": "F22.F23 14년~현재",
+        "d": 550,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "2시리즈",
+        "year": "F44 19년~현재",
+        "d": 650,
+        "p": 430,
+        "r": null,
+        "rDisplay": null,
+        "a": "B12 Type"
+      },
+      {
+        "name": "2시리즈",
+        "year": "F45 14년~22년",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "2시리즈",
+        "year": "F46 14년~현재",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "2시리즈",
+        "year": "U06 23년~현재",
+        "d": 650,
+        "p": 430,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "3시리즈",
+        "year": "13년-15년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "3시리즈",
+        "year": "E90,E91,E92(전기) 05년-09년(상반기)",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "3시리즈",
+        "year": "E90,E91,E92(후기) 09년(하반기)~12년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "3시리즈",
+        "year": "E93/전기 06년~09년",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "3시리즈",
+        "year": "E93/후기 09년~13년",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "3시리즈",
+        "year": "F30.F31 12년~18년",
+        "d": 580,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "3시리즈",
+        "year": "G20.G21 19년~현재",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "4시리즈",
+        "year": "F32,F33,F36 13년~20년",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "4시리즈",
+        "year": "G22,G23,G26 20년~현재",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "5시리즈",
+        "year": "12년~17년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "5시리즈",
+        "year": "E60,E61 03년~10년",
+        "d": 600,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "5시리즈",
+        "year": "F10,F11 10년~16년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "5시리즈",
+        "year": "G30.G31 17년~23년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "5시리즈",
+        "year": "G60 23년~현재",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "6시리즈",
+        "year": "E63, E64 03년~10년",
+        "d": 600,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "6시리즈",
+        "year": "F06,F12,F13 12년~18년",
+        "d": 650,
+        "p": 430,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "7시리즈",
+        "year": "F01,F02 08년 ~ 15년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "7시리즈",
+        "year": "G11.G12 15년~22년",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "7시리즈",
+        "year": "G70 23년~현재",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "8시리즈",
+        "year": "G14, G15, G16 18년~현재",
+        "d": 650,
+        "p": 430,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "13 / 3s",
+        "year": "I01 13년~22년",
+        "d": 700,
+        "p": 600,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "3시리즈 GT",
+        "year": "F34 13년~19년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "5시리즈 GT",
+        "year": "F07 10년~17년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "6시리즈 GT",
+        "year": "G32 17년~현재",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "i4",
+        "year": "G26(E) 21년~현재",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "i5",
+        "year": "24년~현재",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "i7",
+        "year": "G70(E) 22년~현재",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "i8",
+        "year": "I12 14년~20년",
+        "d": 700,
+        "p": 600,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "ix",
+        "year": "I20 25년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "ix 1",
+        "year": "U11 25년~현재",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "ix 2",
+        "year": "U10 24년~현재",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "ix 3",
+        "year": "G08 25년~현재",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B5 Type"
+      },
+      {
+        "name": "M2",
+        "year": "F87 16년~21년",
+        "d": 550,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "M2",
+        "year": "G87 23년~현재",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "M3",
+        "year": "E90,E92,E93(전기) 07년~09년(상반기)",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "M3",
+        "year": "E90,E92,E93(후기) 09년(하반기)~12년",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "M3",
+        "year": "F80 14년~20년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "M3",
+        "year": "G80,G81 20년~현재",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "M4",
+        "year": "F82.F83 14년~20년",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "M5",
+        "year": "E60,E61 05년~10년",
+        "d": 600,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "M5",
+        "year": "F10 12년~16년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "M5",
+        "year": "F90 18년~현재",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "M6",
+        "year": "E63, E64 05년~10년",
+        "d": 600,
+        "p": 580,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "M6",
+        "year": "F06,F12,F13 12년~18년",
+        "d": 650,
+        "p": 430,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "M8",
+        "year": "F91,F92,F93 19년~현재",
+        "d": 650,
+        "p": 430,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "X1",
+        "year": "E84 08년~15년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "X1",
+        "year": "F48 15년~22년",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "X1",
+        "year": "U11 22년~현재",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "X2",
+        "year": "F39 18년~23년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B6 Type"
+      },
+      {
+        "name": "X2",
+        "year": "U10 24년~현재",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "X3",
+        "year": "E83 03년~10년",
+        "d": 550,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "X3",
+        "year": "F25 10년~17년",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "X3",
+        "year": "G01, F97 17년~24년",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B5 Type"
+      },
+      {
+        "name": "X3",
+        "year": "G45 25년~현재",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "X4",
+        "year": "F26 14년~18년",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "X4",
+        "year": "G02, F98 18년~현재",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B5 Type"
+      },
+      {
+        "name": "X5",
+        "year": "E53 99년~07년",
+        "d": 600,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "X5",
+        "year": "E70(전기) 06년~12년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "X5",
+        "year": "E70(후기) 12년~13년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "X5",
+        "year": "F15/F85 13년~18년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "X5",
+        "year": "G05 18년~현재",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "X6",
+        "year": "E71(전기) 07년~12년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "X6",
+        "year": "E71(후기) 12년~14년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "X6",
+        "year": "F16 14년~19년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "X6",
+        "year": "G06 19년~현재",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "X7",
+        "year": "G07 18년~현재",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "Z4",
+        "year": "E85,E86 02년~09년",
+        "d": 500,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "Z4",
+        "year": "E89 09년~16년",
+        "d": 530,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "Z4",
+        "year": "G29 19년~현재",
+        "d": 550,
+        "p": 525,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      }
     ]
   },
-  'CADILLAC (캐딜락)': {
-    icon: '🦅',
-    models: [
-      { name: 'СТ4/СТ4-V', year: '20년~이후', d: 550, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'ATS/ATS-V/ATS-R', year: '12년~이후', d: 550, p: 480, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'CT5/CT5-V', year: '20년~이후', d: 550, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'CT6/CT6-V', year: '16년~이후', d: 600, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'CTS/CTS-V', year: '2세대 08년~13년', d: 550, p: 480, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'CTS/CTS-V', year: '3세대 14년~이후', d: 600, p: 450, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'SRX', year: '2세대 10년~16년', d: 650, p: 430, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'STS', year: '04년~11년', d: 550, p: 530, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'XT4', year: '18년~이후', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'XT5', year: '16년~이후', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'XT6', year: '19년~이후', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'XTS', year: '12년~19년', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '리릭', year: '24년~이후', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '에스컬레이드', year: '1XX 21년~25년', d: 550, p: 550, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '에스컬레이드', year: '25년~이후', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '에스컬레이드', year: '900 06년~14년', d: 550, p: 550, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '에스컬레이드', year: 'K2XL 14년~20년', d: 550, p: 550, r: null, rDisplay: null, a: 'U-Type' },
+  "CADILLAC (캐딜락)": {
+    "icon": "🦅",
+    "models": [
+      {
+        "name": "СТ4/СТ4-V",
+        "year": "20년~이후",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "ATS/ATS-V/ATS-R",
+        "year": "12년~이후",
+        "d": 550,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "CT5/CT5-V",
+        "year": "20년~이후",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "CT6/CT6-V",
+        "year": "16년~이후",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "CTS/CTS-V",
+        "year": "2세대 08년~13년",
+        "d": 550,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "CTS/CTS-V",
+        "year": "3세대 14년~이후",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "SRX",
+        "year": "2세대 10년~16년",
+        "d": 650,
+        "p": 430,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "STS",
+        "year": "04년~11년",
+        "d": 550,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "XT4",
+        "year": "18년~이후",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "XT5",
+        "year": "16년~이후",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "XT6",
+        "year": "19년~이후",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "XTS",
+        "year": "12년~19년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "리릭",
+        "year": "24년~이후",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "에스컬레이드",
+        "year": "1XX 21년~25년",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "에스컬레이드",
+        "year": "25년~이후",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "에스컬레이드",
+        "year": "900 06년~14년",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "에스컬레이드",
+        "year": "K2XL 14년~20년",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      }
     ]
   },
-  'FORD (포드)': {
-    icon: '🔷',
-    models: [
-      { name: 'E150/250/350', year: '98년~이후', d: 500, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'F100/150/250/350/ 450/550 E1', year: '12,13세대 09년~20년', d: 550, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'F100/150/250/350/ 450/550 E1', year: '14세대 21년~이후', d: 550, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '머스탱(GT)', year: '5세대 10년~14년', d: 550, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '머스탱(GT)', year: '6세대 15년~24년', d: 550, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '머스탱(GT)', year: '7세대 24년~이후', d: 550, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '푸마ST', year: '19년~이후', d: 700, p: 350, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '레인저(랩터)', year: '23년~이후', d: 600, p: 400, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '레인저(랩터)', year: 'PX MK1 11년~15년', d: 600, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '레인저(랩터)', year: 'PX MK2 15년~18년', d: 600, p: 400, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '레인저(랩터)', year: 'PX MK3 19년~22년', d: 600, p: 400, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '브롱코', year: '22년~이후', d: 430, p: 430, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '이스케이프', year: '2세대 08년~12년', d: 500, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '이스케이프', year: '3세대 12년~19년', d: 700, p: 700, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '이스케이프', year: '4세대 19년~이후', d: 600, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '익스페디션', year: '3,4세대 08년~이후', d: 550, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '익스플로러', year: '24년~이후', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '익스플로러', year: 'U251 05년~11년', d: 500, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '익스플로러', year: 'U502 11년~19년', d: 650, p: 550, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '익스플로러', year: 'U625 20년~24년', d: 650, p: 530, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '토러스', year: '10년~이후', d: 650, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
+  "FORD (포드)": {
+    "icon": "🔷",
+    "models": [
+      {
+        "name": "E150/250/350",
+        "year": "98년~이후",
+        "d": 500,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "F100/150/250/350/ 450/550 E1",
+        "year": "12,13세대 09년~20년",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "F100/150/250/350/ 450/550 E1",
+        "year": "14세대 21년~이후",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "머스탱(GT)",
+        "year": "5세대 10년~14년",
+        "d": 550,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "머스탱(GT)",
+        "year": "6세대 15년~24년",
+        "d": 550,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "머스탱(GT)",
+        "year": "7세대 24년~이후",
+        "d": 550,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "푸마ST",
+        "year": "19년~이후",
+        "d": 700,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "레인저(랩터)",
+        "year": "23년~이후",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "레인저(랩터)",
+        "year": "PX MK1 11년~15년",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "레인저(랩터)",
+        "year": "PX MK2 15년~18년",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "레인저(랩터)",
+        "year": "PX MK3 19년~22년",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "브롱코",
+        "year": "22년~이후",
+        "d": 430,
+        "p": 430,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "이스케이프",
+        "year": "2세대 08년~12년",
+        "d": 500,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "이스케이프",
+        "year": "3세대 12년~19년",
+        "d": 700,
+        "p": 700,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "이스케이프",
+        "year": "4세대 19년~이후",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "익스페디션",
+        "year": "3,4세대 08년~이후",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "익스플로러",
+        "year": "24년~이후",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "익스플로러",
+        "year": "U251 05년~11년",
+        "d": 500,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "익스플로러",
+        "year": "U502 11년~19년",
+        "d": 650,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "익스플로러",
+        "year": "U625 20년~24년",
+        "d": 650,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "토러스",
+        "year": "10년~이후",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      }
     ]
   },
-  'HONDA (혼다)': {
-    icon: '🏍️',
-    models: [
-      { name: 'CR-V', year: '07년~11년', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'CR-V', year: '12년~17.03년', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'CR-V', year: '18년~23년', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'CR-V', year: '23년~이후', d: 600, p: 480, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'HR-V', year: '16년~이후', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '_ 시빅 Si 쿠페', year: '06년~11년', d: 700, p: 600, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '시빅 세단/쿠페/하이브리드', year: '06년~11년', d: 650, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '시빅 세단/쿠페/하이브리드', year: '12년~16년', d: 650, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '시빅 세단/쿠페/하이브리드', year: '17년~이후', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '시빅 유로', year: '13년~16년', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '어코드', year: '08년~12년', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '어코드', year: '12년~17년', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '어코드', year: '18년~이후', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '오딧세이', year: '05년~11년', d: 650, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '오딧세이', year: '12년~17년', d: 650, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '오딧세이', year: '18년~이후', d: 650, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '파일럿', year: '09년~15년', d: 550, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '파일럿', year: '16년~이후', d: 650, p: 600, r: null, rDisplay: null, a: 'U-Type' },
+  "HONDA (혼다)": {
+    "icon": "🏍️",
+    "models": [
+      {
+        "name": "CR-V",
+        "year": "07년~11년",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "CR-V",
+        "year": "12년~17.03년",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "CR-V",
+        "year": "18년~23년",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "CR-V",
+        "year": "23년~이후",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "HR-V",
+        "year": "16년~이후",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "_ 시빅 Si 쿠페",
+        "year": "06년~11년",
+        "d": 700,
+        "p": 600,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "시빅 세단/쿠페/하이브리드",
+        "year": "06년~11년",
+        "d": 650,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "시빅 세단/쿠페/하이브리드",
+        "year": "12년~16년",
+        "d": 650,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "시빅 세단/쿠페/하이브리드",
+        "year": "17년~이후",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "시빅 유로",
+        "year": "13년~16년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "어코드",
+        "year": "08년~12년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "어코드",
+        "year": "12년~17년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "어코드",
+        "year": "18년~이후",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "오딧세이",
+        "year": "05년~11년",
+        "d": 650,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "오딧세이",
+        "year": "12년~17년",
+        "d": 650,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "오딧세이",
+        "year": "18년~이후",
+        "d": 650,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "파일럿",
+        "year": "09년~15년",
+        "d": 550,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "파일럿",
+        "year": "16년~이후",
+        "d": 650,
+        "p": 600,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      }
     ]
   },
-  'JAGUAR (재규어)': {
-    icon: '🐆',
-    models: [
-      { name: 'E-pace', year: '17년~이후', d: 650, p: 500, r: null, rDisplay: null, a: 'B5 Type' },
-      { name: 'F-pace', year: 'X761 15년~이후', d: 650, p: 480, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'F-type', year: '12년~이후', d: 550, p: 530, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'I-pace', year: '18년~이후', d: 650, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'X-type', year: 'X400 01년~10년', d: 550, p: 480, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'XE', year: 'X760 15년~이후', d: 700, p: 400, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'XF/XFL', year: 'X260 16년~이후', d: 700, p: 430, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'XF/XFR/XFR-S', year: 'X250 08년~15년', d: 600, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'XJ/XJ8', year: 'X351 10년~20년', d: 600, p: 480, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'XK/XKR/XKR-S', year: 'X150 06년~16년', d: 550, p: 530, r: null, rDisplay: null, a: 'U-Type' },
+  "JAGUAR (재규어)": {
+    "icon": "🐆",
+    "models": [
+      {
+        "name": "E-pace",
+        "year": "17년~이후",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B5 Type"
+      },
+      {
+        "name": "F-pace",
+        "year": "X761 15년~이후",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "F-type",
+        "year": "12년~이후",
+        "d": 550,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "I-pace",
+        "year": "18년~이후",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "X-type",
+        "year": "X400 01년~10년",
+        "d": 550,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "XE",
+        "year": "X760 15년~이후",
+        "d": 700,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "XF/XFL",
+        "year": "X260 16년~이후",
+        "d": 700,
+        "p": 430,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "XF/XFR/XFR-S",
+        "year": "X250 08년~15년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "XJ/XJ8",
+        "year": "X351 10년~20년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "XK/XKR/XKR-S",
+        "year": "X150 06년~16년",
+        "d": 550,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      }
     ]
   },
-  'JEEP (지프)': {
-    icon: '🏔️',
-    models: [
-      { name: '어벤저 EV', year: '24년~이후', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '그랜드체로키', year: 'L320 11년~이후', d: 550, p: 530, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '그랜드체로키', year: 'L551 05년~10년', d: 530, p: 530, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '글래디에이터', year: '25년~이후', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '글래디에이터', year: 'L538 18년~24년', d: 400, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '랭글러/루비콘', year: '18년~24년', d: 400, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '랭글러/루비콘', year: '24년~이후', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '레니게이드', year: '14년~이후', d: 550, p: 500, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '체로키', year: 'KJ.KK 02년~13년', d: 480, p: 480, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '체로키', year: 'KL 14년~이후', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '컴패스', year: '1세대 06년~16년', d: 550, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '컴패스', year: '2세대 17년~이후', d: 600, p: 450, r: null, rDisplay: null, a: 'U-Type' },
+  "JEEP (지프)": {
+    "icon": "🏔️",
+    "models": [
+      {
+        "name": "어벤저 EV",
+        "year": "24년~이후",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "그랜드체로키",
+        "year": "L320 11년~이후",
+        "d": 550,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "그랜드체로키",
+        "year": "L551 05년~10년",
+        "d": 530,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "글래디에이터",
+        "year": "25년~이후",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "글래디에이터",
+        "year": "L538 18년~24년",
+        "d": 400,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "랭글러/루비콘",
+        "year": "18년~24년",
+        "d": 400,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "랭글러/루비콘",
+        "year": "24년~이후",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "레니게이드",
+        "year": "14년~이후",
+        "d": 550,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "체로키",
+        "year": "KJ.KK 02년~13년",
+        "d": 480,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "체로키",
+        "year": "KL 14년~이후",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "컴패스",
+        "year": "1세대 06년~16년",
+        "d": 550,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "컴패스",
+        "year": "2세대 17년~이후",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      }
     ]
   },
-  'LINCOLN (링컨)': {
-    icon: '🌟',
-    models: [
-      { name: 'MKC', year: '15년~20년', d: 650, p: 400, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'MKS', year: '08년~16년', d: 650, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'MKT', year: '09년~19년', d: 600, p: 550, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'MKX', year: '1세대 07년~15년', d: 650, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'MKX', year: '2세대 16년~18년', d: 600, p: 450, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'MKZ', year: '1세대 05년~12년', d: 600, p: 480, r: null, rDisplay: null, a: 'U-Type' },
-      { name: 'MKZ', year: '2세대 13년~20년', d: 550, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '네비게이터', year: '08년~현재', d: 550, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '노틸러스', year: '18년~24년', d: 600, p: 450, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '노틸러스', year: '24년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '에비에이터', year: '19년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '올뉴컨티넨탈', year: '16년~20년', d: 600, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '올뉴코세어', year: '20년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
+  "LINCOLN (링컨)": {
+    "icon": "🌟",
+    "models": [
+      {
+        "name": "MKC",
+        "year": "15년~20년",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "MKS",
+        "year": "08년~16년",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "MKT",
+        "year": "09년~19년",
+        "d": 600,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "MKX",
+        "year": "1세대 07년~15년",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "MKX",
+        "year": "2세대 16년~18년",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "MKZ",
+        "year": "1세대 05년~12년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "MKZ",
+        "year": "2세대 13년~20년",
+        "d": 550,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "네비게이터",
+        "year": "08년~현재",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "노틸러스",
+        "year": "18년~24년",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "노틸러스",
+        "year": "24년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "에비에이터",
+        "year": "19년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "올뉴컨티넨탈",
+        "year": "16년~20년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "올뉴코세어",
+        "year": "20년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      }
     ]
   },
-  'MINI (미니쿠퍼)': {
-    icon: '🎯',
-    models: [
-      { name: '쿠퍼. S', year: '20년 이후~', d: 530, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '쿠퍼. S', year: 'F57 16년~20년', d: 450, p: 480, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '쿠퍼. S', year: 'F67 20년~현재', d: 450, p: 480, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '쿠퍼. S', year: 'R52/57 01년~12년', d: 450, p: 480, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '쿠퍼. S', year: 'R56 07년~12년', d: 450, p: 480, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '쿠퍼. S', year: 'R56 2013년', d: 450, p: 480, r: null, rDisplay: null, a: 'B3 Type' },
-      { name: '쿠퍼. S', year: 'R57 13년~15년', d: 450, p: 480, r: null, rDisplay: null, a: 'B3 Type' },
-      { name: '쿠퍼. S', year: 'R59 12년~15년', d: 480, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '쿠페, S, SD', year: 'R58 11년~15년', d: 480, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '클럽맨,S,SD,D', year: 'F54 15년~현재', d: 550, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '클럽맨,S,SD,D', year: 'R55 07년~11년', d: 450, p: 480, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '클럽맨,S,SD,D', year: 'R55 07년~11년 (2)', d: 450, p: 480, r: null, rDisplay: null, a: 'B3 Type' },
-      { name: '쿠퍼, S,SD,D 3도어', year: 'F56 14년 이후~', d: 450, p: 480, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '쿠퍼, S,SD,D 3도어', year: 'F66 20년 이후~', d: 450, p: 480, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '쿠퍼,S,SD,D 5도어', year: 'F55 14년 이후~', d: 450, p: 480, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '쿠퍼,S,SD,D 5도어', year: 'F65 20년 이후~', d: 450, p: 480, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '페이스맨,SD,D', year: 'R61 13년~16년', d: 480, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
+  "MINI (미니쿠퍼)": {
+    "icon": "🎯",
+    "models": [
+      {
+        "name": "쿠퍼. S",
+        "year": "20년 이후~",
+        "d": 530,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "쿠퍼. S",
+        "year": "F57 16년~20년",
+        "d": 450,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "쿠퍼. S",
+        "year": "F67 20년~현재",
+        "d": 450,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "쿠퍼. S",
+        "year": "R52/57 01년~12년",
+        "d": 450,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "쿠퍼. S",
+        "year": "R56 07년~12년",
+        "d": 450,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "쿠퍼. S",
+        "year": "R56 2013년",
+        "d": 450,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B3 Type"
+      },
+      {
+        "name": "쿠퍼. S",
+        "year": "R57 13년~15년",
+        "d": 450,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B3 Type"
+      },
+      {
+        "name": "쿠퍼. S",
+        "year": "R59 12년~15년",
+        "d": 480,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "쿠페, S, SD",
+        "year": "R58 11년~15년",
+        "d": 480,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "클럽맨,S,SD,D",
+        "year": "F54 15년~현재",
+        "d": 550,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "클럽맨,S,SD,D",
+        "year": "R55 07년~11년",
+        "d": 450,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "클럽맨,S,SD,D",
+        "year": "R55 07년~11년 (2)",
+        "d": 450,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B3 Type"
+      },
+      {
+        "name": "쿠퍼, S,SD,D 3도어",
+        "year": "F56 14년 이후~",
+        "d": 450,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "쿠퍼, S,SD,D 3도어",
+        "year": "F66 20년 이후~",
+        "d": 450,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "쿠퍼,S,SD,D 5도어",
+        "year": "F55 14년 이후~",
+        "d": 450,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "쿠퍼,S,SD,D 5도어",
+        "year": "F65 20년 이후~",
+        "d": 450,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "페이스맨,SD,D",
+        "year": "R61 13년~16년",
+        "d": 480,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      }
     ]
   },
-  'NISSAN (닛산)': {
-    icon: '🔶',
-    models: [
-      { name: 'X-트레일', year: '14년~이후', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '로그', year: '08년~14년', d: 650, p: 350, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '로그', year: '14년~이후', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '리프', year: '11년~이후', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '맥시마', year: '09년~14년', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '맥시마', year: '15년~이후', d: 700, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '무라노', year: '09년~14년', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '무라노', year: '15년~이후', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '알티마', year: '09년~12년', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '알티마', year: '13년~18년', d: 700, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '알티마', year: '19년~이후', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '주크', year: '10년~18년', d: 550, p: 350, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '주크', year: '19년~이후', d: 600, p: 350, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '캐시카이', year: '06년~14년', d: 600, p: 350, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '캐시카이', year: '14년~이후', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '큐브', year: '02년~19년', d: 500, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '패스파인더', year: '14년~16년', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '패스파인더', year: '17년~이후', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
+  "NISSAN (닛산)": {
+    "icon": "🔶",
+    "models": [
+      {
+        "name": "X-트레일",
+        "year": "14년~이후",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "로그",
+        "year": "08년~14년",
+        "d": 650,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "로그",
+        "year": "14년~이후",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "리프",
+        "year": "11년~이후",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "맥시마",
+        "year": "09년~14년",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "맥시마",
+        "year": "15년~이후",
+        "d": 700,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "무라노",
+        "year": "09년~14년",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "무라노",
+        "year": "15년~이후",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "알티마",
+        "year": "09년~12년",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "알티마",
+        "year": "13년~18년",
+        "d": 700,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "알티마",
+        "year": "19년~이후",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "주크",
+        "year": "10년~18년",
+        "d": 550,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "주크",
+        "year": "19년~이후",
+        "d": 600,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "캐시카이",
+        "year": "06년~14년",
+        "d": 600,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "캐시카이",
+        "year": "14년~이후",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "큐브",
+        "year": "02년~19년",
+        "d": 500,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "패스파인더",
+        "year": "14년~16년",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "패스파인더",
+        "year": "17년~이후",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      }
     ]
   },
-  'PEUGEOT (푸조)': {
-    icon: '🦁',
-    models: [
-      { name: '207', year: '06년~15년', d: 650, p: 430, r: null, rDisplay: null, a: 'C Type' },
-      { name: '308', year: '1세대 07년~13년', d: 700, p: 650, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '308', year: '2세대 14년~22년', d: 600, p: 450, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '308', year: '3세대 22년~이후', d: 600, p: 400, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '408', year: '23년~이후', d: 600, p: 400, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '508', year: '1세대 10년~18년', d: 650, p: 650, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '508', year: '2세대 18년~이후', d: 650, p: 430, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '3008', year: '2세대 17년~이후', d: 700, p: 400, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '5008', year: '2세대 17년~이후', d: 700, p: 400, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '2008/e-2008', year: '1세대 13년~20년', d: 650, p: 400, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '2008/e-2008', year: '2세대 20년~이후', d: 600, p: 400, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '208/e-208', year: '1세대 12년~19년', d: 650, p: 400, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '208/e-208', year: '2세대 19년~이후', d: 600, p: 400, r: null, rDisplay: null, a: 'B2-2 Type' },
+  "PEUGEOT (푸조)": {
+    "icon": "🦁",
+    "models": [
+      {
+        "name": "207",
+        "year": "06년~15년",
+        "d": 650,
+        "p": 430,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "308",
+        "year": "1세대 07년~13년",
+        "d": 700,
+        "p": 650,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "308",
+        "year": "2세대 14년~22년",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "308",
+        "year": "3세대 22년~이후",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "408",
+        "year": "23년~이후",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "508",
+        "year": "1세대 10년~18년",
+        "d": 650,
+        "p": 650,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "508",
+        "year": "2세대 18년~이후",
+        "d": 650,
+        "p": 430,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "3008",
+        "year": "2세대 17년~이후",
+        "d": 700,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "5008",
+        "year": "2세대 17년~이후",
+        "d": 700,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "2008/e-2008",
+        "year": "1세대 13년~20년",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "2008/e-2008",
+        "year": "2세대 20년~이후",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "208/e-208",
+        "year": "1세대 12년~19년",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "208/e-208",
+        "year": "2세대 19년~이후",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      }
     ]
   },
-  'PORSCHE (포르쉐)': {
-    icon: '🏎️',
-    models: [
-      { name: '718박스터', year: '20년~현재', d: 550, p: 530, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '718박스터', year: '982 16년~현재', d: 530, p: 550, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '718박스터', year: '982 20년~현재', d: 550, p: 530, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '911', year: '24년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '911', year: '991992 13년~24년', d: 550, p: 530, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '911', year: '997 04년~12년', d: 530, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '918스파이더', year: '14년~16년', d: 550, p: 530, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '마칸 EV', year: '24년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '마칸', year: '95B 14년~현재', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '박스터', year: '981 12년~16년', d: 550, p: 530, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '박스터', year: '987 05년~12년', d: 550, p: 530, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '카이맨', year: '981 11년~13년', d: 550, p: 530, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '카이맨', year: '987 05년~10년', d: 550, p: 530, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '카이엔', year: '958 12년~17년', d: 650, p: 650, r: null, rDisplay: null, a: 'C Type' },
-      { name: '카이엔', year: '9YO 18년~현재', d: 650, p: 530, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '타이칸', year: '20년~24년', d: 650, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '타이칸', year: '24년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '파나메라', year: '970(전기) 09년~13년', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '파나메라', year: '970(후기) 14년~15년', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '파나메라', year: '971 16년~24년', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '파나메라', year: '972 24년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
+  "PORSCHE (포르쉐)": {
+    "icon": "🏎️",
+    "models": [
+      {
+        "name": "718박스터",
+        "year": "20년~현재",
+        "d": 550,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "718박스터",
+        "year": "982 16년~현재",
+        "d": 530,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "718박스터",
+        "year": "982 20년~현재",
+        "d": 550,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "911",
+        "year": "24년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "911",
+        "year": "991992 13년~24년",
+        "d": 550,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "911",
+        "year": "997 04년~12년",
+        "d": 530,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "918스파이더",
+        "year": "14년~16년",
+        "d": 550,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "마칸 EV",
+        "year": "24년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "마칸",
+        "year": "95B 14년~현재",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "박스터",
+        "year": "981 12년~16년",
+        "d": 550,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "박스터",
+        "year": "987 05년~12년",
+        "d": 550,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "카이맨",
+        "year": "981 11년~13년",
+        "d": 550,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "카이맨",
+        "year": "987 05년~10년",
+        "d": 550,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "카이엔",
+        "year": "958 12년~17년",
+        "d": 650,
+        "p": 650,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "카이엔",
+        "year": "9YO 18년~현재",
+        "d": 650,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "타이칸",
+        "year": "20년~24년",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "타이칸",
+        "year": "24년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "파나메라",
+        "year": "970(전기) 09년~13년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "파나메라",
+        "year": "970(후기) 14년~15년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "파나메라",
+        "year": "971 16년~24년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "파나메라",
+        "year": "972 24년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      }
     ]
   },
-  'RANGE ROVER (레인지로버)': {
-    icon: '🦌',
-    models: [
-      { name: '디스커버리4', year: 'L319 05년~17년', d: 550, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '디스커버리5', year: 'L462 17년~이후', d: 600, p: 500, r: null, rDisplay: null, a: 'B5 Type' },
-      { name: '디펜더(90,110,130)', year: '20년~이후', d: 550, p: 550, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '디펜더(90,110,130)', year: '90년~16년', d: 350, p: 350, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '레이지로버(보그,LWB)', year: '22년~이후', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '레이지로버(보그,LWB)', year: 'L405 12년~16년', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '레이지로버(보그,LWB)', year: 'L405 17년~21년', d: 600, p: 500, r: null, rDisplay: null, a: 'B5 Type' },
-      { name: '디스커버리스포츠', year: 'L550 14년~이후', d: 650, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '레인지로버벨라', year: 'L560 17년~이후', d: 650, p: 480, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '레인지로버스포츠', year: '20년~이후', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '레인지로버스포츠', year: 'L320 05년~13년', d: 550, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '레인지로버스포츠', year: 'L494 13년~17년', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '레인지로버스포츠', year: 'L494 16년~20년', d: 600, p: 500, r: null, rDisplay: null, a: 'B5 Type' },
-      { name: '레인지로버이보크', year: 'L538 11년~19년', d: 600, p: 530, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '레인지로버이보크', year: 'L551 18년~이후', d: 650, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '프리랜더', year: 'L359 07년~14년', d: 600, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
+  "RANGE ROVER (레인지로버)": {
+    "icon": "🦌",
+    "models": [
+      {
+        "name": "디스커버리4",
+        "year": "L319 05년~17년",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "디스커버리5",
+        "year": "L462 17년~이후",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B5 Type"
+      },
+      {
+        "name": "디펜더(90,110,130)",
+        "year": "20년~이후",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "디펜더(90,110,130)",
+        "year": "90년~16년",
+        "d": 350,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "레이지로버(보그,LWB)",
+        "year": "22년~이후",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "레이지로버(보그,LWB)",
+        "year": "L405 12년~16년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "레이지로버(보그,LWB)",
+        "year": "L405 17년~21년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B5 Type"
+      },
+      {
+        "name": "디스커버리스포츠",
+        "year": "L550 14년~이후",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "레인지로버벨라",
+        "year": "L560 17년~이후",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "레인지로버스포츠",
+        "year": "20년~이후",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "레인지로버스포츠",
+        "year": "L320 05년~13년",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "레인지로버스포츠",
+        "year": "L494 13년~17년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "레인지로버스포츠",
+        "year": "L494 16년~20년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B5 Type"
+      },
+      {
+        "name": "레인지로버이보크",
+        "year": "L538 11년~19년",
+        "d": 600,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "레인지로버이보크",
+        "year": "L551 18년~이후",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "프리랜더",
+        "year": "L359 07년~14년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      }
     ]
   },
-  'TESLA (테슬라)': {
-    icon: '⚡',
-    models: [
-      { name: '모델3', year: '17년~24년', d: 650, p: 450, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '모델3', year: '24년~이후', d: 650, p: 450, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '모델S', year: '12년~20년', d: 700, p: 450, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '모델S', year: '21년~이후', d: 650, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '모델X', year: '21년~23년', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '모델X', year: '23년~이후', d: 650, p: 550, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '모델 Y', year: '20년~이후', d: 650, p: 480, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '모델 Y', year: '24년~이후', d: 650, p: 480, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '로드스터', year: '06년~12년', d: 650, p: null, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '사이버트럭', year: '24년~이후', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
+  "TESLA (테슬라)": {
+    "icon": "⚡",
+    "models": [
+      {
+        "name": "모델3",
+        "year": "17년~24년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "모델3",
+        "year": "24년~이후",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "모델S",
+        "year": "12년~20년",
+        "d": 700,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "모델S",
+        "year": "21년~이후",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "모델X",
+        "year": "21년~23년",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "모델X",
+        "year": "23년~이후",
+        "d": 650,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "모델 Y",
+        "year": "20년~이후",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "모델 Y",
+        "year": "24년~이후",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "로드스터",
+        "year": "06년~12년",
+        "d": 650,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "사이버트럭",
+        "year": "24년~이후",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      }
     ]
   },
-  'TOYOTA (도요타)': {
-    icon: '🌐',
-    models: [
-      { name: '라브4', year: '05년~12년', d: 600, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '라브4', year: '13년~이후', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '도요타 86', year: '12년~이후', d: 550, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '프리우스C', year: '11년~이후', d: 700, p: 350, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '프리우스V1', year: '12년~14년', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '프리우스V2', year: '15년~이후', d: 700, p: 350, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '매트릭스', year: '09년~13년', d: 650, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '벤자', year: '12년~15년', d: 650, p: 550, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '시에나', year: '11년~이후', d: 700, p: 400, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '아발론', year: '05년~12년', d: 650, p: 500, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: '아발론', year: '13년~18년', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '아발론', year: '19년~이후', d: 650, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '캠리', year: '06년~11년', d: 600, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '캠리', year: '12년~17년10월', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '캠리', year: '18년~이후', d: 650, p: 500, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '프리우스', year: '10년~15년', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '프리우스', year: '16년~22년', d: 700, p: 400, r: null, rDisplay: null, a: 'B5 Type' },
-      { name: '프리우스', year: '23년~이후', d: 700, p: 350, r: null, rDisplay: null, a: 'U-Type' },
-      { name: '프리우스프라임', year: '17년~이후', d: 700, p: 400, r: null, rDisplay: null, a: 'B5 Type' },
-      { name: '하이렌더', year: '08년~이후', d: 650, p: 450, r: null, rDisplay: null, a: 'U-Type' },
+  "TOYOTA (도요타)": {
+    "icon": "🌐",
+    "models": [
+      {
+        "name": "라브4",
+        "year": "05년~12년",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "라브4",
+        "year": "13년~이후",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "도요타 86",
+        "year": "12년~이후",
+        "d": 550,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "프리우스C",
+        "year": "11년~이후",
+        "d": 700,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "프리우스V1",
+        "year": "12년~14년",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "프리우스V2",
+        "year": "15년~이후",
+        "d": 700,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "매트릭스",
+        "year": "09년~13년",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "벤자",
+        "year": "12년~15년",
+        "d": 650,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "시에나",
+        "year": "11년~이후",
+        "d": 700,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "아발론",
+        "year": "05년~12년",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "아발론",
+        "year": "13년~18년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "아발론",
+        "year": "19년~이후",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "캠리",
+        "year": "06년~11년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "캠리",
+        "year": "12년~17년10월",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "캠리",
+        "year": "18년~이후",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "프리우스",
+        "year": "10년~15년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "프리우스",
+        "year": "16년~22년",
+        "d": 700,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B5 Type"
+      },
+      {
+        "name": "프리우스",
+        "year": "23년~이후",
+        "d": 700,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      },
+      {
+        "name": "프리우스프라임",
+        "year": "17년~이후",
+        "d": 700,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B5 Type"
+      },
+      {
+        "name": "하이렌더",
+        "year": "08년~이후",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "U-Type"
+      }
     ]
   },
-  'VOLKSWAGEN (폭스바겐)': {
-    icon: '🔧',
-    models: [
-      { name: 'EOS', year: '07년~17년', d: 600, p: 480, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'ID.4', year: 'VW316 20년~현재', d: 700, p: 450, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'ID.5', year: '25년~현재', d: 700, p: 450, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'СС', year: '1세대 08년~12년', d: 600, p: 450, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'СС', year: '2세대 12년~16년', d: 600, p: 450, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '골프', year: '25년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '골프', year: 'MK6 08년~12년', d: 600, p: 450, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '골프', year: 'MK7 03년~19년', d: 650, p: 450, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '골프', year: 'MK8 19년~25년', d: 650, p: 450, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '비틀', year: '13년~19년', d: 550, p: 550, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '시로코', year: '08년~17년', d: 600, p: 480, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '아테온', year: '3H 18년~현재', d: 650, p: 480, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '아틀라스', year: '17년~현재', d: 650, p: 550, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '제타', year: '5C6 11년~18년', d: 600, p: 480, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '제타', year: '6MT 18년~22년', d: 600, p: 480, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '제타', year: '7세대 22년~현재', d: 600, p: 450, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '투아렉', year: '7P5 10년~18년', d: 650, p: 650, r: null, rDisplay: null, a: 'C Type' },
-      { name: '투아렉', year: 'CR 18년~현재', d: 650, p: 550, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '티구안', year: '23년~현재', d: 600, p: 530, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '티구안', year: '5N 07년 15년', d: 600, p: 530, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '티구안', year: 'AD,BW 16년~23년', d: 600, p: 530, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '티록', year: '17년~현재', d: 650, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '파사트', year: 'B6 05년~11년', d: 600, p: 450, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: '파사트', year: 'B7 12년~17년', d: 600, p: 480, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '파사트', year: 'B8 18년~현재', d: 650, p: 480, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '페이톤', year: 'VW611 02년~16년', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: '폴로', year: '5세대 12년~16년', d: 600, p: 400, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: '폴로', year: '6세대 17년~현재', d: 650, p: 450, r: null, rDisplay: null, a: 'B2-1 Type' },
+  "VOLKSWAGEN (폭스바겐)": {
+    "icon": "🔧",
+    "models": [
+      {
+        "name": "EOS",
+        "year": "07년~17년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "ID.4",
+        "year": "VW316 20년~현재",
+        "d": 700,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "ID.5",
+        "year": "25년~현재",
+        "d": 700,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "СС",
+        "year": "1세대 08년~12년",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "СС",
+        "year": "2세대 12년~16년",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "골프",
+        "year": "25년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "골프",
+        "year": "MK6 08년~12년",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "골프",
+        "year": "MK7 03년~19년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "골프",
+        "year": "MK8 19년~25년",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "비틀",
+        "year": "13년~19년",
+        "d": 550,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "시로코",
+        "year": "08년~17년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "아테온",
+        "year": "3H 18년~현재",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "아틀라스",
+        "year": "17년~현재",
+        "d": 650,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "제타",
+        "year": "5C6 11년~18년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "제타",
+        "year": "6MT 18년~22년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "제타",
+        "year": "7세대 22년~현재",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "투아렉",
+        "year": "7P5 10년~18년",
+        "d": 650,
+        "p": 650,
+        "r": null,
+        "rDisplay": null,
+        "a": "C Type"
+      },
+      {
+        "name": "투아렉",
+        "year": "CR 18년~현재",
+        "d": 650,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "티구안",
+        "year": "23년~현재",
+        "d": 600,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "티구안",
+        "year": "5N 07년 15년",
+        "d": 600,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "티구안",
+        "year": "AD,BW 16년~23년",
+        "d": 600,
+        "p": 530,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "티록",
+        "year": "17년~현재",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "파사트",
+        "year": "B6 05년~11년",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "파사트",
+        "year": "B7 12년~17년",
+        "d": 600,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "파사트",
+        "year": "B8 18년~현재",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "페이톤",
+        "year": "VW611 02년~16년",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "폴로",
+        "year": "5세대 12년~16년",
+        "d": 600,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "폴로",
+        "year": "6세대 17년~현재",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      }
     ]
   },
-  'VOLVO (볼보)': {
-    icon: '🛡️',
-    models: [
-      { name: 'C30', year: '06년~13년', d: 650, p: 500, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'C40', year: '21년~현재', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'C70', year: 'P1 07년~13년', d: 650, p: 480, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'EX30', year: '24년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'S40', year: 'P1 05년~12년', d: 650, p: 500, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'S60', year: 'P3 10년~18년', d: 650, p: 500, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'S60', year: 'SPA 18년~이후', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'S80', year: 'P3 06년~16년', d: 650, p: 480, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'S90', year: '16년~이후', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'V40', year: '12년~20년', d: 650, p: 480, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'V40 CC', year: '12년~이후', d: 650, p: 450, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'V60', year: 'P3 10년~18년', d: 650, p: 500, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'V60', year: 'SPA 19년~이후', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'V90', year: 'SPA 16년~이후', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'XC40', year: '17년~25년', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
-      { name: 'XC40', year: '25년~이후', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'XC60', year: 'AU 08년~17년', d: 650, p: 500, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'XC60', year: 'SPA 17년~이후', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'XC70', year: 'P3 07년~16년', d: 650, p: 500, r: null, rDisplay: null, a: 'B2-2 Type' },
-      { name: 'XC90', year: '25년~현재', d: null, p: null, r: null, rDisplay: null, a: '준비중' },
-      { name: 'XC90', year: 'P2 05년~15년', d: 600, p: 550, r: null, rDisplay: null, a: 'B1 Type' },
-      { name: 'XC90', year: 'SPA 16년~25년', d: 600, p: 500, r: null, rDisplay: null, a: 'B2-1 Type' },
+  "VOLVO (볼보)": {
+    "icon": "🛡️",
+    "models": [
+      {
+        "name": "C30",
+        "year": "06년~13년",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "C40",
+        "year": "21년~현재",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "C70",
+        "year": "P1 07년~13년",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "EX30",
+        "year": "24년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "S40",
+        "year": "P1 05년~12년",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "S60",
+        "year": "P3 10년~18년",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "S60",
+        "year": "SPA 18년~이후",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "S80",
+        "year": "P3 06년~16년",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "S90",
+        "year": "16년~이후",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "V40",
+        "year": "12년~20년",
+        "d": 650,
+        "p": 480,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "V40 CC",
+        "year": "12년~이후",
+        "d": 650,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "V60",
+        "year": "P3 10년~18년",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "V60",
+        "year": "SPA 19년~이후",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "V90",
+        "year": "SPA 16년~이후",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "XC40",
+        "year": "17년~25년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "XC40",
+        "year": "25년~이후",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "XC60",
+        "year": "AU 08년~17년",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "XC60",
+        "year": "SPA 17년~이후",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "XC70",
+        "year": "P3 07년~16년",
+        "d": 650,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "XC90",
+        "year": "25년~현재",
+        "d": null,
+        "p": null,
+        "r": null,
+        "rDisplay": null,
+        "a": "준비중"
+      },
+      {
+        "name": "XC90",
+        "year": "P2 05년~15년",
+        "d": 600,
+        "p": 550,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      },
+      {
+        "name": "XC90",
+        "year": "SPA 16년~25년",
+        "d": 600,
+        "p": 500,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-1 Type"
+      }
     ]
-  },
+  }
 };
 
 let selBrand = 'all';
@@ -1529,6 +6485,8 @@ function render() {
 
   brands.forEach(brand => {
     let models = DATA[brand].models.filter(m => !m._deleted);
+    // 차종명 가나다 정렬 (기본/사용자 구분 없이 전체 통합 정렬)
+    models.sort((a, b) => a.name.localeCompare(b.name, 'ko'));
     if (q) models = models.filter(m => {
         const haystack = buildHaystack(brand, m);
         return matches(haystack, q);
@@ -2195,6 +7153,4 @@ render();
     lastTap = now;
   });
 })();
-</script>
-</body>
-</html>
+</script></body></html>
