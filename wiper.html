@@ -2086,6 +2086,10 @@ function buildExportSheet(includeBuiltin) {
 }
 
 function exportHtml() {
+  // 모달 모두 닫고 저장 (열린 채로 저장되면 모달이 열린 상태로 배포됨)
+  document.getElementById('manageModal').classList.remove('open');
+  document.getElementById('pwModal').classList.remove('open');
+
   // 현재 DATA(기본+override+deleted 적용)를 기반으로 HTML 재생성
   // 1. 현재 파일의 HTML 문자열 가져오기
   // 2. DATA 객체에서 런타임 플래그 제거 후 직렬화
@@ -2171,6 +2175,8 @@ function exportHtml() {
 }
 
 function exportAll() {
+  document.getElementById('manageModal').classList.remove('open');
+  document.getElementById('pwModal').classList.remove('open');
   const rows = buildExportSheet(true);
   const ws = XLSX.utils.aoa_to_sheet(rows);
   ws['!cols'] = [20,16,16,12,12,10,14,12].map(w=>({wch:w}));
@@ -2181,6 +2187,8 @@ function exportAll() {
 }
 
 function exportUserOnly() {
+  document.getElementById('manageModal').classList.remove('open');
+  document.getElementById('pwModal').classList.remove('open');
   const users = loadUserModels();
   if (!users.length) { showToast('추가된 차종이 없습니다.'); return; }
   const rows = [['제조사','차종명','연식','운전석(mm)','조수석(mm)','후방(mm)','후방표시','어댑터']];
