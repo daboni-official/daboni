@@ -716,6 +716,11 @@
             <li>페이지 새로고침 시 변경사항 즉시 반영 ✓</li>
           </ol>
         </div>
+        <div style="margin-top:14px;padding:14px 16px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;">
+          <div style="font-size:13px;font-weight:600;color:#92400e;margin-bottom:5px;">🔧 데이터 정리</div>
+          <div style="font-size:12px;color:#78350f;margin-bottom:10px;">엑셀 업로드 시 "현대", "삼성" 등으로 잘못 등록된 제조사명을 기본 제조사로 자동 이전합니다.</div>
+          <button class="btn-save" style="width:auto;padding:8px 18px;font-size:13px;margin:0;" onclick="fixBrandNames()">잘못된 제조사명 정리</button>
+        </div>
       </div>
     </div>
   </div>
@@ -725,6 +730,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
+/*##DATA_START##*/
 const DATA = {
   "HYUNDAI (현대)": {
     "icon": "🚗",
@@ -1268,6 +1274,15 @@ const DATA = {
         "r": 350,
         "rDisplay": "RB680/350mm",
         "a": "U-Type"
+      },
+      {
+        "name": "쏘나타 디엣지 택시(중국생산)",
+        "year": "2024~2025.2월까지",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B11 Type"
       }
     ]
   },
@@ -1994,6 +2009,24 @@ const DATA = {
         "r": null,
         "rDisplay": null,
         "a": "B2-2 Type"
+      },
+      {
+        "name": "QM3",
+        "year": "2016년 2월 이전",
+        "d": 650,
+        "p": 350,
+        "r": 290,
+        "rDisplay": "RB880",
+        "a": "B3 Type"
+      },
+      {
+        "name": "QM3",
+        "year": "2016년 2월 이후",
+        "d": 650,
+        "p": 350,
+        "r": 290,
+        "rDisplay": "RB880",
+        "a": "B6 Type"
       }
     ]
   },
@@ -2454,6 +2487,24 @@ const DATA = {
         "r": null,
         "rDisplay": null,
         "a": "B11 Type"
+      },
+      {
+        "name": "트레일블레이져",
+        "year": "",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "아베오",
+        "year": "",
+        "d": 650,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
       }
     ]
   },
@@ -6488,68 +6539,9 @@ const DATA = {
         "a": "B2-1 Type"
       }
     ]
-  },
-  "삼성": {
-    "icon": "⭐",
-    "models": [
-      {
-        "name": "QM3",
-        "year": "2016년 2월 이전",
-        "d": 650,
-        "p": 350,
-        "r": 290,
-        "rDisplay": "RB880",
-        "a": "B3 Type"
-      },
-      {
-        "name": "QM3",
-        "year": "2016년 2월 이후",
-        "d": 650,
-        "p": 350,
-        "r": 290,
-        "rDisplay": "RB880",
-        "a": "B6 Type"
-      }
-    ]
-  },
-  "쉐보레": {
-    "icon": "⭐",
-    "models": [
-      {
-        "name": "트레일블레이져",
-        "year": "",
-        "d": 600,
-        "p": 450,
-        "r": null,
-        "rDisplay": null,
-        "a": "B2-2 Type"
-      },
-      {
-        "name": "아베오",
-        "year": "",
-        "d": 650,
-        "p": 350,
-        "r": null,
-        "rDisplay": null,
-        "a": "B1 Type"
-      }
-    ]
-  },
-  "현대": {
-    "icon": "⭐",
-    "models": [
-      {
-        "name": "쏘나타 디엣지 택시(중국생산)",
-        "year": "2024~2025.2월까지",
-        "d": 600,
-        "p": 450,
-        "r": null,
-        "rDisplay": null,
-        "a": "B11 Type"
-      }
-    ]
   }
 };
+/*##DATA_END##*/
 
 let selBrand = 'all';
 let query = '';
@@ -6567,8 +6559,10 @@ document.addEventListener('click', e => {
 
 function buildDD() {
   const menu = document.getElementById('mfrMenu');
+  const hiddenBrands = loadHiddenBrands();
   menu.innerHTML = '';
-  [['all','전체 제조사'], ...Object.keys(DATA).map(k => [k, k])].forEach(([val, label]) => {
+  const visibleBrands = Object.keys(DATA).filter(b => !hiddenBrands.includes(b));
+  [['all','전체 제조사'], ...visibleBrands.map(k => [k, k])].forEach(([val, label]) => {
     const el = document.createElement('div');
     el.className = 'mfr-opt' + (selBrand === val ? ' active' : '');
     el.textContent = label;
@@ -6614,7 +6608,10 @@ function matches(haystack, q) {
 
 function render() {
   const q = query;
-  const brands = selBrand === 'all' ? Object.keys(DATA) : [selBrand];
+  const hiddenBrands = loadHiddenBrands();
+  const brands = selBrand === 'all'
+    ? Object.keys(DATA).filter(b => !hiddenBrands.includes(b))
+    : [selBrand];
   let html = ''; let found = 0;
 
   brands.forEach(brand => {
@@ -6671,10 +6668,11 @@ function render() {
 
 // ── 차종 관리 ──────────────────────────────────────────────────────────────
 
-const LS_KEY          = 'wiperUserModels';
-const LS_OVERRIDES    = 'wiperOverrides';   // 기본 차종 수정본
-const LS_DELETED      = 'wiperDeleted';     // 기본 차종 삭제 목록
-const LS_ADAPTERS     = 'wiperCustomAdapters'; // 커스텀 어댑터 목록
+const LS_KEY              = 'wiperUserModels';
+const LS_OVERRIDES        = 'wiperOverrides';      // 기본 차종 수정본
+const LS_DELETED          = 'wiperDeleted';        // 기본 차종 삭제 목록
+const LS_ADAPTERS         = 'wiperCustomAdapters'; // 커스텀 어댑터 목록
+const LS_HIDDEN_BRANDS    = 'wiperHiddenBrands';   // 숨긴 제조사 목록
 
 function loadCustomAdapters() {
   try { return JSON.parse(localStorage.getItem(LS_ADAPTERS) || '[]'); } catch(e) { return []; }
@@ -6742,6 +6740,80 @@ function saveDeleted(arr) { localStorage.setItem(LS_DELETED, JSON.stringify(arr)
 // 기본 차종 고유키: "브랜드||이름||연식"
 function builtinKey(brand, m) {
   return `${brand}||${m.name}||${m.year||''}`;
+}
+
+// 엑셀 입력 브랜드명을 기존 DATA 키에 매핑
+// "삼성" → "SAMSUNG (삼성)", "현대" → "HYUNDAI (현대)" 등
+function matchBrandKey(input) {
+  const inputClean = input.trim().toLowerCase().replace(/\s+/g, '');
+  const keys = Object.keys(DATA);
+  // 1) 완전 일치
+  if (DATA[input.trim()]) return input.trim();
+  // 2) 괄호 안 한글 or 영문 앞부분으로 매핑
+  for (const key of keys) {
+    const keyClean = key.toLowerCase().replace(/\s+/g, '');
+    // 입력값이 키에 포함되거나 / 키가 입력값을 포함
+    if (keyClean.includes(inputClean) || inputClean.includes(keyClean)) return key;
+    // 괄호 안 한글 추출해서 비교
+    const m = key.match(/\(([^)]+)\)/);
+    if (m && m[1].toLowerCase().replace(/\s+/g, '') === inputClean) return key;
+    // 괄호 앞 영문 추출해서 비교
+    const eng = key.split('(')[0].trim().toLowerCase().replace(/\s+/g, '');
+    if (eng === inputClean) return key;
+  }
+  // 3) 매핑 안 되면 원본 그대로
+  return input.trim();
+}
+function loadHiddenBrands() {
+  try { return JSON.parse(localStorage.getItem(LS_HIDDEN_BRANDS) || '[]'); } catch(e) { return []; }
+}
+function saveHiddenBrands(arr) { localStorage.setItem(LS_HIDDEN_BRANDS, JSON.stringify(arr)); }
+
+// 잘못 등록된 브랜드명(예: "현대", "삼성")을 올바른 기본 브랜드로 자동 이전
+function migrateMismatchedBrands() {
+  const users = loadUserModels();
+  let changed = false;
+  let count = 0;
+
+  // ① localStorage LS_KEY 안의 항목 정리
+  users.forEach((item, i) => {
+    const matched = matchBrandKey(item.brand);
+    if (matched !== item.brand) {
+      users[i] = { ...item, brand: matched };
+      changed = true;
+      count++;
+    }
+  });
+  if (changed) saveUserModels(users);
+
+  // ② DATA 안에 이미 병합된 _user 브랜드 정리
+  // (엑셀 업로드로 "현대" 등 잘못된 브랜드가 DATA에 직접 추가된 경우)
+  const userBrands = Object.keys(DATA).filter(b => DATA[b]._user);
+  userBrands.forEach(oldBrand => {
+    const matched = matchBrandKey(oldBrand);
+    if (matched !== oldBrand) {
+      // 모든 모델을 올바른 브랜드로 이전
+      const models = DATA[oldBrand].models.filter(m => m._userId);
+      models.forEach(m => {
+        const idx = users.findIndex(u => u.id === m._userId);
+        if (idx !== -1) {
+          users[idx] = { ...users[idx], brand: matched };
+          count++;
+        }
+      });
+      changed = true;
+    }
+  });
+  if (changed) {
+    saveUserModels(users);
+    resetDataFlags();
+    mergeUserData();
+    buildDD();
+    render();
+    renderUserList();
+    showToast(`제조사명 ${count}건을 올바른 제조사로 이전했습니다.`);
+  }
+  return changed;
 }
 
 function loadUserModels() {
@@ -6880,11 +6952,7 @@ function saveModel() {
     // 사용자 추가 차종 수정
     const idx = parseInt(editIdx.replace('user:', ''));
     const oldItem = users[idx];
-    if (oldItem && DATA[oldItem.brand]) {
-      DATA[oldItem.brand].models = DATA[oldItem.brand].models.filter(m => m._userId !== oldItem.id);
-      if (DATA[oldItem.brand]._userIds)
-        DATA[oldItem.brand]._userIds = DATA[oldItem.brand]._userIds.filter(id => id !== oldItem.id);
-    }
+    // localStorage 먼저 갱신 (resetDataFlags→mergeUserData가 이 값을 읽으므로)
     users[idx] = { id: oldItem.id, brand, model };
     saveUserModels(users);
   } else {
@@ -6913,6 +6981,7 @@ function editModel(idx) {
   document.getElementById('edit-idx').value = 'user:' + idx;
   document.getElementById('form-title').textContent = '차종 수정';
   const sel = document.getElementById('f-brand');
+  document.getElementById('f-brand-new').value = '';
   let found = false;
   for (let o of sel.options) { if (o.value === item.brand) { o.selected = true; found = true; break; } }
   if (!found) document.getElementById('f-brand-new').value = item.brand;
@@ -6937,6 +7006,7 @@ function editBuiltin(brand, builtinKey) {
   document.getElementById('edit-idx').value = 'builtin:' + builtinKey;
   document.getElementById('form-title').textContent = '기본 차종 수정';
   const sel = document.getElementById('f-brand');
+  document.getElementById('f-brand-new').value = '';
   let found = false;
   for (let o of sel.options) { if (o.value === brand) { o.selected = true; found = true; break; } }
   if (!found) document.getElementById('f-brand-new').value = brand;
@@ -7028,20 +7098,21 @@ function setListFilter(f) {
 
 // 목록 렌더링 (기본 + 사용자 통합)
 function renderUserList() {
-  const el       = document.getElementById('userModelsList');
-  const users    = loadUserModels();
-  const overrides= loadOverrides();
-  const deleted  = loadDeleted();
-  const searchQ  = (document.getElementById('listSearch')?.value || '').trim().toLowerCase();
+  const el          = document.getElementById('userModelsList');
+  const users       = loadUserModels();
+  const overrides   = loadOverrides();
+  const deleted     = loadDeleted();
+  const hiddenBrands= loadHiddenBrands();
+  const searchQ     = (document.getElementById('listSearch')?.value || '').trim().toLowerCase();
   let items = [];
 
-  // 기본 차종 수집
+  // 기본 차종 수집 (숨긴 제조사 포함 — 관리 화면에서는 모두 보임)
   if (listFilter !== 'user') {
     Object.entries(DATA).forEach(([brand, info]) => {
       if (info._user) return;
       info.models.forEach(m => {
         if (!m._builtinKey) return;
-        items.push({ type: 'builtin', brand, m, key: m._builtinKey });
+        items.push({ type: 'builtin', brand, m, key: m._builtinKey, brandHidden: hiddenBrands.includes(brand) });
       });
     });
   }
@@ -7093,18 +7164,56 @@ function renderUserList() {
             + `<button class="btn-del"  onclick="deleteModel(${it.idx})">삭제</button>`;
     }
 
-    return `<div class="user-model-item" style="${m._deleted ? 'opacity:.5;' : ''}">
+    const brandHiddenStyle = it.brandHidden ? 'opacity:.45;' : '';
+    return `<div class="user-model-item" style="${m._deleted ? 'opacity:.5;' : brandHiddenStyle}">
       <div class="user-model-info">
-        <div class="user-model-name">${escHtml(it.brand)} &nbsp;›&nbsp; ${escHtml(m.name)}${badge}${m.year ? ` <span style="font-weight:400;color:#6b7280;font-size:12px;">(${escHtml(m.year)})</span>` : ''}</div>
+        <div class="user-model-name">${escHtml(it.brand)} &nbsp;›&nbsp; ${escHtml(m.name)}${badge}${it.brandHidden ? '<span class="badge-deleted" style="margin-left:4px;">제조사숨김</span>' : ''}${m.year ? ` <span style="font-weight:400;color:#6b7280;font-size:12px;">(${escHtml(m.year)})</span>` : ''}</div>
         <div class="user-model-detail">${sizes || '사이즈 미입력'} &nbsp;·&nbsp; 어댑터: ${escHtml(m.a)}</div>
       </div>
       <div class="user-model-btns">${btns}</div>
     </div>`;
   }).join('');
+
+  // 제조사 숨김/복원 섹션 (맨 아래)
+  if (!searchQ) {
+    const allBrands = Object.keys(DATA).filter(b => !DATA[b]._user);
+    if (allBrands.length) {
+      el.innerHTML += `<div style="margin-top:18px;border-top:1px solid #e5e7eb;padding-top:14px;">
+        <div style="font-size:12px;font-weight:600;color:#6b7280;margin-bottom:8px;letter-spacing:.5px;">제조사 표시 관리</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">` +
+        allBrands.map(b => {
+          const hidden = hiddenBrands.includes(b);
+          return `<button onclick="toggleHideBrand('${escHtml(b)}')" style="font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid ${hidden ? '#f87171' : '#d1d5db'};background:${hidden ? '#fef2f2' : '#f9fafb'};color:${hidden ? '#dc2626' : '#374151'};cursor:pointer;font-family:inherit;">${escHtml(b.replace(/^[A-Z ]+\s*/, '').replace(/^\(/, '').replace(/\)$/, '') || b)}${hidden ? ' 👁️‍🗨️' : ''}</button>`;
+        }).join('') +
+        `</div><div style="font-size:11px;color:#9ca3af;margin-top:6px;">버튼 클릭 시 해당 제조사를 호환표에서 숨기거나 표시합니다.</div></div>`;
+    }
+  }
 }
 
 function escHtml(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function toggleHideBrand(brand) {
+  const hidden = loadHiddenBrands();
+  const idx = hidden.indexOf(brand);
+  if (idx === -1) {
+    hidden.push(brand);
+    showToast(`'${brand.match(/\(([^)]+)\)/)?.[1] || brand}' 제조사를 숨겼습니다.`);
+  } else {
+    hidden.splice(idx, 1);
+    showToast(`'${brand.match(/\(([^)]+)\)/)?.[1] || brand}' 제조사를 표시합니다.`);
+  }
+  saveHiddenBrands(hidden);
+  buildDD();
+  render();
+  renderUserList();
+}
+
+// 잘못된 제조사명 정리 버튼 (관리 모달에서 호출)
+function fixBrandNames() {
+  const changed = migrateMismatchedBrands();
+  if (!changed) showToast('정리할 항목이 없습니다.');
 }
 
 // Toast
@@ -7138,6 +7247,7 @@ function handleExcelFile(input) {
   input.value = '';
 }
 
+
 function processExcelFile(file) {
   const reader = new FileReader();
   reader.onload = function(e) {
@@ -7148,7 +7258,7 @@ function processExcelFile(file) {
       // 헤더 제외
       const dataRows = rows.slice(1).filter(r => r[0] || r[1]);
       previewRows = dataRows.map(r => ({
-        brand:    String(r[0] || '').trim(),
+        brand:    matchBrandKey(String(r[0] || '').trim()),
         name:     String(r[1] || '').trim(),
         year:     String(r[2] || '').trim(),
         d:        parseInt(r[3]) || null,
@@ -7203,12 +7313,11 @@ function importExcelData() {
 function downloadSample() {
   const ws = XLSX.utils.aoa_to_sheet([
     ['제조사','차종명','연식','운전석(mm)','조수석(mm)','후방(mm)','후방표시','어댑터'],
-    ['TESLA (테슬라)','모델3','2021~',650,450,'','','U-Type'],
-    ['TESLA (테슬라)','모델Y','2022~',650,400,300,'RB382/300mm','U-Type'],
-    ['BMW (비엠더블유)','1시리즈','F20 2011~19',600,480,'','','B2-1 Type'],
+    ['TOYOTA (도요타)','캠리','2018~',650,400,'','','U-Type'],
+    ['TOYOTA (도요타)','RAV4','2019~',650,400,350,'RB382/350mm','U-Type'],
+    ['BMW','1시리즈','F20 2011~19',600,480,'','','B2-1 Type'],
   ]);
-  // 컬럼 너비
-  ws['!cols'] = [18,14,14,12,12,10,14,12].map(w=>({wch:w}));
+  ws['!cols'] = [22,14,14,12,12,10,14,12].map(w=>({wch:w}));
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, '차종데이터');
   XLSX.writeFile(wb, '와이퍼_차종_샘플.xlsx');
@@ -7267,20 +7376,24 @@ function exportHtml() {
   document.getElementById('manageModal').classList.remove('open');
   document.getElementById('pwModal').classList.remove('open');
 
-  // 페이지 로드 시 저장해둔 원본 HTML 사용 (로컬/서버 모두 동작)
   let htmlStr = _originalHtml;
 
-  // DATA 교체
-  const dataStr = 'const DATA = ' + JSON.stringify(cleanData, null, 2) + ';';
-  let replaced = htmlStr.replace(
-    /const DATA = \{[\s\S]*?\};(\s*\nlet selBrand)/,
-    dataStr + '$1'
-  );
+  // 마커 주석 사이의 DATA 블록 교체
+  // outerHTML이어도 주석은 그대로 보존되므로 로컬/서버 모두 동작
+  const MARKER_START = '/*##DATA_START##*/';
+  const MARKER_END   = '/*##DATA_END##*/';
+  const si = htmlStr.indexOf(MARKER_START);
+  const ei = htmlStr.indexOf(MARKER_END);
 
-  if (replaced === htmlStr) {
+  if (si === -1 || ei === -1 || si >= ei) {
     showToast('HTML 생성 중 오류가 발생했습니다.');
     return;
   }
+
+  const dataStr = 'const DATA = ' + JSON.stringify(cleanData, null, 2) + ';';
+  let replaced = htmlStr.slice(0, si + MARKER_START.length)
+    + '\n' + dataStr + '\n'
+    + htmlStr.slice(ei);
 
   // 커스텀 어댑터 옵션을 select에 반영 (준비중 옵션 뒤에 삽입)
   const customs = loadCustomAdapters();
