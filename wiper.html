@@ -7376,10 +7376,15 @@ function exportHtml() {
   document.getElementById('manageModal').classList.remove('open');
   document.getElementById('pwModal').classList.remove('open');
 
+  // fetch가 아직 완료 안 된 경우
+  if (_originalHtml === null) {
+    showToast('잠시 후 다시 시도해 주세요.');
+    return;
+  }
+
   let htmlStr = _originalHtml;
 
   // 마커 주석 사이의 DATA 블록 교체
-  // outerHTML이어도 주석은 그대로 보존되므로 로컬/서버 모두 동작
   const MARKER_START = '/*##DATA_START##*/';
   const MARKER_END   = '/*##DATA_END##*/';
   const si = htmlStr.indexOf(MARKER_START);
@@ -7449,7 +7454,24 @@ function exportUserOnly() {
 }
 
 // 원본 HTML 저장 (페이지 로드 직후 — 모달 닫힌 상태)
-var _originalHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+var _originalHtml = null;
+(function() {
+  // 서버(깃허브 등): fetch로 원본 파일 그대로 가져옴
+  // 로컬(file://): fetch 실패 → outerHTML fallback
+  fetch(location.href)
+    .then(r => r.text())
+    .then(text => {
+      // 마커가 살아있는지 확인
+      if (text.indexOf('/*##DATA_START##*/') !== -1) {
+        _originalHtml = text;
+      } else {
+        _originalHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      }
+    })
+    .catch(() => {
+      _originalHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    });
+})();
 
 // 초기 로드 시 사용자 데이터 병합
 mergeUserData();
