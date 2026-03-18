@@ -614,9 +614,20 @@
               <option value="B3 Type">B3 Type</option>
               <option value="B4 Type">B4 Type</option>
               <option value="B5 Type">B5 Type</option>
+              <option value="B6 Type">B6 Type</option>
+              <option value="B11 Type">B11 Type</option>
+              <option value="B12 Type">B12 Type</option>
+              <option value="B12 or B14 Type">B12 or B14 Type</option>
               <option value="C Type">C Type</option>
+              <option value="F Type">F Type</option>
+              <option value="G&amp;H Type">G&amp;H Type</option>
               <option value="준비중">준비중</option>
+              <option value="매직비전&amp;히팅" data-custom="1">매직비전&amp;히팅</option>
             </select>
+            <div style="display:flex;gap:8px;margin-top:8px;align-items:center;" id="adapterAddRow">
+              <input type="text" id="f-adapter-new" placeholder="새 어댑터명 입력 (예: X Type)" style="flex:1;border:1.5px solid #d1d5db;border-radius:7px;padding:7px 10px;font-size:13px;font-family:'Noto Sans KR',sans-serif;outline:none;">
+              <button type="button" onclick="addCustomAdapter()" style="background:#1a1a1a;color:#fff;border:none;border-radius:7px;padding:7px 14px;font-size:13px;font-family:'Noto Sans KR',sans-serif;cursor:pointer;white-space:nowrap;">+ 어댑터 추가</button>
+            </div>
           </div>
         </div>
 
@@ -1974,6 +1985,15 @@ const DATA = {
         "r": null,
         "rDisplay": null,
         "a": "U-Type"
+      },
+      {
+        "name": "그랑콜레오스",
+        "year": "2025",
+        "d": 600,
+        "p": 430,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
       }
     ]
   },
@@ -2141,6 +2161,42 @@ const DATA = {
         "r": 250,
         "rDisplay": "RB361/250mm",
         "a": "U-Type"
+      },
+      {
+        "name": "렉스턴 스포츠",
+        "year": "",
+        "d": 650,
+        "p": 500,
+        "r": 330,
+        "rDisplay": "RB383",
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "렉스턴 칸",
+        "year": "",
+        "d": 650,
+        "p": 500,
+        "r": 330,
+        "rDisplay": "RB383",
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "렉스턴 G4",
+        "year": "",
+        "d": 650,
+        "p": 500,
+        "r": 330,
+        "rDisplay": "RB383",
+        "a": "B2-1 Type"
+      },
+      {
+        "name": "올뉴 렉스턴",
+        "year": "",
+        "d": 650,
+        "p": 500,
+        "r": 330,
+        "rDisplay": "RB383",
+        "a": "B2-1 Type"
       }
     ]
   },
@@ -2356,7 +2412,7 @@ const DATA = {
       },
       {
         "name": "트랙스",
-        "year": "2016~2020",
+        "year": "2016~",
         "d": 600,
         "p": 350,
         "r": null,
@@ -2380,6 +2436,24 @@ const DATA = {
         "r": null,
         "rDisplay": null,
         "a": "U-Type"
+      },
+      {
+        "name": "트랙스",
+        "year": "2013~2015",
+        "d": 650,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "트랙스 크로스오버",
+        "year": "2023년 3월~",
+        "d": 650,
+        "p": 400,
+        "r": null,
+        "rDisplay": null,
+        "a": "B11 Type"
       }
     ]
   },
@@ -6414,6 +6488,66 @@ const DATA = {
         "a": "B2-1 Type"
       }
     ]
+  },
+  "삼성": {
+    "icon": "⭐",
+    "models": [
+      {
+        "name": "QM3",
+        "year": "2016년 2월 이전",
+        "d": 650,
+        "p": 350,
+        "r": 290,
+        "rDisplay": "RB880",
+        "a": "B3 Type"
+      },
+      {
+        "name": "QM3",
+        "year": "2016년 2월 이후",
+        "d": 650,
+        "p": 350,
+        "r": 290,
+        "rDisplay": "RB880",
+        "a": "B6 Type"
+      }
+    ]
+  },
+  "쉐보레": {
+    "icon": "⭐",
+    "models": [
+      {
+        "name": "트레일블레이져",
+        "year": "",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B2-2 Type"
+      },
+      {
+        "name": "아베오",
+        "year": "",
+        "d": 650,
+        "p": 350,
+        "r": null,
+        "rDisplay": null,
+        "a": "B1 Type"
+      }
+    ]
+  },
+  "현대": {
+    "icon": "⭐",
+    "models": [
+      {
+        "name": "쏘나타 디엣지 택시(중국생산)",
+        "year": "2024~2025.2월까지",
+        "d": 600,
+        "p": 450,
+        "r": null,
+        "rDisplay": null,
+        "a": "B11 Type"
+      }
+    ]
   }
 };
 
@@ -6540,6 +6674,61 @@ function render() {
 const LS_KEY          = 'wiperUserModels';
 const LS_OVERRIDES    = 'wiperOverrides';   // 기본 차종 수정본
 const LS_DELETED      = 'wiperDeleted';     // 기본 차종 삭제 목록
+const LS_ADAPTERS     = 'wiperCustomAdapters'; // 커스텀 어댑터 목록
+
+function loadCustomAdapters() {
+  try { return JSON.parse(localStorage.getItem(LS_ADAPTERS) || '[]'); } catch(e) { return []; }
+}
+function saveCustomAdapters(arr) { localStorage.setItem(LS_ADAPTERS, JSON.stringify(arr)); }
+
+// 기본 어댑터 목록 (select에 고정된 값)
+const BASE_ADAPTERS = [
+  'U-Type','B1 Type','B2-1 Type','B2-2 Type','B3 Type','B4 Type','B5 Type',
+  'B6 Type','B11 Type','B12 Type','B12 or B14 Type','C Type','F Type','G&H Type','준비중'
+];
+
+// select에 커스텀 어댑터 옵션 반영
+function applyCustomAdaptersToSelect() {
+  const sel = document.getElementById('f-adapter');
+  const customs = loadCustomAdapters();
+  Array.from(sel.options).forEach(o => { if (o.dataset.custom) o.remove(); });
+  customs.forEach(v => {
+    const o = new Option(v, v);
+    o.dataset.custom = '1';
+    sel.add(o);
+  });
+}
+
+// 어댑터 추가 버튼 핸들러
+function addCustomAdapter() {
+  const inp = document.getElementById('f-adapter-new');
+  const val = inp.value.trim();
+  if (!val) { showToast('어댑터명을 입력해주세요.'); return; }
+  const sel = document.getElementById('f-adapter');
+  for (let o of sel.options) {
+    if (o.value === val) { sel.value = val; inp.value = ''; showToast('이미 있는 어댑터입니다.'); return; }
+  }
+  const customs = loadCustomAdapters();
+  if (!customs.includes(val)) { customs.push(val); saveCustomAdapters(customs); }
+  const o = new Option(val, val);
+  o.dataset.custom = '1';
+  sel.add(o);
+  sel.value = val;
+  inp.value = '';
+  showToast(`"${val}" 어댑터가 추가되었습니다.`);
+}
+
+// 수정 시 select에 없는 어댑터 값을 동적으로 추가
+function ensureAdapterOption(val) {
+  if (!val) return;
+  const sel = document.getElementById('f-adapter');
+  for (let o of sel.options) { if (o.value === val) return; }
+  const customs = loadCustomAdapters();
+  if (!customs.includes(val)) { customs.push(val); saveCustomAdapters(customs); }
+  const o = new Option(val, val);
+  o.dataset.custom = '1';
+  sel.add(o);
+}
 
 function loadOverrides() {
   try { return JSON.parse(localStorage.getItem(LS_OVERRIDES) || '{}'); } catch(e) { return {}; }
@@ -6628,6 +6817,7 @@ function checkPw() {
   }
   closePwModal();
   buildBrandSelect();
+  applyCustomAdaptersToSelect();
   renderUserList();
   document.getElementById('manageModal').classList.add('open');
 }
@@ -6732,6 +6922,7 @@ function editModel(idx) {
   document.getElementById('f-p').value        = item.model.p || '';
   document.getElementById('f-r').value        = item.model.r || '';
   document.getElementById('f-rdisplay').value = item.model.rDisplay || '';
+  ensureAdapterOption(item.model.a);
   document.getElementById('f-adapter').value  = item.model.a || 'U-Type';
 }
 
@@ -6755,6 +6946,7 @@ function editBuiltin(brand, builtinKey) {
   document.getElementById('f-p').value        = m.p || '';
   document.getElementById('f-r').value        = m.r || '';
   document.getElementById('f-rdisplay').value = m.rDisplay || '';
+  ensureAdapterOption(m.a);
   document.getElementById('f-adapter').value  = m.a || 'U-Type';
 }
 
@@ -7080,7 +7272,7 @@ function exportHtml() {
 
   // DATA 교체
   const dataStr = 'const DATA = ' + JSON.stringify(cleanData, null, 2) + ';';
-  const replaced = htmlStr.replace(
+  let replaced = htmlStr.replace(
     /const DATA = \{[\s\S]*?\};(\s*\nlet selBrand)/,
     dataStr + '$1'
   );
@@ -7088,6 +7280,18 @@ function exportHtml() {
   if (replaced === htmlStr) {
     showToast('HTML 생성 중 오류가 발생했습니다.');
     return;
+  }
+
+  // 커스텀 어댑터 옵션을 select에 반영 (준비중 옵션 뒤에 삽입)
+  const customs = loadCustomAdapters();
+  if (customs.length > 0) {
+    const customOptions = customs.map(v =>
+      `              <option value="${v.replace(/&/g,'&amp;').replace(/"/g,'&quot;')}" data-custom="1">${v.replace(/&/g,'&amp;')}</option>`
+    ).join('\n');
+    replaced = replaced.replace(
+      /(<option value="준비중">준비중<\/option>)/,
+      `$1\n${customOptions}`
+    );
   }
 
   // 다운로드
